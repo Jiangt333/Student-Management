@@ -23,6 +23,25 @@ import {ref} from 'vue'
 import {useRoute, useRouter} from 'vue-router'
 const router = useRouter()
 const route = useRoute()
+
+const call = async () =>{
+  let user_input = document.getElementById('myInput1').value
+  user_input = user_input.trim()
+  alert("Checking, please wait a moment.")
+  let body = {'user_input': user_input}
+  let response = await fetch('http://8.134.148.198:5000/search', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8'
+    },
+    body: JSON.stringify(body)
+  });
+  if (response.ok) {
+    // tableData1.value = await response.json()
+  } else {
+    alert("HTTP-Error: " + response.status)
+  }
+}
 </script>
 
 <style scoped>
