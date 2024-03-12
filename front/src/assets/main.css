@@ -2,8 +2,9 @@
 
 #app {
   max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  /* 就是因为下面这两句造成网页两边可能会留白 */
+  /* margin: 0 auto; */
+  /* padding: 2rem;  */
 
   font-weight: normal;
 }
@@ -21,7 +22,7 @@ a,
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 3000px) {
   body {
     display: flex;
     place-items: center;

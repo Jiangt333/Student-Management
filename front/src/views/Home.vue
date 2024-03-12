@@ -1,93 +1,223 @@
 <template>
-  <!--四色丰阳-->
-  <TopBar></TopBar>
-  <div class="title-1" id="home1"><p>—学 生 管 理 平 台—</p></div>
-  <div class="container-1">
-    
-  </div>
+  <meta charset="charset=utf-8"/>
+    <div class="bgimg">
+      <div>
+        <el-button class="info">
+        </el-button>
+        <el-button class="github" onclick="window.location.href = 'https://gitlab.igem.org/2023/software-tools/sysu-software'">
+        </el-button>
+        <img src='../assets/head.jpg' alt="" class="headimg">
+      </div>
+      <el-container style="position: relative">
+        <el-card style="border-radius: 10px;margin-top: 1%;margin-left:2%;margin-right:1%;width: 47%;height:36rem">
+          <el-tabs type="border-card" style="height:30rem"  @tab-change="Switch()">
+            <el-tab-pane label="Online Inquiry" style="position: relative">
+              <el-button class="but" @click="call1()">CONFIRM</el-button>
+              <el-card style="margin-top:2rem;width: 80%">
+                <textarea id="myInput1" rows="2" cols="20" style="width: 99%;height:15rem;font-size: 1rem">
+                </textarea>
+              </el-card>
+              <span class="attention">Note: Please enter a protein sequence.</span>
+            </el-tab-pane>
+            <el-tab-pane label="Online Prediction">
+              <el-button class="but" @click="call2()">SUBMIT</el-button>
+              <el-card style="margin-top:2rem;width: 80%">
+                <input type="file" id="myInput2" style="width: 60%;font-size: 1rem">
+              </el-card>
+              <span class="attention">Note: Please upload a .faa format file.</span>
+            </el-tab-pane>
+          </el-tabs>
+        </el-card>
+
+        <el-card id="table1" style="position:fixed;border-radius: 10px;margin-top: 1%;margin-left:51%;margin-right:2%;width: 47%;height:36rem;display: block;z-index: 1">
+          <el-table :data="tableData1" height="34rem" border>
+            <el-table-column prop="Specie" label="Specie" width="160" />
+            <el-table-column prop="Protein" label="Protein" width="160" />
+            <el-table-column prop="Regions" label="Putative programmable regions" />
+          </el-table>
+        </el-card>
+        <el-card id="table2" style="position:fixed;border-radius: 10px;margin-top: 1%;margin-left:51%;margin-right:2%;width: 47%;height:36rem">
+          <el-table :data="tableData2" height="34rem" border>
+            <el-table-column prop="Specie" label="Specie" width="160" />
+            <el-table-column prop="Protein" label="Protein" width="160" />
+            <el-table-column prop="Sequence" label="Sequence" />
+          </el-table>
+        </el-card>
+        <el-button id="download" class="download" onclick="window.location.href='http://8.134.148.198:5000/download';">download</el-button>
+      </el-container>
 
 
+    </div>
 
 </template>
+  
+<script  setup>
+import {ref} from 'vue'
+import {useRoute, useRouter} from 'vue-router'
 
-<script setup>
-import TopBar from "./TopBar.vue";
-import { useRoute, useRouter, onBeforeRouteUpdate } from 'vue-router'
-import { ref, reactive, inject, onMounted } from 'vue'
 const router = useRouter()
 const route = useRoute()
-  // mounted() {
-  //   // 改变网页背景颜色
-  //   document.querySelector('body').setAttribute('style', 'background-color:#d9e0dc');
-  // },
-  // beforeDestroy() {
-  //   document.querySelector('body').removeAttribute('style')
-  // },
-
-</script>
-<style scoped>
-.title-1 {
-  width: 100%;
-  font-size: 80px;
-  font-family: STXingkai;
-  font-weight: 100;
-  color: #474141;
-  margin-top: 100px;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: center;
-}
-
-img{
-  transition: all .5s;
-}
-
-.container-1 {
-  .image-container0 {
-    aspect-ratio: 670/360;
-    .image-wrapper {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      align-items: center;
-      justify-content: center;
-      .responsive-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+let itemKey = Math.random()
+let tableData1 = ref([])
+let tableData2 = ref([])
+const isProteinSequence = async(sequence) =>{
+  const proteinCharacters = 'ACDEFGHIKLMNPQRSTVWY';
+  const upperInput = sequence.toUpperCase();
+  for (let i = 0; i < upperInput.length; i++) {
+      if (proteinCharacters.indexOf(upperInput[i]) === -1) {
+        return false;
       }
     }
+  return true;
+}
+const Switch = async () =>{
+  let element1 = document.getElementById('table1')
+  let element2 = document.getElementById('table2')
+  if(element1.style.display === 'none')
+  {
+    element1.style.cssText = 'display: block;position:fixed;border-radius: 10px;margin-top: 1%;margin-left:51%;margin-right:2%;width: 47%;height:35rem;z-index: 1'
+    // element2.style.cssText = 'display: none;border-radius: 10px;margin-top: 2%;margin-left:1%;margin-right:2%;width: 47%;height:35rem;'
+    tableData1.value = []
+    document.getElementById('download').setAttribute('style', 'display: none')
+
   }
-  .txt-container {
-    background: url(../../assets/HomePage/index-pic-2.jpg);
-    .fengyang_subtitle {
-      color: rgb(0, 0, 0);
-      font-size: 34px;
-      top: 6%;
-      margin: 20px;
-      text-align: center;
-      font-family: 宋体;
-      
-    }
-    .content_txt
-    {
-      top: 8%;
-      left: 5%;
-      width: 90%;
-      text-indent:2em;
-      font-size: 18px;
-      font-family: 宋体;
-      color: rgb(0, 0, 0);
-      display: flex;
-      text-align: center;
-      word-break: keep-all;
-      line-height: 30px;
-      
-    }
+  else {
+    element1.style.cssText = 'display:none;position:fixed;border-radius: 10px;margin-top: 1%;margin-left:51%;margin-right:2%;width: 47%;height:35rem;z-index: 1'
+    tableData2.value = []
+    // element2.style.cssText = 'display: block;border-radius: 10px;margin-top: 2%;margin-left:1%;margin-right:2%;width: 47%;height:35rem;'
+  }
+}
+const call1 = async () =>{
+  let user_input = document.getElementById('myInput1').value
+  user_input = user_input.trim()
+  if(!await isProteinSequence(user_input)){
+    alert("Please enter the correct protein sequence！")
+    return;
+  }
+  alert("Checking, please wait a moment.")
+  let body = {'user_input': user_input}
+  let response = await fetch('http://8.134.148.198:5000/search', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8'
+    },
+    body: JSON.stringify(body)
+  });
+  if (response.ok) {
+    tableData1.value = await response.json()
+  } else {
+    alert("HTTP-Error: " + response.status)
   }
 }
 
-.image-container0:hover img {
-    transform: scale(1.1);
+const call2 = async () =>{
+  let user_input = document.getElementById('myInput2').files[0];
+  if(!user_input.name.endsWith('.faa')){
+    alert("Please upload a file with the suffix.faa!");
+    return;
   }
+  alert("It may take a long time. Please wait patiently...");
+  let formData = new FormData();
+  formData.append('user_input', user_input);
+  let response = await fetch('http://8.134.148.198:5000/dig', {
+    method: 'POST',
+    body: formData
+  });
+  if (response.ok) {
+    tableData2.value = await response.json()
+  } else {
+    alert("HTTP-Error: " + response.status)
+  }
+  let but = document.getElementById('download')
+  but.setAttribute('style', 'display: block')
+  // document.getElementById('table2').style.cssText = 'display: block;border-radius: 10px;margin-top: 2%;margin-left:1%;margin-right:2%;width: 47%;height:35rem;'
+  // if (response.ok) {
+  //   let data = await response.json();
+  // } else {
+  //   alert("HTTP-Error: " + response.status);
+  // }
+}
+
+
+</script>
+
+<style scoped>
+.headimg{
+  height: 10%;
+  width: 100%;
+}
+.bgimg{
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-image: url('../assets/body.jpg');
+  background-size:100% 100%;
+}
+.but {
+  color: #0086b3;
+  background-color: #e9ebef;
+  position: absolute;
+  margin-left: 32.5rem;
+  border-radius: 0.5rem;
+  height: 2.8rem;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+.but:hover {
+  color: rgba(88,54,174,0.58);
+  transform: scale(1.05);
+}
+.download {
+  color: white;
+  background-color: indianred;
+  opacity: 0.9;
+  z-index: 1;
+  position: absolute;
+  top: 6.4%;
+  left:90%;
+  border-radius: 0.8rem;
+  height: 2.2rem;
+  font-size: 0.8rem;
+  display: none;
+}
+.info{
+  background-color: rgba(195,179,235,0.58);
+  /*color: rgba(195,179,235,0.58);*/
+  z-index: 1;
+  position: absolute;
+  margin-top:1.6%;
+  margin-left: 85%;
+  border-radius: 2rem;
+  height: 3rem;
+  width: 6.5rem;
+  font-size: 1rem;
+  border: none;
+}
+.info:hover{
+  transform: scale(1.05);
+}
+.github{
+  background: url('../assets/gitlab.jpg') center no-repeat;
+  background-size: cover;
+  z-index: 1;
+  position: absolute;
+  margin-top:1.6%;
+  margin-left: 85%;
+  border-radius: 2rem;
+  height: 3rem;
+  width: 6.5rem;
+  font-size: 1rem;
+  border: none;
+}
+.github:hover{
+  transform: scale(1.05);
+}
+.attention{
+  font-size: 1.1rem;
+  margin-left: 2rem;
+  margin-top: 0.5rem;
+  color: #c45656
+}
+
 </style>
+  
