@@ -42,7 +42,7 @@ services:
     depends_on:
       eureka:
         condition: service_started
-      gateway-server:
+      gateway-service:
         condition: service_healthy
 
 
