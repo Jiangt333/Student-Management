@@ -1,5 +1,5 @@
 server:
-  port: 1001
+  port: 1002
 
 eureka:
   instance:
@@ -10,10 +10,10 @@ eureka:
 
 spring:
   application:
-    name: user-service
+    name: score-service
 
 swagger:
-  title: "user-service"
-  description: "用户接口"
+  title: "score-service"
+  description: "成绩接口"
   version: V1.0
   enabled: true
