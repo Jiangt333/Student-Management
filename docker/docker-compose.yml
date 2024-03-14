@@ -4,7 +4,6 @@ services:
     build: ../eureka
     container_name: eureka
     restart: always
-    entrypoint: java -jar /eureka.jar
     ports:
       - "8761:8761"
 
@@ -14,7 +13,6 @@ services:
     restart: always
     ports:
       - "1001:1001"
-    entrypoint: java -jar /user-service.jar
     depends_on:
       - eureka
 
@@ -24,7 +22,6 @@ services:
     restart: always
     ports:
       - "1002:1002"
-    entrypoint: java -jar /score-service.jar
     depends_on:
       - eureka
       - user-service
@@ -35,7 +32,6 @@ services:
     restart: always
     ports:
       - "80:80"
-    entrypoint: java -jar /gateway-service.jar
     depends_on:
       - eureka
       - user-service
