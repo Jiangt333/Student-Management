@@ -21,7 +21,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.0.RELEASE</version>
+        <version>2.2.2.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -30,7 +30,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <!--    spring cloud版本    -->
-        <spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
+        <spring-cloud.version>Hoxton.SR2</spring-cloud.version>
         <!-- <spring-boot.version>2.6.13</spring-boot.version>-->
         <!-- 配置 Swagger 版本 -->
         <swagger.version>1.9.0.RELEASE</swagger.version>
@@ -58,21 +58,21 @@
 
 
         <!-- swagger-start -->
+        <dependency>
+            <groupId>com.spring4all</groupId>
+            <artifactId>swagger-spring-boot-starter</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
 <!--        <dependency>-->
-<!--            <groupId>com.spring4all</groupId>-->
-<!--            <artifactId>swagger-spring-boot-starter</artifactId>-->
-<!--            <version>${swagger.version}</version>-->
+<!--            <groupId>io.springfox</groupId>-->
+<!--            <artifactId>springfox-swagger2</artifactId>-->
+<!--            <version>2.9.2</version>-->
 <!--        </dependency>-->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>2.9.2</version>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.9.2</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.springfox</groupId>-->
+<!--            <artifactId>springfox-swagger-ui</artifactId>-->
+<!--            <version>2.9.2</version>-->
+<!--        </dependency>-->
 
         <!-- lombok 依赖 -->
         <dependency>
