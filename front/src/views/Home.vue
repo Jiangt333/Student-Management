@@ -1,54 +1,7 @@
 <template>
   <meta charset="charset=utf-8"/>
     <div class="bgimg">
-      <div>
-        <el-button class="info">
-        </el-button>
-        <el-button class="github" onclick="window.location.href = 'https://gitlab.igem.org/2023/software-tools/sysu-software'">
-        </el-button>
-        <img src='../assets/head.jpg' alt="" class="headimg">
-      </div>
-      <el-container style="position: relative">
-        <el-card style="border-radius: 10px;margin-top: 1%;margin-left:2%;margin-right:1%;width: 47%;height:36rem">
-          <el-tabs type="border-card" style="height:30rem"  @tab-change="Switch()">
-            <el-tab-pane label="Online Inquiry" style="position: relative">
-              <el-button class="but" @click="call1()">CONFIRM</el-button>
-              <el-card style="margin-top:2rem;width: 80%">
-                <textarea id="myInput1" rows="2" cols="20" style="width: 99%;height:15rem;font-size: 1rem">
-                </textarea>
-              </el-card>
-              <span class="attention">Note: Please enter a protein sequence.</span>
-            </el-tab-pane>
-            <el-tab-pane label="Online Prediction">
-              <el-button class="but" @click="call2()">SUBMIT</el-button>
-              <el-card style="margin-top:2rem;width: 80%">
-                <input type="file" id="myInput2" style="width: 60%;font-size: 1rem">
-              </el-card>
-              <span class="attention">Note: Please upload a .faa format file.</span>
-            </el-tab-pane>
-          </el-tabs>
-        </el-card>
-
-        <el-card id="table1" style="position:fixed;border-radius: 10px;margin-top: 1%;margin-left:51%;margin-right:2%;width: 47%;height:36rem;display: block;z-index: 1">
-          <el-table :data="tableData1" height="34rem" border>
-            <el-table-column prop="Specie" label="Specie" width="160" />
-            <el-table-column prop="Protein" label="Protein" width="160" />
-            <el-table-column prop="Regions" label="Putative programmable regions" />
-          </el-table>
-        </el-card>
-        <el-card id="table2" style="position:fixed;border-radius: 10px;margin-top: 1%;margin-left:51%;margin-right:2%;width: 47%;height:36rem">
-          <el-table :data="tableData2" height="34rem" border>
-            <el-table-column prop="Specie" label="Specie" width="160" />
-            <el-table-column prop="Protein" label="Protein" width="160" />
-            <el-table-column prop="Sequence" label="Sequence" />
-          </el-table>
-        </el-card>
-        <el-button id="download" class="download" onclick="window.location.href='http://8.134.148.198:5000/download';">download</el-button>
-      </el-container>
-
-
     </div>
-
 </template>
   
 <script  setup>

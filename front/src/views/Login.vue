@@ -3,10 +3,12 @@
     <div class="bgimg">
       <div>
         <el-card class="card">
-          <el-button class="login" onclick="window.location.href = 'https://gitlab.igem.org/2023/software-tools/sysu-software'">
+          <el-input v-model="input_account" class="account" placeholder="账号"/>
+          <el-input v-model="input_password" class="password" type="password" placeholder="密码"/>
+          <el-button class="login" @click="call_login()">
           登录
           </el-button>
-          <el-button class="help">
+          <el-button class="getpass">
           忘记密码
           </el-button>
           <el-button class="help">
@@ -23,25 +25,28 @@ import {ref} from 'vue'
 import {useRoute, useRouter} from 'vue-router'
 const router = useRouter()
 const route = useRoute()
-
-const call = async () =>{
-  let user_input = document.getElementById('myInput1').value
-  user_input = user_input.trim()
-  alert("Checking, please wait a moment.")
-  let body = {'user_input': user_input}
-  let response = await fetch('http://8.134.148.198:5000/search', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8'
-    },
-    body: JSON.stringify(body)
-  });
-  if (response.ok) {
-    // tableData1.value = await response.json()
-  } else {
-    alert("HTTP-Error: " + response.status)
-  }
+const input_account = ref('')
+const input_password = ref('')
+const call_login = async () =>{
+  router.push('/home');
+//   let user_input = document.getElementById('myInput1').value
+//   user_input = user_input.trim()
+//   let body = {'user_input': user_input}
+//   let response = await fetch('http://8.134.148.198:5000/search', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json;charset=utf-8'
+//     },
+//     body: JSON.stringify(body)
+//   });
+//   if (response.ok) {
+//     // tableData1.value = await response.json()
+//     router.push('/home');
+//   } else {
+//     alert("HTTP-Error: " + response.status)
+//   }
 }
+
 </script>
 
 <style scoped>
@@ -54,36 +59,88 @@ const call = async () =>{
 }
 
 .login{
-  z-index: 1;
-  margin-top:5%;
+  /* margin-top:5%;
   margin-left: 10%;
   margin-right: 10%;
-  border-radius: 2rem;
   height: 3rem;
   width: 80%;
-  font-size: 1.2rem;
+  font-size: 1.2rem; */
+  position: absolute;
+  left: 59px;
+  top: 147.59px;
+  width: 280px;
+  height: 52.03px;
+  border-radius: 10px;
+  opacity: 1;
   border: none;
   background-color: rgba(12, 64, 196, 0.58);
+  font-size: 18px;
   color: aliceblue;
+  
+}
+.account{
+  position: absolute;
+  left: 59px;
+  top: 31px;
+  width: 280px;
+  height: 38px;
+  opacity: 1;
+}
+.password{
+position: absolute;
+left: 59px;
+top: 86px;
+width: 281px;
+height: 38.22px;
+opacity: 1;
+}
+.getpass{
+position: absolute;
+left: 45px;
+top: 224px;
+width: 90px;
+height: 28px;
+opacity: 1;
+border: none;
+font-family: DM Sans;
+font-size: 18px;
+font-weight: bold;
+line-height: 26px;
+text-align: center;
+letter-spacing: 0px;
+font-size: 15px;
+color: rgba(35, 101, 255, 0.6)
 }
 .help{
-  z-index: 1;
-  margin-top:7%;
-  margin-left: 5%;
-  margin-right: 5%;
-  border-radius: 2rem;
-  height: 50%;
-  width: 100%;
-  font-size: 1rem;
-  width: 40%;
-  border: none;
+position: absolute;
+left: 240px;
+top: 224px;
+width: 90px;
+height: 28px;
+opacity: 1;
+border: none;
+font-family: DM Sans;
+font-size: 18px;
+font-weight: bold;
+line-height: 26px;
+text-align: center;
+letter-spacing: 0px;
+font-size: 15px;
+color: rgba(35, 101, 255, 0.6);
 }
+
 .card{
-  margin-top:15%;
+  /* margin-top:15%;
   margin-left: 60%;
   opacity: 80%;
   width: 23%;
-  height: 11rem;
+  height: 15rem; */
+  position: absolute;
+left: 904px;
+top: 253px;
+width: 399px;
+height: 275px;
+opacity: 1;
   color: aliceblue;
 }
 </style>
