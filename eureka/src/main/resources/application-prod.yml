@@ -1,11 +1,9 @@
 eureka:
   instance:
     hostname: eureka
+
   client:
-    # 禁用注册中心自己的注册行为
     register-with-eureka: false
-    # 注册中心只需维护服务实例，不需检索服务，设 false
     fetch-registry: false
-    # 注册中心的服务访问地址，EL 表达式获取到上面的主机和端口号（注意： yml 配置文件是有顺序的）
-    serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+    service-url:
+      defaultZone: http://eureka:8761/eureka/
