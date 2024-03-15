@@ -1,11 +1,11 @@
 version: '2.2'
 services:
-  eureka:
-    build: ../eureka
-    container_name: eureka
+  gateway-service:
+    build: ../gateway-service
+    container_name: gateway-service
     restart: always
     ports:
-      - "8761:8761"
+      - "1000:1000"
 
   user-service:
     build: ../user-service
@@ -14,7 +14,7 @@ services:
     ports:
       - "1001:1001"
     depends_on:
-      - eureka
+      - gateway-service
 
   score-service:
     build: ../score-service
@@ -23,18 +23,7 @@ services:
     ports:
       - "1002:1002"
     depends_on:
-      - eureka
-      - user-service
+      - gateway-service
 
-  gateway-service:
-    build: ../gateway-service
-    container_name: gateway-service
-    restart: always
-    ports:
-      - "80:80"
-    depends_on:
-      - eureka
-      - user-service
-      - score-service
 
 
