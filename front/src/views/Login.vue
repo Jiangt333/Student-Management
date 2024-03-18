@@ -25,26 +25,38 @@ import {ref} from 'vue'
 import {useRoute, useRouter} from 'vue-router'
 const router = useRouter()
 const route = useRoute()
-const input_account = ref('')
-const input_password = ref('')
+let input_account = ref('')
+let input_password = ref('')
+
 const call_login = async () =>{
-  router.push('/home');
-//   let user_input = document.getElementById('myInput1').value
-//   user_input = user_input.trim()
-//   let body = {'user_input': user_input}
-//   let response = await fetch('http://8.134.148.198:5000/search', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json;charset=utf-8'
-//     },
-//     body: JSON.stringify(body)
-//   });
-//   if (response.ok) {
-//     // tableData1.value = await response.json()
-//     router.push('/home');
-//   } else {
-//     alert("HTTP-Error: " + response.status)
-//   }
+  input_account = input_account.trim();
+  input_password = input_password.trim();
+  let body = { 'user_input': input_account, 'password': input_password };
+  let response = await fetch('http://43.136.61.147:1000/test', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8'
+    },
+    body: JSON.stringify(body)
+  });
+
+  if (response.ok) {
+    // 服务器JSON 对象 { "exists": true/false, "correctPassword": true/false }
+    let data = await response.json();
+    if (data.exists && data.correctPassword) {
+      router.push('/home');
+    } 
+    else if(!data.exists)
+    {
+      alert("用户不存在");
+    }
+    else{
+      alert("密码错误");
+    }
+  } 
+  else {
+    alert("HTTP-Error: " + response.status);
+  }
 }
 
 </script>
@@ -87,46 +99,46 @@ const call_login = async () =>{
   opacity: 1;
 }
 .password{
-position: absolute;
-left: 59px;
-top: 86px;
-width: 281px;
-height: 38.22px;
-opacity: 1;
+  position: absolute;
+  left: 59px;
+  top: 86px;
+  width: 281px;
+  height: 38.22px;
+  opacity: 1;
 }
 .getpass{
-position: absolute;
-left: 45px;
-top: 224px;
-width: 90px;
-height: 28px;
-opacity: 1;
-border: none;
-font-family: DM Sans;
-font-size: 18px;
-font-weight: bold;
-line-height: 26px;
-text-align: center;
-letter-spacing: 0px;
-font-size: 15px;
-color: rgba(35, 101, 255, 0.6)
+  position: absolute;
+  left: 45px;
+  top: 224px;
+  width: 90px;
+  height: 28px;
+  opacity: 1;
+  border: none;
+  font-family: DM Sans;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 26px;
+  text-align: center;
+  letter-spacing: 0px;
+  font-size: 15px;
+  color: rgba(35, 101, 255, 0.6)
 }
 .help{
-position: absolute;
-left: 240px;
-top: 224px;
-width: 90px;
-height: 28px;
-opacity: 1;
-border: none;
-font-family: DM Sans;
-font-size: 18px;
-font-weight: bold;
-line-height: 26px;
-text-align: center;
-letter-spacing: 0px;
-font-size: 15px;
-color: rgba(35, 101, 255, 0.6);
+  position: absolute;
+  left: 240px;
+  top: 224px;
+  width: 90px;
+  height: 28px;
+  opacity: 1;
+  border: none;
+  font-family: DM Sans;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 26px;
+  text-align: center;
+  letter-spacing: 0px;
+  font-size: 15px;
+  color: rgba(35, 101, 255, 0.6);
 }
 
 .card{
@@ -136,11 +148,11 @@ color: rgba(35, 101, 255, 0.6);
   width: 23%;
   height: 15rem; */
   position: absolute;
-left: 904px;
-top: 253px;
-width: 399px;
-height: 275px;
-opacity: 1;
+  left: 904px;
+  top: 253px;
+  width: 399px;
+  height: 275px;
+  opacity: 1;
   color: aliceblue;
 }
 </style>
