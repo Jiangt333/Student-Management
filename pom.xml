@@ -82,6 +82,13 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
+        <!--SSH 连接-->
+        <dependency>
+            <groupId>com.jcraft</groupId>
+            <artifactId>jsch</artifactId>
+            <version>0.1.55</version>
+        </dependency>
+
         <!--MyBatic依赖-->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
