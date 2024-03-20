@@ -30,7 +30,7 @@ public class userController {
     @ApiOperation(value = "获取某个用户全部信息", tags = {"用户信息的接口文档"})
     @GetMapping("/one-user")
     @ResponseBody
-    public user hello(@ApiParam(value = "学号") @RequestParam(value = "id", defaultValue = "0") int id) {
+    public user hello(@ApiParam(value = "学号") @RequestParam(value = "id") int id) {
         user User = UserService.getUserById(id);
         return User;
     }
