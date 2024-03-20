@@ -5,7 +5,7 @@ services:
     container_name: gateway-service
     restart: always
     ports:
-      - "1000:1000"
+      - "80:80"
 
   user-service:
     build: ../user-service
