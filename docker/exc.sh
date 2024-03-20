@@ -12,8 +12,8 @@ cd $CURR_DIR/../
 git pull origin master:master|| ! echo '[ERROR]Git pull failed!' || exit
 echo "[check point] code update successful"
 
-mvn clean package -Dmaven.test.skip=true || ! echo '[ERROR]Maven package failed！' || exit
-echo "[check point] package successful"
+#mvn clean package -Dmaven.test.skip=true || ! echo '[ERROR]Maven package failed！' || exit
+#echo "[check point] package successful"
 
 docker-compose -f docker/docker-compose-env.yml down || ! echo '[ERROR]env docker down failed！' || exit
 echo "[check point] env docker down successful..."
