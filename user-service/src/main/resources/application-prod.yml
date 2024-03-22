@@ -1,0 +1,7 @@
+eureka:
+  instance:
+    hostname: user-service
+
+  client:
+    serviceUrl:
+      defaultZone: http://eureka:8761/eureka/

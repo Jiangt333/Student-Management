@@ -1,0 +1,7 @@
+eureka:
+  instance:
+    hostname: gateway-service
+
+  client:
+    serviceUrl:
+      defaultZone: http://eureka:8761/eureka/

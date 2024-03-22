@@ -1,0 +1,29 @@
+version: '2.2'
+services:
+  gateway-service:
+    build: ../gateway-service
+    container_name: gateway-service
+    restart: always
+    ports:
+      - "1000:1000"
+
+  user-service:
+    build: ../user-service
+    container_name: user-service
+    restart: always
+    ports:
+      - "1001:1001"
+    depends_on:
+      - gateway-service
+
+  score-service:
+    build: ../score-service
+    container_name: score-service
+    restart: always
+    ports:
+      - "1002:1002"
+    depends_on:
+      - gateway-service
+
+
+
