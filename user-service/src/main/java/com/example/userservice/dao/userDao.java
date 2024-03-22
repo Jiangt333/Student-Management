@@ -20,6 +20,6 @@ public interface userDao {
      * 获取某个用户全部信息
      * @return
      */
-    @Select("select * from user where id = #{id}")
+    @Select("select * from user where sid = #{id}")
     user findUserById(int id);
 }
