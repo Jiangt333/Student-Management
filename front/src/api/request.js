@@ -6,16 +6,21 @@ const NETWORK_ERROR = '网络请求异常，请稍后重试！';
 // 创建axios实例对象
 const service = axios.create({
   baseURL: config.baseApi,
+  timeout: 5000 //
 });
 
-// 在请求之前
+// 请求之前
 service.interceptors.request.use((req) => {
-  // 可以自定义header
-  // jwt-token认证时候用到
+  // 自定义header
+  // jwt-token认证
+  const jwtToken = localStorage.getItem('jwtToken');
+  if (jwtToken) {
+    req.headers.Authorization = `Bearer ${jwtToken}`;
+  }
   return req;
 });
 
-// 在请求之后
+// 请求之后
 service.interceptors.response.use((res) => {
   // console.log(res.data);
   const { code, data, msg } = res.data;

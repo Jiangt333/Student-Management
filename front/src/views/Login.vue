@@ -53,6 +53,8 @@ const call_login = async () =>{
     // 服务器JSON 对象 { "exists": true/false, "correctPassword": true/false }
     let data = await response.json();
     if (data.exists && data.correctPassword) {
+      // 保存jwt令牌
+      // localStorage.setItem('jwtToken', jwtToken);
       router.push('/home');
     } 
     else if(!data.exists)
