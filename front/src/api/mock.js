@@ -8,14 +8,12 @@ Mock.setup({
 
 
 // 拦截请求
-Mock.mock(/\/my\/test/, 'get', () => {
+Mock.mock(/mock\/test/, 'get', () => {
     const arr = []
-    for (let i = 0; i <= 4; i++) {
-      arr.push(Mock.mock({
-        // 生成唯一id 和 name
-        id: '@id',
-        name: '@cname'
-      }))
-    }
-    return { msg: '获取数据成功', result: arr }
+    arr.push(Mock.mock({
+      // 生成id和name
+      id: '@id',
+      name: '@cname'
+    }))
+    return {code: 200,  data: arr, msg: '获取数据成功',}
 })
