@@ -5,6 +5,9 @@ Object.defineProperty(exports, '__esModule', { value: true });
 var sr = {
   name: "sr",
   el: {
+    breadcrumb: {
+      label: "Breadcrumb"
+    },
     colorpicker: {
       confirm: "OK",
       clear: "\u041F\u043E\u043D\u0438\u0448\u0442\u0438"

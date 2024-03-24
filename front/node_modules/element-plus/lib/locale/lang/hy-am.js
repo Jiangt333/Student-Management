@@ -5,6 +5,9 @@ Object.defineProperty(exports, '__esModule', { value: true });
 var hyAm = {
   name: "hy-am",
   el: {
+    breadcrumb: {
+      label: "Breadcrumb"
+    },
     colorpicker: {
       confirm: "\u053C\u0561\u0582",
       clear: "\u0544\u0561\u0584\u0580\u0565\u056C"

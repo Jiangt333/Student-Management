@@ -1,6 +1,9 @@
 var el = {
   name: "el",
   el: {
+    breadcrumb: {
+      label: "Breadcrumb"
+    },
     colorpicker: {
       confirm: "\u0395\u03BD\u03C4\u03AC\u03BE\u03B5\u03B9",
       clear: "\u039A\u03B1\u03B8\u03B1\u03C1\u03B9\u03C3\u03BC\u03CC\u03C2"

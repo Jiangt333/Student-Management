@@ -1,6 +1,9 @@
 var mg = {
   name: "mg",
   el: {
+    breadcrumb: {
+      label: "Breadcrumb"
+    },
     colorpicker: {
       confirm: "ENY",
       clear: "Fafana"

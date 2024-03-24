@@ -1,6 +1,9 @@
 var et = {
   name: "et",
   el: {
+    breadcrumb: {
+      label: "Breadcrumb"
+    },
     colorpicker: {
       confirm: "OK",
       clear: "T\xFChjenda"

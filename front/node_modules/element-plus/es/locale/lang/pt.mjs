@@ -1,6 +1,9 @@
 var pt = {
   name: "pt",
   el: {
+    breadcrumb: {
+      label: "Breadcrumb"
+    },
     colorpicker: {
       confirm: "Confirmar",
       clear: "Limpar"

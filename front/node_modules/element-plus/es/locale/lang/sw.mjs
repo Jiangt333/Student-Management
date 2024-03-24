@@ -1,6 +1,9 @@
 var sw = {
   name: "sw",
   el: {
+    breadcrumb: {
+      label: "Breadcrumb"
+    },
     colorpicker: {
       confirm: "sawa",
       clear: "futa",

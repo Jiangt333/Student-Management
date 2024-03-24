@@ -32,7 +32,7 @@ const anchorProps = runtime.buildProps({
   },
   type: {
     type: runtime.definePropType(String),
-    default: "defalut"
+    default: "default"
   },
   direction: {
     type: runtime.definePropType(String),

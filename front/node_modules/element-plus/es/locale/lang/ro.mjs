@@ -1,6 +1,9 @@
 var ro = {
   name: "ro",
   el: {
+    breadcrumb: {
+      label: "Breadcrumb"
+    },
     colorpicker: {
       confirm: "OK",
       clear: "\u0218terge"

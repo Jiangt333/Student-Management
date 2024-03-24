@@ -5,6 +5,9 @@ Object.defineProperty(exports, '__esModule', { value: true });
 var az = {
   name: "az",
   el: {
+    breadcrumb: {
+      label: "Breadcrumb"
+    },
     colorpicker: {
       confirm: "T\u0259sdiql\u0259",
       clear: "T\u0259mizl\u0259"

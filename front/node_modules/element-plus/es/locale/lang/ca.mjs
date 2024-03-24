@@ -1,6 +1,9 @@
 var ca = {
   name: "ca",
   el: {
+    breadcrumb: {
+      label: "Breadcrumb"
+    },
     colorpicker: {
       confirm: "Confirmar",
       clear: "Netejar"

@@ -1,6 +1,9 @@
 var vi = {
   name: "vi",
   el: {
+    breadcrumb: {
+      label: "Breadcrumb"
+    },
     colorpicker: {
       confirm: "OK",
       clear: "X\xF3a"

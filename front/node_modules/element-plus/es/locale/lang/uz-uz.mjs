@@ -1,6 +1,9 @@
 var uzUz = {
   name: "uz-uz",
   el: {
+    breadcrumb: {
+      label: "Breadcrumb"
+    },
     colorpicker: {
       confirm: "Qabul qilish",
       clear: "Tozalash"

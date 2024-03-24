@@ -1,6 +1,9 @@
 var zhCn = {
   name: "zh-cn",
   el: {
+    breadcrumb: {
+      label: "\u9762\u5305\u5C51"
+    },
     colorpicker: {
       confirm: "\u786E\u5B9A",
       clear: "\u6E05\u7A7A"

@@ -7,8 +7,10 @@ require('../../../hooks/index.js');
 var constants = require('./constants.js');
 var breadcrumb = require('./breadcrumb.js');
 var pluginVue_exportHelper = require('../../../_virtual/plugin-vue_export-helper.js');
-var index = require('../../../hooks/use-namespace/index.js');
+var index = require('../../../hooks/use-locale/index.js');
+var index$1 = require('../../../hooks/use-namespace/index.js');
 
+const _hoisted_1 = ["aria-label"];
 const __default__ = vue.defineComponent({
   name: "ElBreadcrumb"
 });
@@ -17,7 +19,8 @@ const _sfc_main = /* @__PURE__ */ vue.defineComponent({
   props: breadcrumb.breadcrumbProps,
   setup(__props) {
     const props = __props;
-    const ns = index.useNamespace("breadcrumb");
+    const { t } = index.useLocale();
+    const ns = index$1.useNamespace("breadcrumb");
     const breadcrumb = vue.ref();
     vue.provide(constants.breadcrumbKey, props);
     vue.onMounted(() => {
@@ -31,11 +34,11 @@ const _sfc_main = /* @__PURE__ */ vue.defineComponent({
         ref_key: "breadcrumb",
         ref: breadcrumb,
         class: vue.normalizeClass(vue.unref(ns).b()),
-        "aria-label": "Breadcrumb",
+        "aria-label": vue.unref(t)("el.breadcrumb.label"),
         role: "navigation"
       }, [
         vue.renderSlot(_ctx.$slots, "default")
-      ], 2);
+      ], 10, _hoisted_1);
     };
   }
 });

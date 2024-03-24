@@ -1,6 +1,9 @@
 var ko = {
   name: "ko",
   el: {
+    breadcrumb: {
+      label: "Breadcrumb"
+    },
     colorpicker: {
       confirm: "\uD655\uC778",
       clear: "\uCD08\uAE30\uD654",

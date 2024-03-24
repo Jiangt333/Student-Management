@@ -1,6 +1,9 @@
 var nl = {
   name: "nl",
   el: {
+    breadcrumb: {
+      label: "Breadcrumb"
+    },
     colorpicker: {
       confirm: "Bevestig",
       clear: "Wissen"

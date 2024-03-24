@@ -5,6 +5,9 @@ Object.defineProperty(exports, '__esModule', { value: true });
 var tk = {
   name: "tk",
   el: {
+    breadcrumb: {
+      label: "Breadcrumb"
+    },
     colorpicker: {
       confirm: "OK",
       clear: "Arassala"

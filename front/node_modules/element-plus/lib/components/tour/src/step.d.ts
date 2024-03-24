@@ -39,7 +39,7 @@ export declare const tourStepProps: {
     };
     scrollIntoViewOptions: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => (boolean | ScrollIntoViewOptions) & {}) | (() => boolean | ScrollIntoViewOptions) | ((new (...args: any[]) => (boolean | ScrollIntoViewOptions) & {}) | (() => boolean | ScrollIntoViewOptions))[], unknown, unknown, undefined, boolean>;
     type: {
-        readonly type: import("vue").PropType<import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => ("defalut" | "primary") & {}) | (() => "defalut" | "primary") | ((new (...args: any[]) => ("defalut" | "primary") & {}) | (() => "defalut" | "primary"))[], unknown, unknown>>;
+        readonly type: import("vue").PropType<import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => ("default" | "primary") & {}) | (() => "default" | "primary") | ((new (...args: any[]) => ("default" | "primary") & {}) | (() => "default" | "primary"))[], unknown, unknown>>;
         readonly required: false;
         readonly validator: ((val: unknown) => boolean) | undefined;
         __epPropKey: true;

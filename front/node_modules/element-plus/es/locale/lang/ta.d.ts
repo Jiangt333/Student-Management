@@ -1,6 +1,9 @@
 declare const _default: {
     name: string;
     el: {
+        breadcrumb: {
+            label: string;
+        };
         colorpicker: {
             confirm: string;
             clear: string;

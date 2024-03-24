@@ -7,6 +7,7 @@ export declare const ElBreadcrumb: import("element-plus/es/utils").SFCWithInstal
         __epPropKey: true;
     };
 }, {
+    t: import("../..").Translator;
     props: Readonly<import("@vue/shared").LooseRequired<Readonly<import("vue").ExtractPropTypes<{
         readonly separator: import("element-plus/es/utils").EpPropFinalized<StringConstructor, unknown, unknown, "/", boolean>;
         readonly separatorIcon: {

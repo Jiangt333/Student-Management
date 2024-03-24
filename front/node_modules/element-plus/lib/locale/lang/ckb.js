@@ -5,6 +5,9 @@ Object.defineProperty(exports, '__esModule', { value: true });
 var ckb = {
   name: "ckb",
   el: {
+    breadcrumb: {
+      label: "Breadcrumb"
+    },
     colorpicker: {
       confirm: "\u0628\u0627\u0634\u06D5",
       clear: "\u067E\u0627\u06A9\u06A9\u0631\u062F\u0646\u06D5\u0648\u06D5",

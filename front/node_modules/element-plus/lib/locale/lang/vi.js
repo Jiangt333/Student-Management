@@ -5,6 +5,9 @@ Object.defineProperty(exports, '__esModule', { value: true });
 var vi = {
   name: "vi",
   el: {
+    breadcrumb: {
+      label: "Breadcrumb"
+    },
     colorpicker: {
       confirm: "OK",
       clear: "X\xF3a"

@@ -11,7 +11,7 @@ export declare const anchorProps: {
     bound: import("element-plus/es/utils").EpPropFinalized<NumberConstructor, unknown, unknown, number, boolean>;
     duration: import("element-plus/es/utils").EpPropFinalized<NumberConstructor, unknown, unknown, number, boolean>;
     marker: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, boolean, boolean>;
-    type: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => ("defalut" | "underline") & {}) | (() => "defalut" | "underline") | ((new (...args: any[]) => ("defalut" | "underline") & {}) | (() => "defalut" | "underline"))[], unknown, unknown, string, boolean>;
+    type: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => ("default" | "underline") & {}) | (() => "default" | "underline") | ((new (...args: any[]) => ("default" | "underline") & {}) | (() => "default" | "underline"))[], unknown, unknown, string, boolean>;
     direction: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => ("vertical" | "horizontal") & {}) | (() => "vertical" | "horizontal") | ((new (...args: any[]) => ("vertical" | "horizontal") & {}) | (() => "vertical" | "horizontal"))[], unknown, unknown, string, boolean>;
 };
 export declare type AnchorProps = ExtractPropTypes<typeof anchorProps>;

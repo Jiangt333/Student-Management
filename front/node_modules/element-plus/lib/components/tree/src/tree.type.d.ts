@@ -57,7 +57,7 @@ export declare interface TreeOptionProps {
     isLeaf?: string | ((data: TreeNodeData, node: Node) => boolean);
     class?: (data: TreeNodeData, node: Node) => string | {
         [key: string]: boolean;
-    } | string;
+    };
 }
 export declare type RenderContentFunction = (h: hType, context: RenderContentContext) => VNode | VNode[];
 export declare interface RenderContentContext {

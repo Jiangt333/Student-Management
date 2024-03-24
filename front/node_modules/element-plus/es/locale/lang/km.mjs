@@ -1,6 +1,9 @@
 var km = {
   name: "km",
   el: {
+    breadcrumb: {
+      label: "Breadcrumb"
+    },
     colorpicker: {
       confirm: "\u1799\u179B\u17CB\u1796\u17D2\u179A\u1798",
       clear: "\u179B\u17BB\u1794"

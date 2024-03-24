@@ -24,50 +24,42 @@
 import {ref} from 'vue'
 import {useRoute, useRouter} from 'vue-router'
 import '../api/mock.js'
-import {GetUser} from '../api/api.js'
+import {Test} from '../api/api.js'
 
 const router = useRouter()
 const route = useRoute()
 let input_account = ref('')
 let input_password = ref('')
 
-const call_login = async () =>{
+const call_login = () =>{
   let body = { 'user_input': input_account, 'password': input_password };
 
-  let response = await GetUser();
+  // 向mockjs发起请求
+  Test().then(response => {
+    console.log(response.data);
+  }).catch(error => {
+    console.error('Error:', error);
+  });
 
-  // // 向mockjs发起请求
-  // axios.get('/my/test').then(res => {
-  // console.log(res)
-  // })
-
-  // let response = await fetch('http://43.136.61.147:1000/test', {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/json;charset=utf-8'
-  //   },
-  //   body: JSON.stringify(body)
-  // });
-
-  if (response.ok) {
-    // 服务器JSON 对象 { "exists": true/false, "correctPassword": true/false }
-    let data = await response.json();
-    if (data.exists && data.correctPassword) {
-      // 保存jwt令牌
-      // localStorage.setItem('jwtToken', jwtToken);
-      router.push('/home');
-    } 
-    else if(!data.exists)
-    {
-      alert("用户不存在");
-    }
-    else{
-      alert("密码错误");
-    }
-  } 
-  else {
-    alert("HTTP-Error: " + response.status);
-  }
+  // let response = await GetUser();
+  // if (response.ok) {
+  //   // 服务器JSON 对象 { "exists": true/false, "correctPassword": true/false }
+  //   let data = await response.json();
+  //   if (data.exists && data.correctPassword) {
+  //     localStorage.setItem('jwtToken', jwtToken);
+  //     router.push('/home');
+  //   } 
+  //   else if(!data.exists)
+  //   {
+  //     alert("用户不存在");
+  //   }
+  //   else{
+  //     alert("密码错误");
+  //   }
+  // } 
+  // else {
+  //   alert("HTTP-Error: " + response.status);
+  // }
 }
 
 </script>

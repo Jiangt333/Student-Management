@@ -1,6 +1,9 @@
 var nbNo = {
   name: "nb-no",
   el: {
+    breadcrumb: {
+      label: "Breadcrumb"
+    },
     colorpicker: {
       confirm: "OK",
       clear: "T\xF8m"

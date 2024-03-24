@@ -1,6 +1,9 @@
 var eo = {
   name: "eo",
   el: {
+    breadcrumb: {
+      label: "Breadcrumb"
+    },
     colorpicker: {
       confirm: "Bone",
       clear: "Malplenigi"

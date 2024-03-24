@@ -1,58 +1,53 @@
 import axios from 'axios';
-import config from '../config';
+import EnvConfig from '../config';
 import { ElMessage } from 'element-plus';
+import {isTokenExpired, refreshJwtToken} from './token'
 
-const NETWORK_ERROR = '网络请求异常，请稍后重试！';
+
 // 创建axios实例对象
 const service = axios.create({
-  baseURL: config.baseApi,
-  timeout: 5000 //
+  baseURL: EnvConfig.baseApi,
 });
 
 // 请求之前
 service.interceptors.request.use((req) => {
-  // 自定义header
   // jwt-token认证
   const jwtToken = localStorage.getItem('jwtToken');
+  // 检测JWT令牌是否过期
+  if (jwtToken && isTokenExpired(jwtToken)) { 
+    refreshJwtToken(); // 刷新JWT令牌
+  }
   if (jwtToken) {
     req.headers.Authorization = `Bearer ${jwtToken}`;
-  }
   return req;
+  }
 });
 
 // 请求之后
 service.interceptors.response.use((res) => {
-  // console.log(res.data);
+  console.log(res.data);
   const { code, data, msg } = res.data;
+  console.log(code);
   if (code == 200) {
     return data;
-  } else if (code == 404) {
+  } 
+  else if (code == 404) {
     ElMessage.error('网络请求失败，请稍后再试！');
-  } else {
-    // 网络请求错误提示
-    ElMessage.error(msg || NETWORK_ERROR);
-    return Promise.reject(msg || NETWORK_ERROR);
+  } 
+  else {
+    ElMessage.error(msg || '网络请求异常，请稍后重试！');
+    return Promise.reject(msg || '网络请求异常，请稍后重试！');
   }
 });
 
 // 封装的核心函数
 function request(options) {
-  options.method = options.method || 'get';
-  if (options.method.toLowerCase() == 'get') {
+  if (options.method.toLowerCase() == 'post') {
     options.params = options.data;
   }
   //对mock的处理
-  let isMock = config.isMock;
-  if (typeof options.mock !== 'undefined') {
-    isMock = options.mock;
-  }
-  // 对线上环境做处理
-  if (config.env == 'prod') {
-    // 无法使用mock
-    service.defaults.baseURL = config.baseApi;
-  } else {
-    service.defaults.baseURL = isMock ? config.mockApi : config.baseApi;
-  }
+  let isMock = options.mock;
+  service.defaults.baseURL = isMock ? EnvConfig.mockApi : EnvConfig.baseApi;
   return service(options);
 }
 

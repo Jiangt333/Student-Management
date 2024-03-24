@@ -1,6 +1,9 @@
 var id = {
   name: "id",
   el: {
+    breadcrumb: {
+      label: "Breadcrumb"
+    },
     colorpicker: {
       confirm: "Pilih",
       clear: "Kosongkan"

@@ -5,6 +5,9 @@ Object.defineProperty(exports, '__esModule', { value: true });
 var ja = {
   name: "ja",
   el: {
+    breadcrumb: {
+      label: "Breadcrumb"
+    },
     colorpicker: {
       confirm: "OK",
       clear: "\u30AF\u30EA\u30A2"

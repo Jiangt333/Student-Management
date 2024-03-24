@@ -5,6 +5,9 @@ Object.defineProperty(exports, '__esModule', { value: true });
 var zhTw = {
   name: "zh-tw",
   el: {
+    breadcrumb: {
+      label: "\u9762\u5305\u5C51"
+    },
     colorpicker: {
       confirm: "\u78BA\u8A8D",
       clear: "\u6E05\u7A7A",

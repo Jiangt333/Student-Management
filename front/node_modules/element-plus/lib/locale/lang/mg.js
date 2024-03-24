@@ -5,6 +5,9 @@ Object.defineProperty(exports, '__esModule', { value: true });
 var mg = {
   name: "mg",
   el: {
+    breadcrumb: {
+      label: "Breadcrumb"
+    },
     colorpicker: {
       confirm: "ENY",
       clear: "Fafana"

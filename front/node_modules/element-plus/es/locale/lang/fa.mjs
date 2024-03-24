@@ -1,6 +1,9 @@
 var fa = {
   name: "fa",
   el: {
+    breadcrumb: {
+      label: "Breadcrumb"
+    },
     colorpicker: {
       confirm: "\u062A\u0627\u06CC\u06CC\u062F",
       clear: "\u062D\u0630\u0641"

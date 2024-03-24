@@ -2,6 +2,7 @@ import '../../../../utils/index.mjs';
 import Node from './node.mjs';
 import { getNodeKey } from './util.mjs';
 import { hasOwn, isObject } from '@vue/shared';
+import { isPropAbsent } from '../../../../utils/types.mjs';
 
 class TreeStore {
   constructor(options) {
@@ -94,7 +95,7 @@ class TreeStore {
     }
   }
   append(data, parentData) {
-    const parentNode = parentData ? this.getNode(parentData) : this.root;
+    const parentNode = !isPropAbsent(parentData) ? this.getNode(parentData) : this.root;
     if (parentNode) {
       parentNode.insertChild({ data });
     }

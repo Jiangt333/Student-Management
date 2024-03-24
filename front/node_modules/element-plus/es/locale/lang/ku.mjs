@@ -1,6 +1,9 @@
 var ku = {
   name: "ku",
   el: {
+    breadcrumb: {
+      label: "Breadcrumb"
+    },
     colorpicker: {
       confirm: "Temam",
       clear: "Paqij bike"

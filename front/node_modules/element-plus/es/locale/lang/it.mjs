@@ -1,6 +1,9 @@
 var it = {
   name: "it",
   el: {
+    breadcrumb: {
+      label: "Breadcrumb"
+    },
     colorpicker: {
       confirm: "OK",
       clear: "Pulisci"

@@ -5,6 +5,9 @@ Object.defineProperty(exports, '__esModule', { value: true });
 var uk = {
   name: "uk",
   el: {
+    breadcrumb: {
+      label: "Breadcrumb"
+    },
     colorpicker: {
       confirm: "OK",
       clear: "\u041E\u0447\u0438\u0441\u0442\u0438\u0442\u0438"

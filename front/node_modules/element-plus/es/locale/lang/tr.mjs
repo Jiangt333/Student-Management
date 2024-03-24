@@ -1,6 +1,9 @@
 var tr = {
   name: "tr",
   el: {
+    breadcrumb: {
+      label: "Breadcrumb"
+    },
     colorpicker: {
       confirm: "Onayla",
       clear: "Temizle"

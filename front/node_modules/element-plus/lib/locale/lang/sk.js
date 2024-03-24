@@ -5,6 +5,9 @@ Object.defineProperty(exports, '__esModule', { value: true });
 var sk = {
   name: "sk",
   el: {
+    breadcrumb: {
+      label: "Breadcrumb"
+    },
     colorpicker: {
       confirm: "OK",
       clear: "Zmaza\u0165"

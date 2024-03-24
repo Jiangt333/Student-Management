@@ -1,6 +1,9 @@
 var ugCn = {
   name: "ug-cn",
   el: {
+    breadcrumb: {
+      label: "Breadcrumb"
+    },
     colorpicker: {
       confirm: "\u062C\u06D5\u0632\u0645\u0644\u06D5\u0634",
       clear: "\u0642\u06C7\u0631\u06C7\u0642\u062F\u0627\u0634"

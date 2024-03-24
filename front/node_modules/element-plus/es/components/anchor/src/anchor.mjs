@@ -28,7 +28,7 @@ const anchorProps = buildProps({
   },
   type: {
     type: definePropType(String),
-    default: "defalut"
+    default: "default"
   },
   direction: {
     type: definePropType(String),

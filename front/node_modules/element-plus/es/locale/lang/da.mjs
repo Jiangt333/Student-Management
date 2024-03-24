@@ -1,6 +1,9 @@
 var da = {
   name: "da",
   el: {
+    breadcrumb: {
+      label: "Breadcrumb"
+    },
     colorpicker: {
       confirm: "OK",
       clear: "Ryd"

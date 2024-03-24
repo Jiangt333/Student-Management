@@ -5,6 +5,9 @@ Object.defineProperty(exports, '__esModule', { value: true });
 var uzUz = {
   name: "uz-uz",
   el: {
+    breadcrumb: {
+      label: "Breadcrumb"
+    },
     colorpicker: {
       confirm: "Qabul qilish",
       clear: "Tozalash"

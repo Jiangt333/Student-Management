@@ -1,6 +1,9 @@
 var fi = {
   name: "fi",
   el: {
+    breadcrumb: {
+      label: "Breadcrumb"
+    },
     colorpicker: {
       confirm: "OK",
       clear: "Tyhjenn\xE4"

@@ -1,6 +1,9 @@
 var ta = {
   name: "ta",
   el: {
+    breadcrumb: {
+      label: "Breadcrumb"
+    },
     colorpicker: {
       confirm: "\u0B89\u0BB1\u0BC1\u0BA4\u0BBF \u0B9A\u0BC6\u0BAF\u0BCD",
       clear: "\u0BA4\u0BC6\u0BB3\u0BBF\u0BB5\u0BBE\u0B95\u0BCD\u0B95\u0BC1"

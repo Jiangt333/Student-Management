@@ -178,11 +178,7 @@ const _sfc_main = vue.defineComponent({
         expandingNode.value = null;
       }
       oldNodes.forEach((node) => node.doCheck(false));
-      if (props.props.multiple) {
-        vue.reactive(newNodes).forEach((node) => node.doCheck(true));
-      } else {
-        newNodes.forEach((node) => node.doCheck(true));
-      }
+      vue.reactive(newNodes).forEach((node) => node.doCheck(true));
       checkedNodes.value = newNodes;
       vue.nextTick(scrollToExpandingNode);
     };

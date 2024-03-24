@@ -6,6 +6,7 @@ require('../../../../utils/index.js');
 var node = require('./node.js');
 var util = require('./util.js');
 var shared = require('@vue/shared');
+var types = require('../../../../utils/types.js');
 
 class TreeStore {
   constructor(options) {
@@ -98,7 +99,7 @@ class TreeStore {
     }
   }
   append(data, parentData) {
-    const parentNode = parentData ? this.getNode(parentData) : this.root;
+    const parentNode = !types.isPropAbsent(parentData) ? this.getNode(parentData) : this.root;
     if (parentNode) {
       parentNode.insertChild({ data });
     }

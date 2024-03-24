@@ -7,6 +7,7 @@ declare const _default: import("vue").DefineComponent<{
         __epPropKey: true;
     };
 }, {
+    t: import("element-plus/es/hooks").Translator;
     props: Readonly<import("@vue/shared").LooseRequired<Readonly<import("vue").ExtractPropTypes<{
         readonly separator: import("../../../utils").EpPropFinalized<StringConstructor, unknown, unknown, "/", boolean>;
         readonly separatorIcon: {

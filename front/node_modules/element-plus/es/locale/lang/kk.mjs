@@ -1,6 +1,9 @@
 var kk = {
   name: "kk",
   el: {
+    breadcrumb: {
+      label: "Breadcrumb"
+    },
     colorpicker: {
       confirm: "\u049A\u0430\u0431\u044B\u043B\u0434\u0430\u0443",
       clear: "\u0422\u0430\u0437\u0430\u043B\u0430\u0443"
