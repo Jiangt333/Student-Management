@@ -10,6 +10,7 @@ services:
   mysql:
     image: mysql
     container_name: stums-mysql
+    restart: always
     ports:
       - "3306:3306"
     environment:

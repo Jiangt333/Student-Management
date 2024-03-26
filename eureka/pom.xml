@@ -28,6 +28,13 @@
             <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.javaparser</groupId>
+            <artifactId>javaparser-core</artifactId>
+            <version>3.3.0</version>
+        </dependency>
+
+
     </dependencies>
     <build>
         <plugins>
