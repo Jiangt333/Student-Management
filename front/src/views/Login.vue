@@ -33,12 +33,17 @@ let input_password = ref('')
 
 const call_login = () =>{
   let body = { 'user_input': input_account, 'password': input_password };
-
   // 向mockjs发起请求
   Test().then(response => {
     console.log(response.data);
   }).catch(error => {
-    console.error('Error:', error);
+    if(error==101)
+    {
+      router.push('/home');
+    }
+    else{
+      console.error('Error:', error);
+    }
   });
 
   // let response = await GetUser();

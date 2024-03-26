@@ -15,5 +15,5 @@ Mock.mock(/mock\/test/, 'get', () => {
       id: '@id',
       name: '@cname'
     }))
-    return {code: 200,  data: arr, msg: '获取数据成功',}
+    return {code: 101,  data: arr, msg: '获取数据成功',}
 })
