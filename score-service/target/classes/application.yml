@@ -1,0 +1,14 @@
+server:
+  port: 1002
+
+spring:
+  application:
+    name: score-service
+  profiles:
+    active: ${SPRING_PROFILE_ACTIVE:dev}
+
+swagger:
+  title: "score-service"
+  description: "成绩接口"
+  version: V1.0
+  enabled: true
