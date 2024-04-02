@@ -23,48 +23,34 @@
 <script  setup>
 import {ref} from 'vue'
 import {useRoute, useRouter} from 'vue-router'
-import '../api/mock.js'
+import {UserStore} from '../stores/UserStore.js'
 import {Test} from '../api/api.js'
 
 const router = useRouter()
 const route = useRoute()
+const userStore = UserStore();
+
+const isLoggedIn = userStore.isLoggedIn;
+const currentUser = userStore.currentUser;
+
 let input_account = ref('')
 let input_password = ref('')
 
 const call_login = () =>{
-  let body = { 'user_input': input_account, 'password': input_password };
-  // 向mockjs发起请求
+  let user = { 'username': input_account.value, 'password': input_password.value };
   Test().then(response => {
-    console.log(response.data);
-  }).catch(error => {
-    if(error==101)
-    {
+      userStore.login(user);
       router.push('/home');
-    }
-    else{
-      console.error('Error:', error);
-    }
-  });
-
-  // let response = await GetUser();
-  // if (response.ok) {
-  //   // 服务器JSON 对象 { "exists": true/false, "correctPassword": true/false }
-  //   let data = await response.json();
-  //   if (data.exists && data.correctPassword) {
-  //     localStorage.setItem('jwtToken', jwtToken);
-  //     router.push('/home');
-  //   } 
-  //   else if(!data.exists)
-  //   {
-  //     alert("用户不存在");
-  //   }
-  //   else{
-  //     alert("密码错误");
-  //   }
-  // } 
-  // else {
-  //   alert("HTTP-Error: " + response.status);
-  // }
+    }).catch(error => {
+      if(error==101)
+      {
+        userStore.logout();
+        router.push('/home');
+      }
+      else{
+        console.error('Error:', error);
+      }
+    });
 }
 
 </script>

@@ -9,17 +9,11 @@ import './assets/iconfont/iconfont.css'
 
 import axios from 'axios';
 
-import { createPinia } from "pinia"; // 引入pinia
-import { UserStore } from "./stores/UserStore" // 引入UserStore
+import { createPinia } from "pinia";
+import { UserStore } from "./stores/UserStore" 
 
-import { router } from "./routes/router"; // 引入路由
+import { router } from "./routes/router";
 
-
-// 拦截器传token
-// axios.interceptors.request.use((config) => {
-//     config.headers.authorization = `Bearer ${userStore.token}`
-//     return config
-// })
 
 const app = createApp(App);
 
@@ -28,7 +22,7 @@ app.provide("axios", axios); // 将axios全局放入
 app.use(ElementPlus) // 使用Element UI
 
 app.use(createPinia()); // 引入pinia
-const userStore = UserStore()
+const userStore = UserStore() // 引入UserStore
 
 app.use(router); // 引入路由
 
