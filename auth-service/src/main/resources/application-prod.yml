@@ -1,6 +1,6 @@
 eureka:
   instance:
-    hostname: score-service
+    hostname: auth-service
 
   client:
     serviceUrl:

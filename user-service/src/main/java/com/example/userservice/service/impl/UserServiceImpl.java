@@ -14,9 +14,11 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public User login(String SID, String SPassword) {
+    public boolean login(String SID, String SPassword) {
         User myUser = userDao.findByUsernameAndPassword(SID, SPassword);
-        return myUser;
+        if(myUser != null)
+            return true;
+        return  false;
     }
 
     @Override
@@ -26,7 +28,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserById(int SID) {
+    public User getUserById(String SID) {
         User User = userDao.findUserById(SID);
         return User;
     }

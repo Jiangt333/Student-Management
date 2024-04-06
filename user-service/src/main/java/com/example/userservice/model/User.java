@@ -14,7 +14,7 @@ import java.util.Date;
 @ApiModel(description = "用户类")
 public class User {
     @ApiModelProperty(value = "学号", example = "21319743")
-    private Integer SID;
+    private String SID;
 
     @ApiModelProperty(value = "姓名", example = "王凌")
     private String SName;

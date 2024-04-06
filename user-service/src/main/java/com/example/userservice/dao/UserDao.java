@@ -28,5 +28,5 @@ public interface UserDao {
      * @return
      */
     @Select("select * from user where sid = #{SID}")
-    User findUserById(int SID);
+    User findUserById(String SID);
 }
