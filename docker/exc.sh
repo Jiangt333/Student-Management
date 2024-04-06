@@ -5,7 +5,7 @@ echo "starting deployment..."
 CURR_DIR=`S=\`readlink "$0"\`; [ -z "$S" ] && S=$0; dirname $S`
 echo $CURR_DIR
 
-source /etc/profile
+#source /etc/profile
 
 cd $CURR_DIR/../
 
