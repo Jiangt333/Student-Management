@@ -7,6 +7,15 @@ services:
     ports:
       - "80:80"
 
+  auth-service:
+    build: ../auth-service
+    container_name: stums-auth-service
+    restart: always
+    ports:
+      - "1005:1005"
+    depends_on:
+      - gateway-service
+
   user-service:
     build: ../user-service
     container_name: stums-user-service
