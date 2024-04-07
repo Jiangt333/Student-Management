@@ -14,14 +14,6 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public boolean login(String SID, String SPassword) {
-        User myUser = userDao.findByUsernameAndPassword(SID, SPassword);
-        if(myUser != null)
-            return true;
-        return  false;
-    }
-
-    @Override
     public List<User> getAllUsers() {
         List<User> UserList = userDao.findAllUsers();
         return UserList;

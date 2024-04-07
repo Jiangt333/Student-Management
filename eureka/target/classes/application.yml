@@ -1,8 +1,0 @@
-server:
-  port: 8761
-
-spring:
-  application:
-    name: eureka
-  profiles:
-    active: ${SPRING_PROFILE_ACTIVE:dev}

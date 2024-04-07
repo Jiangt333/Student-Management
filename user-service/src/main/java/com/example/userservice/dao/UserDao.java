@@ -10,13 +10,6 @@ import java.util.List;
 @Mapper
 public interface UserDao {
     /**
-     * 登录判断
-     * @return
-     */
-    @Select("select * from user where SID = #{SID} and SPassword = #{SPassword}")
-    User findByUsernameAndPassword(String SID, String SPassword);
-
-    /**
      * 获取所有用户全部信息
      * @return
      */

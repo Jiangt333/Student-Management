@@ -14,9 +14,9 @@
     <modules>
         <module>eureka</module>
         <module>gateway-service</module>
+        <module>auth-service</module>
         <module>user-service</module>
         <module>score-service</module>
-        <module>auth-service</module>
     </modules>
 
     <parent>

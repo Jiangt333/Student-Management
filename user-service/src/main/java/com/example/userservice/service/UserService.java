@@ -5,7 +5,6 @@ import com.example.userservice.model.User;
 import java.util.List;
 
 public interface UserService {
-    boolean login(String SID, String SPassword);
 
     List<User> getAllUsers();
 
