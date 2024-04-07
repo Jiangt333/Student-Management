@@ -24,7 +24,7 @@
 import {ref} from 'vue'
 import {useRoute, useRouter} from 'vue-router'
 import {UserStore} from '../stores/UserStore.js'
-import {Test} from '../api/api.js'
+import {GetUser} from '../api/api.js'
 
 const router = useRouter()
 const route = useRoute()
@@ -38,8 +38,9 @@ let input_password = ref('')
 
 const call_login = () =>{
   let user = { 'username': input_account.value, 'password': input_password.value };
-  Test().then(response => {
+  GetUser(user).then(response => {
       userStore.login(user);
+      localStorage.setItem('jwtToken', data.token);
       router.push('/home');
     }).catch(error => {
       if(error==101)
