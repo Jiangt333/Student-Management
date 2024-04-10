@@ -41,7 +41,7 @@ public class JWTInterceptor implements HandlerInterceptor {
             map.put("msg","token算法不一致!");
         }catch (Exception e){
             e.printStackTrace();
-            map.put("msg","token无效!!");
+            map.put("msg","token无效!");
         }
         System.out.println("*****************************************");
         System.out.println("未通过token验证");
