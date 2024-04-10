@@ -1,5 +1,4 @@
 #!/bin/bash
-
 echo "starting deployment..."
 
 CURR_DIR=`S=\`readlink "$0"\`; [ -z "$S" ] && S=$0; dirname $S`
@@ -9,19 +8,19 @@ echo $CURR_DIR
 
 cd $CURR_DIR/../
 
-#git pull origin master|| ! echo '[ERROR]Git pull failed!' || exit
-#echo "[check point] code update successful"
+git pull origin master|| ! echo '[ERROR]Git pull failed!' || exit
+echo "[check point] code update successful"
 
-#mvn clean package -Dmaven.test.skip=true || ! echo '[ERROR]Maven package failed！' || exit
-#echo "[check point] package successful"
+mvn clean package -Dmaven.test.skip=true || ! echo '[ERROR]Maven package failed！' || exit
+echo "[check point] package successful"
 
-docker-compose -f docker/docker-compose-env.yml down || ! echo '[ERROR]env docker down failed！' || exit
+docker-compose -f docker/docker-compose-env.yml down
 echo "[check point] env docker down successful..."
 docker-compose -f docker/docker-compose.yml down || ! echo '[ERROR]service docker down failed！' || exit
 echo "[check point] service docker down successful..."
 
-#docker rmi -f $(docker images | grep "docker-") || ! echo '[ERROR]images rm failed！' || exit
-#echo "[check point] images rm successful..."
+docker rmi -f $(docker images -a | grep "docker_")
+echo "[check point] images rm successful..."
 
 docker-compose -f docker/docker-compose-env.yml build || ! echo '[ERROR]env image build failed！' || exit
 echo "[check point] env image build successful"

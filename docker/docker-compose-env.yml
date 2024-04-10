@@ -7,15 +7,15 @@ services:
     ports:
       - "8761:8761"
 
-  mysql:
-    image: mysql
-    container_name: stums-mysql
-    restart: always
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: 123456
-    volumes:
-      - /root/mysql/datadir:/var/lib/mysql
-      - /root/mysql/conf:/etc/mysql/conf.d
-      - /root/mysql/logs:/var/log/mysql
+  # mysql:
+  #   image: mysql
+  #   container_name: mysql
+  #   restart: always
+  #   ports:
+  #     - "3306:3306"
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: 123456
+  #   volumes:
+  #     - ~/my_mysql/datadir:/var/lib/mysql
+  #     - ~/my_mysql/conf:/etc/mysql/conf.d
+  #     - ~/my_mysql/logs:/var/log/mysql
