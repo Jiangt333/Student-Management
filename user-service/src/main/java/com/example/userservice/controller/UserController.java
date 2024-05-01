@@ -1,5 +1,6 @@
 package com.example.userservice.controller;
 
+import com.example.authservice.utils.Response;
 import com.example.userservice.model.User;
 import com.example.userservice.service.UserService;
 import io.swagger.annotations.Api;
@@ -18,21 +19,25 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private Response response;
 
     @ApiOperation(value = "获取全部用户的全部信息")
     @GetMapping("/all-users")
     @ResponseBody
-    public List<User> hello() {
+    public Response<List<User>> hello() {
         List<User> UserList = userService.getAllUsers();
-        return UserList;
+        response.data = UserList;
+        return response;
     }
 
     @ApiOperation(value = "获取某个用户全部信息")
     @GetMapping("/one-user")
     @ResponseBody
-    public User hello(@ApiParam(value = "学号") @RequestParam(value = "SID") String SID) {
-        User User = userService.getUserById(SID);
-        return User;
+    public Response<User> hello(@ApiParam(value = "学号") @RequestParam(value = "SID") String SID) {
+        User user = userService.getUserById(SID);
+        response.data = user;
+        return response;
     }
 
 

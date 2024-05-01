@@ -2,6 +2,7 @@ package com.example.authservice.controller;
 
 import com.example.authservice.utils.JWTUtils;
 import com.example.authservice.service.AuthService;
+import com.example.authservice.utils.Response;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,23 +19,22 @@ public class AuthController {
 
     @Autowired
     private AuthService authService;
+    @Autowired
+    private Response response;
 
     @PostMapping("/login")
     @ResponseBody
-    public Map<String,Object> login(String SID, String SPassword) {
-        Map<String, Object> result = new HashMap<>();
+    public Response<String> login(String SID, String SPassword) {
         if(authService.login(SID, SPassword)){
             Map<String, String> payLoad = new HashMap<>();
             payLoad.put("id", SID);
             String token = JWTUtils.getToken(payLoad);
-            result.put("token", token);
-            result.put("state", true);
-            result.put("msg", "登录成功！");
+            response.data = token;
         }
          else {
-            result.put("state","false");
-            result.put("msg", "登录失败！");
+            response.code = 403;
+            response.data = "token error!";
         }
-        return result;
+        return response;
     }
 }
