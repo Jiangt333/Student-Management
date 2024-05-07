@@ -7,6 +7,8 @@ import com.example.authservice.utils.JWTUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
@@ -23,12 +25,19 @@ public class JWTInterceptor implements HandlerInterceptor {
         Map<String, Object> map = new HashMap<>();
         // 获取请求头中令牌
         String token = request.getHeader("token");
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
+        response.setHeader("Access-Control-Allow-Methods", "*");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.setHeader("Access-Control-Allow-Headers", "x-requested-with,content-type");
+        System.err.println("------------------>:已完成跨域处理");
         try {
             // 验证令牌
             JWTUtils.verify(token);
             System.out.println("*****************************************");
             System.out.println("token验证成功");
             System.out.println("*****************************************");
+            response.addHeader("content-test","123");
             return true;
         } catch (SignatureVerificationException e) {
             map.put("code", 4000);
