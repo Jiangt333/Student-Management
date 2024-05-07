@@ -31,23 +31,25 @@ public class JWTInterceptor implements HandlerInterceptor {
             System.out.println("*****************************************");
             return true;
         } catch (SignatureVerificationException e) {
+            map.put("code", 4000);
             e.printStackTrace();
-            map.put("msg","无效签名!");
+            map.put("data", "无效签名!");
         }catch (TokenExpiredException e){
+            map.put("code", 4001);
             e.printStackTrace();
-            map.put("msg","token过期!");
+            map.put("data", "token过期!");
         }catch (AlgorithmMismatchException e){
+            map.put("code", 4002);
             e.printStackTrace();
-            map.put("msg","token算法不一致!");
+            map.put("data", "token算法不一致!");
         }catch (Exception e){
+            map.put("code", 4003);
             e.printStackTrace();
-            map.put("msg","token无效!");
+            map.put("data", "token无效!");
         }
         System.out.println("*****************************************");
         System.out.println("未通过token验证");
         System.out.println("*****************************************");
-        // 未通过验证：设置状态
-        map.put("state",false);
         // 将map转为json  jackson
         String json = new ObjectMapper().writeValueAsString(map);
         response.setContentType("application/json;charset=UTF-8");

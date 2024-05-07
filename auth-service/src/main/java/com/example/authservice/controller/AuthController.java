@@ -22,7 +22,7 @@ public class AuthController {
     @Autowired
     private Response response;
 
-    @PostMapping("/login")
+    @GetMapping("/login")
     @ResponseBody
     public Response<String> login(String SID, String SPassword) {
         if(authService.login(SID, SPassword)){
@@ -32,8 +32,8 @@ public class AuthController {
             response.data = token;
         }
          else {
-            response.code = 403;
-            response.data = "token error!";
+            response.code = 4004;
+            response.data = "password or id wrong!";
         }
         return response;
     }
