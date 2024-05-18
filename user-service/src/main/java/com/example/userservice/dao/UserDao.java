@@ -1,6 +1,7 @@
 package com.example.userservice.dao;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.example.userservice.model.User;
@@ -21,5 +22,5 @@ public interface UserDao {
      * @return
      */
     @Select("select * from user where sid = #{SID}")
-    User findUserById(String SID);
+    User findUserById(@Param("SID") String SID);
 }

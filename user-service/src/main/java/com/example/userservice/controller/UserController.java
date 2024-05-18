@@ -25,7 +25,7 @@ public class UserController {
     @ApiOperation(value = "获取全部用户的全部信息")
     @GetMapping("/all-users")
     @ResponseBody
-    public Response<List<User>> hello() {
+    public Response<List<User>> getAllUsers() {
         List<User> UserList = userService.getAllUsers();
         response.data = UserList;
         return response;
@@ -34,7 +34,7 @@ public class UserController {
     @ApiOperation(value = "获取某个用户全部信息")
     @GetMapping("/one-user")
     @ResponseBody
-    public Response<User> hello(@ApiParam(value = "学号") @RequestParam(value = "SID") String SID) {
+    public Response<User> getUserById(@ApiParam(value = "学号") @RequestParam(value = "SID") String SID) {
         User user = userService.getUserById(SID);
         response.data = user;
         return response;
