@@ -23,3 +23,6 @@
 
 api文档：http://1.12.37.226/swagger-ui.html
 
+后端服务：
+mysql：3307端口
+
