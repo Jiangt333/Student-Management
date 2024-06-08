@@ -10,10 +10,16 @@
 * 云服务器上`unzip stuMS.zip`命令解压缩
 * 解压缩，进入到有docker-compose的目录
 *   先`docker-compose down`，down掉之前起的
-*   再删除镜像 `docker rmi $(docker images | grep "stums-")`
+*   `docker-compose -f docker-compose.yml down`
+*   `docker-compose -f docker-compose-env.yml down`
+*   再删除镜像 `docker rmi $(docker images | grep "docker-")`
 *   再分别给环境依赖和服务打镜像：
 `docker-compose -f docker-compose-env.yml build`
 `docker-compose -f docker-compose.yml build`
 *   先启动环境依赖 `docker-compose -f docker-compose-env.yml up -d`
 *   再启动各个服务 `docker-compose -f docker-compose.yml up -d`
+
+<br/>
+
+api文档：http://1.12.37.226/swagger-ui.html
 
