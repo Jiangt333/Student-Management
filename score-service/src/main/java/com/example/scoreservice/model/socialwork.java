@@ -6,12 +6,13 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Data
 @Getter
 @Setter
-@ApiModel(description = "学生填的综测信息")
-public class ScoreInfo {
-    @ApiModelProperty(value = "自增主键", example = "1")
+@ApiModel(description = "社会工作")
+public class socialwork {
     private int PID;
 
     @ApiModelProperty(value = "学生学号", example = "21310000")
@@ -20,18 +21,28 @@ public class ScoreInfo {
     @ApiModelProperty(value = "大序号", example = "1")
     private int idx;
 
-    @ApiModelProperty(value = "综测加分条目具体内容", example = "某比赛多少名")
-    private String reward;
-
-    @ApiModelProperty(value = "加分", example = "0.5")
+    @ApiModelProperty(value = "加分", example = "0")
     private float score;
+
+    private String title;
+
+    @ApiModelProperty(value = "开始日期", example = "2024-06-15")
+    private Date date_start;
+
+    @ApiModelProperty(value = "结束日期", example = "2024-06-15")
+    private Date date_end;
+
+    private String link_name;
 
     @ApiModelProperty(value = "证明文件链接", example = "...")
     private String link;
 
+    private String remarks;
+
+    private int status_one;
+
+    private int status_two;
+
     @ApiModelProperty(value = "审核建议", example = "...")
     private String comment;
-
-    @ApiModelProperty(value = "状态", example = "1")
-    private int status;
 }

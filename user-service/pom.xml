@@ -43,6 +43,7 @@
             <artifactId>auth-service</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+
         <!-- 排除继承自authservice模块的该依赖，否则会冲突-->
         <dependency>
             <groupId>javax.servlet</groupId>

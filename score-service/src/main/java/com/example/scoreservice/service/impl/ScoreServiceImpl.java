@@ -1,14 +1,19 @@
 package com.example.scoreservice.service.impl;
 
 import com.example.scoreservice.dao.ScoreDao;
-import com.example.scoreservice.model.ScoreInfo;
-import com.example.scoreservice.model.ScoreStandard;
+import com.example.scoreservice.model.*;
 import com.example.scoreservice.service.ScoreService;
-import org.apache.ibatis.annotations.Param;
+import com.example.scoreservice.utils.myException;
+import org.apache.ibatis.exceptions.PersistenceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.apache.commons.beanutils.BeanUtils;
 
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ScoreServiceImpl implements ScoreService {
@@ -16,34 +21,67 @@ public class ScoreServiceImpl implements ScoreService {
     private ScoreDao scoreDao;
 
     @Override
-    public List<ScoreStandard> selectPolitics(){
-        List<ScoreStandard> list = scoreDao.selectPolitics();
-        return list;
+    public <T> List<T> selectTable(String SID, String table, Class<T> type) throws myException.SqlOperationException, myException.NoMatchingRecordException {
+        try {
+            List<Map<String, Object>> result = scoreDao.selectTable(SID, table);
+            if(result.isEmpty()){
+                throw new myException.NoMatchingRecordException("No matching record found for operation");
+            }
+            List<T> typedResult = new ArrayList<>();
+            for (Map<String, Object> map : result) {
+                T instance = type.newInstance();
+                BeanUtils.populate(instance, map);
+                typedResult.add(instance);
+            }
+            return typedResult;
+        }
+        catch (InstantiationException | InvocationTargetException | IllegalAccessException e) {
+            throw new myException.SqlOperationException("Error instantiating or accessing class: " + e.getMessage());
+        }
     }
 
     @Override
-    public List<ScoreStandard> selectPractice(){
-        List<ScoreStandard> list = scoreDao.selectPractice();
-        return list;
+    public int deleteTable(String PID, String SID, String table) throws myException.SqlOperationException, myException.NoMatchingRecordException {
+        int result = scoreDao.deleteTable(PID, SID, table);
+        if (result == 0) {
+            throw new myException.NoMatchingRecordException("No matching record found for operation");
+        }
+        return result;
     }
+//
+//    @Override
+//    public <T> int submitForm(T form, String type) {
+//        switch (type) {
+//            case "morality":
+//                return submitMorality((morality) form);
+//            case "volunteer":
+//                return submitVolunteer((volunteer) form);
+//            case "socialwork":
+//                return submitSocialwork((socialwork) form);
+//            case "competition":
+//                return submitCompetition((competition) form);
+//            case "paper":
+//                return submitPaper((paper) form);
+//            case "patent":
+//                return submitPatent((patent) form);
+//            case "copyright":
+//                return submitCopyright((copyright) form);
+//            case "publication":
+//                return submitPublication((publication) form);
+//            case "exchange":
+//                return submitExchange((exchange) form);
+//            default:
+//                throw new IllegalArgumentException("Unknown form type: " + type);
+//        }
+//    }
 
+    /**
+     * morality
+     */
     @Override
-    public List<ScoreStandard> selectSocialWork(){
-        List<ScoreStandard> list = scoreDao.selectSocialWork();
-        return list;
-    }
-
-    @Override
-    public List<ScoreStandard> selectStudy(){
-        List<ScoreStandard> list = scoreDao.selectStudy();
-        return list;
-    }
-
-
-    @Override
-    public int submitPolitics(ScoreInfo scoreinfo){
+    public int submitMorality(morality moral){
         try{
-            scoreDao.submitPolitics(scoreinfo);
+            scoreDao.submitMorality(moral);
             return 1;
         }
         catch (Exception e){
@@ -52,10 +90,14 @@ public class ScoreServiceImpl implements ScoreService {
         }
     }
 
+
+    /**
+     * volunteer
+     */
     @Override
-    public int submitPractice(ScoreInfo scoreinfo){
+    public int submitVolunteer(volunteer volun){
         try{
-            scoreDao.submitPractice(scoreinfo);
+            scoreDao.submitVolunteer(volun);
             return 1;
         }
         catch (Exception e){
@@ -64,10 +106,13 @@ public class ScoreServiceImpl implements ScoreService {
         }
     }
 
+    /**
+     * socialwork
+     */
     @Override
-    public int submitSocialWork(ScoreInfo scoreinfo){
+    public int submitSocialwork(socialwork soc){
         try{
-            scoreDao.submitSocialWork(scoreinfo);
+            scoreDao.submitSocialwork(soc);
             return 1;
         }
         catch (Exception e){
@@ -76,10 +121,13 @@ public class ScoreServiceImpl implements ScoreService {
         }
     }
 
+    /**
+     * competition
+     */
     @Override
-    public int submitStudy(ScoreInfo scoreinfo){
+    public int submitCompetition(competition com){
         try{
-            scoreDao.submitStudy(scoreinfo);
+            scoreDao.submitCompetition(com);
             return 1;
         }
         catch (Exception e){
@@ -88,31 +136,78 @@ public class ScoreServiceImpl implements ScoreService {
         }
     }
 
+    /**
+     * paper
+     */
     @Override
-    public List<ScoreInfo> selectPoliticsRecords(String SID){
-        List<ScoreInfo> list = scoreDao.selectPoliticsRecords(SID);
-        return list;
+    public int submitPaper(paper pap){
+        try{
+            scoreDao.submitPaper(pap);
+            return 1;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
     }
 
+    /**
+     * patent
+     */
     @Override
-    public List<ScoreInfo> selectPracticeRecords(String SID){
-        List<ScoreInfo> list = scoreDao.selectPracticeRecords(SID);
-        return list;
+    public int submitPatent(patent pat){
+        try{
+            scoreDao.submitPatent(pat);
+            return 1;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
     }
 
+    /**
+     * copyright
+     */
     @Override
-    public List<ScoreInfo> selectSocialWorkRecords(String SID){
-        List<ScoreInfo> list = scoreDao.selectSocialWorkRecords(SID);
-        return list;
+    public int submitCopyright(copyright cop){
+        try{
+            scoreDao.submitCopyright(cop);
+            return 1;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
     }
 
+    /**
+     * publication
+     */
     @Override
-    public List<ScoreInfo> selectStudyRecords(String SID){
-        List<ScoreInfo> list = scoreDao.selectStudyRecords(SID);
-        return list;
+    public int submitPublication(publication pub){
+        try{
+            scoreDao.submitPublication(pub);
+            return 1;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
     }
 
-
-
-
+    /**
+     * exchange
+     */
+    @Override
+    public int submitExchange(exchange exch){
+        try{
+            scoreDao.submitExchange(exch);
+            return 1;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }

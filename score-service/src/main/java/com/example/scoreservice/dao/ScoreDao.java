@@ -1,70 +1,98 @@
 package com.example.scoreservice.dao;
 
-import com.example.scoreservice.model.ScoreInfo;
-import com.example.scoreservice.model.ScoreStandard;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import com.example.scoreservice.model.*;
+import com.example.scoreservice.utils.SqlProvider;
+import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.exceptions.PersistenceException;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface ScoreDao {
-    /**
-     * 返回某表综测具体条目及对应分值
-     * 参数：无参
-     * 返回：某表综测具体条目及对应分值
-     */
-    @Select("select * from politics_standard")
-    List<ScoreStandard> selectPolitics();
+    //    @Select("select * from #{table} where SID = #{SID}")
+    //    List<Map<String, Object>> selectTable(@Param("SID") String SID, @Param("table") String table) throws PersistenceException;
+    @SelectProvider(type = SqlProvider.class, method = "selectTable")
+    List<Map<String, Object>> selectTable(@Param("SID") String SID, @Param("table") String table);
 
-    @Select("select * from practice_standard")
-    List<ScoreStandard> selectPractice();
-
-    @Select("select * from socialwork_standard")
-    List<ScoreStandard> selectSocialWork();
-
-    @Select("select * from study_standard")
-    List<ScoreStandard> selectStudy();
+    @DeleteProvider(type = SqlProvider.class, method = "deleteTable")
+    int deleteTable(@Param("PID") String PID, @Param("SID") String SID, @Param("table") String table);
 
     /**
-     * 提交综测填报信息某表的表单
-     * 参数：params（该表除主键外的所有字段）
-     * 返回：
+     * morality
      */
-    @Insert("insert into politics(SID, idx, reward, score, link, comment, status) " +
-            "values(#{SID}, #{idx}, #{reward}, #{score}, #{link}, #{comment}, #{status})")
-    void submitPolitics(ScoreInfo scoreinfo);
-
-    @Insert("insert into practice(SID, idx, reward, score, link, comment, status) " +
-            "values(#{SID}, #{idx}, #{reward}, #{score}, #{link}, #{comment}, #{status})")
-    void submitPractice(ScoreInfo scoreinfo);
-
-    @Insert("insert into socialwork(SID, idx, reward, score, link, comment, status) " +
-            "values(#{SID}, #{idx}, #{reward}, #{score}, #{link}, #{comment}, #{status})")
-    void submitSocialWork(ScoreInfo scoreinfo);
-
-    @Insert("insert into study(SID, idx, reward, score, link, comment, status) " +
-            "values(#{SID}, #{idx}, #{reward}, #{score}, #{link}, #{comment}, #{status})")
-    void submitStudy(ScoreInfo scoreinfo);
+    @Insert("insert into morality(SID, idx, score, title, date, link_name, link, remarks, status_one, status_two, comment) " +
+            "values(#{SID}, #{idx}, #{score}, #{title}, #{date}, #{link_name}, #{link}, #{remarks}, #{status_one}, #{status_two}, #{comment})")
+    int submitMorality(morality moral);
 
     /**
-     * 根据学生id返回某表的综测填报信息
-     * 参数：params（SID）
-     * 返回：相关填报信息的列表
+     * volunteer
      */
-    @Select("select * from politics where SID = #{SID}")
-    List<ScoreInfo> selectPoliticsRecords(@Param("SID") String SID);
+    @Insert("insert into volunteer(SID, idx, title, organization, type, date_start, date_end, duration, link_name, link, remarks, status_one, status_two, comment) " +
+            "values(#{SID}, #{idx}, #{title}, #{organization}, #{type}, #{date_start}, #{date_end}, #{duration}, #{link_name}, #{link}, #{remarks}, #{status_one}, #{status_two}, #{comment})")
+    int submitVolunteer(volunteer volun);
 
-    @Select("select * from practice where SID = #{SID}")
-    List<ScoreInfo> selectPracticeRecords(@Param("SID") String SID);
+    /**
+     * socialwork
+     */
+    @Insert("insert into socialwork(SID, idx, score, title, date_start, date_end, link_name, link, remarks, status_one, status_two, comment) " +
+            "values(#{SID}, #{idx}, #{score}, #{title}, #{date_start}, #{date_end}, #{link_name}, #{link}, #{remarks}, #{status_one}, #{status_two}, #{comment})")
+    int submitSocialwork(socialwork soc);
 
-    @Select("select * from socialwork where SID = #{SID}")
-    List<ScoreInfo> selectSocialWorkRecords(@Param("SID") String SID);
+    /**
+     * competition
+     */
+    @Insert("insert into competition(SID, idx, score, type, name, organization, date, title, level, my_rank, team, link_name, link, remarks, status_one, status_two, comment) " +
+            "values(#{SID}, #{idx}, #{score}, #{type}, #{name}, #{organization}, #{date}, #{title}, #{level}, #{my_rank}, #{team}, #{link_name}, #{link}, #{remarks}, #{status_one}, #{status_two}, #{comment})")
+    int submitCompetition(competition com);
 
-    @Select("select * from study where SID = #{SID}")
-    List<ScoreInfo> selectStudyRecords(@Param("SID") String SID);
+    /**
+     * paper
+     */
+    @Insert("insert into paper(SID, idx, score, title, type, author_level, authors, corresponding_author, ISSN_CN, factor, published_status," +
+            "submission_date, received_date, publication_date, my_range, DOI_PMID, CCF, my_partition, inclusion, publisher, language, award_flag, " +
+            "collaborative_one, collaborative_two, link_name, link, remarks, status_one, status_two, comment) " +
+            "values(#{SID}, #{idx}, #{score}, #{title}, #{type}, #{author_level}, #{authors}, #{corresponding_author}, #{ISSN_CN}, #{factor}, " +
+            "#{published_status}, #{submission_date}, #{received_date}, #{publication_date}, #{my_range}, #{DOI_PMID}, #{CCF}, #{my_partition}, #{inclusion}, " +
+            "#{publisher}, #{language}, #{award_flag}, #{collaborative_one}, #{collaborative_two}, " +
+            "#{link_name}, #{link}, #{remarks}, #{status_one}, #{status_two}, #{comment})")
+    int submitPaper(paper pap);
+
+    /**
+     * patent
+     */
+    @Insert("insert into patent(SID, idx, score, title, type, application_num, certificate_num, team, acceptance, acceptance_date, my_release, release_date," +
+            "empower, empower_date, transferred, transferred_date, link_name, link, remarks, status_one, status_two, comment)" +
+            "values(#{SID}, #{idx}, #{score}, #{title}, #{type}, #{application_num}, #{certificate_num}, #{team}, #{acceptance}, #{acceptance_date}, " +
+            "#{my_release}, #{release_date}, #{empower}, #{empower_date}, #{transferred}, #{transferred_date}, " +
+            "#{link_name}, #{link}, #{remarks}, #{status_one}, #{status_two}, #{comment})")
+    int submitPatent(patent pat);
+
+    /**
+     * copyright
+     */
+    @Insert("insert into copyright(SID, idx, score, title, author_level, team, application_status, date, " +
+            "link_name, link, remarks, status_one, status_two, comment)" +
+            "values(#{SID}, #{idx}, #{score}, #{title}, #{author_level}, #{team}, #{application_status}, #{date}, " +
+            "#{link_name}, #{link}, #{remarks}, #{status_one}, #{status_two}, #{comment})")
+    int submitCopyright(copyright cop);
+
+    /**
+     * publication
+     */
+    @Insert("insert into publication(SID, idx, score, title, author_level, team, publisher, type, date, ISBN, " +
+            "link_name, link, remarks, status_one, status_two, comment)" +
+            "values(#{SID}, #{idx}, #{score}, #{title}, #{author_level}, #{team}, #{publisher}, #{type}, #{date}, #{ISBN}, " +
+            "#{link_name}, #{link}, #{remarks}, #{status_one}, #{status_two}, #{comment})")
+    int submitPublication(publication pub);
+
+    /**
+     * exchange
+     */
+    @Insert("insert into exchange(SID, title, type, funding_source, country, city, institution, duration, date_start, date_end, current_status," +
+            "flag1, flag2, flag3, flag4, link_name, link, remarks, status_one, status_two, comment)" +
+            "values(#{SID}, #{title}, #{type}, #{funding_source}, #{country}, #{city}, #{institution}, #{duration}, #{date_start}, #{date_end}, " +
+            "#{current_status}, #{flag1}, #{flag2}, #{flag3}, #{flag4}, " +
+            "#{link_name}, #{link}, #{remarks}, #{status_one}, #{status_two}, #{comment})")
+    int submitExchange(exchange exch);
 }

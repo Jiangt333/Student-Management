@@ -25,4 +25,18 @@ public class UserServiceImpl implements UserService {
         return User;
     }
 
+    @Override
+    public int updateUserById(User user){
+        try{
+            if(userDao.updateUserById(user) == 1){
+                return 1;
+            }
+            return -1;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            System.out.println("学生端更新个人信息失败");
+            return 0;
+        }
+    }
 }

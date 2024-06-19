@@ -24,8 +24,8 @@ public class AuthController {
 
     @GetMapping("/login")
     @ResponseBody
-    public Response<String> login(String SID, String SPassword) {
-        if(authService.login(SID, SPassword)){
+    public Response<String> login(String SID, String password) {
+        if(authService.login(SID, password)){
             Map<String, String> payLoad = new HashMap<>();
             payLoad.put("id", SID);
             String token = JWTUtils.getToken(payLoad);

@@ -12,8 +12,8 @@ public class AuthServiceImpl implements AuthService {
     private AuthDao authDao;
 
     @Override
-    public boolean login(String SID, String SPassword) {
-        SimpleUser myUser = authDao.findByUsernameAndPassword(SID, SPassword);
+    public boolean login(String SID, String password) {
+        SimpleUser myUser = authDao.findByUsernameAndPassword(SID, password);
         if(myUser != null)
             return true;
         return  false;

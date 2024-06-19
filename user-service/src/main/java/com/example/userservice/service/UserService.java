@@ -9,4 +9,6 @@ public interface UserService {
     List<User> getAllUsers();
 
     User getUserById(String SID);
+
+    int updateUserById(User user);
 }

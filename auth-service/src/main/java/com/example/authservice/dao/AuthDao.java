@@ -10,6 +10,6 @@ public interface AuthDao {
      * 登录判断
      * @return
      */
-    @Select("select * from user where SID = #{SID} and SPassword = #{SPassword}")
-    SimpleUser findByUsernameAndPassword(String SID, String SPassword);
+    @Select("select * from user where SID = #{SID} and password = #{password}")
+    SimpleUser findByUsernameAndPassword(String SID, String password);
 }
