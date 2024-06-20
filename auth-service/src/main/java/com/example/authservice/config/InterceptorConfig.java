@@ -19,7 +19,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(jWTInterceptor)
-                .addPathPatterns("/user/**", "/score/**", "/mail/**")
+                .addPathPatterns("/1/**")
                 .excludePathPatterns("/**/login");
 
         registry.addInterceptor(corsInterceptor)

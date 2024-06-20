@@ -1,13 +1,19 @@
 package com.example.authservice.dao;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
+import com.example.authservice.model.MailCode;
+import org.apache.ibatis.annotations.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Mapper
 public interface MailDao {
-    @Insert("insert into mailCode(toEmail, code, start_time) values(#{toEmail}, #{code}, #{start_time}")
+    @Insert("insert into mailCode(toEmail, code, start_time) values(#{toEmail}, #{code}, #{start_time})")
     void saveCode(@Param("toEmail") String toEmail, @Param("code")String code, @Param("start_time")Date start_time);
+
+    @Select("select * from mailCode where toEmail = #{toEmail}")
+    List<MailCode> selectCode(@Param("toEmail") String toEmail);
+
+    @Delete("delete from mailCode where toEmail = #{toEmail}")
+    void deleteCode(@Param("toEmail") String toEmail);
 }

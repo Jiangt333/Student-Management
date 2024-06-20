@@ -5,6 +5,7 @@ import org.springframework.mail.MailSender;
 import java.util.Date;
 
 public interface MailService {
-    void verifyCode(String toEmail, String code);
-    void sendMessageToMail(MailSender mailSender, String toEmail, String code);
+    int verifyCode(String toEmail);
+    String getCode();
+    int sendMessageToMail(String toEmail);
 }

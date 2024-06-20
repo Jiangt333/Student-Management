@@ -1,19 +1,26 @@
 package com.example.authservice.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
-import java.util.Random;
+import java.util.Properties;
 
 @Configuration
 public class MailConfig {
-    @Value("${spring.mail.username}")
-    private static String USERNAME;
-    @Value("${spring.mail.password}")
-    private static String PASSWORD;
+//    @Value("${spring.mail.username}")
+//    private static String USERNAME;
+//    @Value("${spring.mail.password}")
+//    private static String PASSWORD;
+
+    //    @Value("${mail.username}")
+    private String USERNAME = "";
+    //    @Value("${mail.password}")
+    private String PASSWORD = "";
 
     /**
      * 配置 MailSender
@@ -21,25 +28,20 @@ public class MailConfig {
      * @return
      */
     @Bean
-    public MailSender mailSender(){
+    public JavaMailSender getJavaMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-        mailSender.setHost("smtp.qq.com");  //指定用来发送邮件服务器的主机名
-        mailSender.setPort(587);    // 默认端口，标准的SMTP端口
-        mailSender.setUsername(USERNAME);  //配置自己的qq邮箱
-        mailSender.setPassword(PASSWORD);   //配置自己的qq邮箱发送授权码
-        return mailSender;
-    }
+        mailSender.setHost("smtp.qq.com");
+        mailSender.setPort(587);
+        mailSender.setUsername(USERNAME);
+        mailSender.setPassword(PASSWORD);
 
-    /**
-     * 生成六位随机数
-     */
-    @Bean
-    public String getCode(){
-        Random random = new Random();
-        String result = "";
-        for(int i = 0; i < 6; i++){
-            result += random.nextInt(10);
-        }
-        return result;
+//        Properties props = mailSender.getJavaMailProperties();
+//        props.put("mail.transport.protocol", "smtp");
+//        props.put("mail.smtp.auth", "true");
+//        props.put("mail.smtp.starttls.enable", "true");
+//        props.put("mail.smtp.ehlo", "true");
+//        props.put("mail.debug", "true");
+
+        return mailSender;
     }
 }
