@@ -18,9 +18,9 @@ public class MailConfig {
 //    private static String PASSWORD;
 
     //    @Value("${mail.username}")
-    private String USERNAME = "1170504445@qq.com";
+    private String USERNAME = "";
     //    @Value("${mail.password}")
-    private String PASSWORD = "qnknpwrnzomsjbhf";
+    private String PASSWORD = "";
 
     /**
      * 配置 MailSender
