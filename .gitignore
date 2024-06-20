@@ -5,6 +5,7 @@ target/
 !**/src/test/**/target/
 
 **/application-secret.yml
+**/MailConfig.java
 src/main/java/com/example/authservice/config/MailConfig.java
 
 
