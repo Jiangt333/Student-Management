@@ -5,6 +5,8 @@ target/
 !**/src/test/**/target/
 
 **/application-secret.yml
+src/main/java/com/example/authservice/config/MailConfig.java
+
 
 ### STS ###
 .apt_generated

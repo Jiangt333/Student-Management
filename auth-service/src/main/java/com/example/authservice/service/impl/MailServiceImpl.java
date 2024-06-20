@@ -30,15 +30,12 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class MailServiceImpl implements MailService {
 
-    private String USERNAME = "";
+    private String USERNAME = "1170504445@qq.com";
 
     @Autowired
     MailDao mailDao;
     @Autowired
     MailConfig mailConfig;
-
-//    @Autowired
-//    JavaMailSender javaMailSender;
 
     private long timeDifferenceInSeconds;
 
