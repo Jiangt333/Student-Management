@@ -39,4 +39,10 @@ public class MailController {
         }
         return response;
     }
+
+//    @GetMapping("/valid")
+//    @ResponseBody
+//    public Response<String> validCode(String toEmail, String code){
+//
+//    }
 }

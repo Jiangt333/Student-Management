@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@SpringBootApplication(scanBasePackages={"com.example.userservice", "com.example.authservice"})
+@SpringBootApplication(scanBasePackages={"com.example.userservice"})
 @EnableEurekaClient
 @EnableSwagger2
 public class UserServiceApplication 

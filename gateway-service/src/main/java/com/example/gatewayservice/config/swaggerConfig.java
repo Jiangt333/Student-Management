@@ -5,8 +5,10 @@ import org.springframework.cloud.gateway.config.GatewayProperties;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import springfox.documentation.swagger.web.SwaggerResource;
 import springfox.documentation.swagger.web.SwaggerResourcesProvider;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.*;
 
@@ -14,6 +16,7 @@ import java.util.*;
 @Primary
 @AllArgsConstructor
 public class swaggerConfig implements SwaggerResourcesProvider {
+
     /**
      * swagger2默认的url后缀（v2或v3）
      */

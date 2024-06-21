@@ -1,11 +1,8 @@
-package com.example.authservice.config;
+package com.example.userservice.config;
 
-//import com.example.authservice.interceptors.CORSInterceptor;
-import com.example.authservice.interceptors.CORSInterceptor;
-import com.example.authservice.interceptors.JWTInterceptor;
+import com.example.userservice.interceptors.JWTInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -14,16 +11,9 @@ public class InterceptorConfig implements WebMvcConfigurer {
     @Autowired
     private JWTInterceptor jWTInterceptor;
 
-    @Autowired
-    private CORSInterceptor corsInterceptor;
-
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(jWTInterceptor)
-                .addPathPatterns("/**")
-                .excludePathPatterns("/**/login");
-
-        registry.addInterceptor(corsInterceptor)
                 .addPathPatterns("/**");
     }
 }

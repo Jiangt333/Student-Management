@@ -30,6 +30,7 @@ public class AuthController {
             payLoad.put("id", SID);
             String token = JWTUtils.getToken(payLoad);
             response.data = token;
+            response.code = 200;
         }
          else {
             response.code = 4004;

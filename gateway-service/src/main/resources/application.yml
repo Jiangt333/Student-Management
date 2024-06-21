@@ -13,6 +13,20 @@ spring:
           enabled: true  # 表明gateway开启服务注册和发现的功能，动态路由
           lowerCaseServiceId: true
 
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowed-origin-patterns: "*" # spring boot2.4配置
+            # allowed-origins: "*"
+            allowed-headers: "*"
+            allow-credentials: true
+            allowed-methods:
+              - GET
+              - POST
+              - DELETE
+              - PUT
+              - OPTION
+
       routes:
         - id: user-service
           uri: lb://user-service
