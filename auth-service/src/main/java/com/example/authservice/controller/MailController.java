@@ -40,9 +40,22 @@ public class MailController {
         return response;
     }
 
-//    @GetMapping("/valid")
-//    @ResponseBody
-//    public Response<String> validCode(String toEmail, String code){
-//
-//    }
+    @GetMapping("/valid")
+    @ResponseBody
+    public Response<String> validCode(String toEmail, String userCode){
+        int re = mailService.verifyCode(toEmail, userCode);
+        if(re == 1){
+            response.code = 200;
+            response.data = "验证成功！";
+        }
+        else if(re == -1){
+            response.code = 4004;
+            response.data = "验证码已过期！";
+        }
+        else if(re == 0){
+            response.code = 4004;
+            response.data = "验证失败！";
+        }
+        return response;
+    }
 }

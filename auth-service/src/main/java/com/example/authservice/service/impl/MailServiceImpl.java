@@ -21,10 +21,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.Date;
-import java.util.List;
-import java.util.Properties;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -60,7 +57,7 @@ public class MailServiceImpl implements MailService {
 //            System.err.println("timeDifferenceInMinutes: " + timeDifferenceInMinutes + " timeDifferenceInSeconds: " + timeDifferenceInSeconds + " remainingSeconds: " + remainingSeconds + " currentTime: " + currentTime + " startTime: " + startTime);
             System.err.println(" timeDifferenceInSeconds: " + timeDifferenceInSeconds + ", currentTime: " + currentTime + ", startTime: " + startTime);
 
-            if (timeDifferenceInSeconds > 60) {
+            if (timeDifferenceInSeconds > 300) {
                 // 删除过期的验证码记录
                 System.err.println("timeDifferenceInSeconds > 5分钟，验证码已过期！");
                 mailDao.deleteCode(toEmail);
@@ -72,6 +69,38 @@ public class MailServiceImpl implements MailService {
 //            // 正常不应该出现这种情况
 //        }
         return 1;
+    }
+
+    @Override
+    public int verifyCode(String toEmail, String userCode){
+        List<MailCode> mailCodeList = mailDao.selectCode(toEmail);
+        if(mailCodeList.size() == 1){
+            // 对应邮箱的验证存在
+            MailCode mailCode = mailCodeList.get(0);
+
+            // 验证验证码是否过期
+            ZonedDateTime currentTime = ZonedDateTime.now(ZoneId.of("GMT+8"));
+            ZonedDateTime startTime = mailCode.getStart_time().toInstant().atZone(ZoneId.of("GMT+8"));
+
+            // 计算时间差（以秒为单位）
+            Duration timeDifference = Duration.between(startTime, currentTime);
+            timeDifferenceInSeconds = timeDifference.getSeconds();
+
+            System.err.println(" timeDifferenceInSeconds: " + timeDifferenceInSeconds + ", currentTime: " + currentTime + ", startTime: " + startTime);
+
+            if (timeDifferenceInSeconds > 60) {
+                // 删除过期的验证码记录
+                System.err.println("timeDifferenceInSeconds > 5分钟，验证码已过期！");
+                mailDao.deleteCode(toEmail);
+                return -1;
+            }
+            else {
+                // 验证码存在且没过期，则验证是否相等
+                return (Objects.equals(userCode, mailCode.getCode())) ? 1 : 0;
+            }
+        }
+        // 对应邮箱的验证不存在
+        return 0;
     }
 
     /**
