@@ -1,8 +1,0 @@
-server:
-  port: 1005
-
-spring:
-  application:
-    name: auth-service
-  profiles:
-    active: ${SPRING_PROFILE_ACTIVE:dev}
