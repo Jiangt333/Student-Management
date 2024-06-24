@@ -57,9 +57,9 @@ public class MailServiceImpl implements MailService {
 //            System.err.println("timeDifferenceInMinutes: " + timeDifferenceInMinutes + " timeDifferenceInSeconds: " + timeDifferenceInSeconds + " remainingSeconds: " + remainingSeconds + " currentTime: " + currentTime + " startTime: " + startTime);
             System.err.println(" timeDifferenceInSeconds: " + timeDifferenceInSeconds + ", currentTime: " + currentTime + ", startTime: " + startTime);
 
-            if (timeDifferenceInSeconds > 300) {
+            if (timeDifferenceInSeconds > 180) {
                 // 删除过期的验证码记录
-                System.err.println("timeDifferenceInSeconds > 5分钟，验证码已过期！");
+                System.err.println("timeDifferenceInSeconds > 3分钟，验证码已过期！");
                 mailDao.deleteCode(toEmail);
                 return 1;
             }
@@ -88,9 +88,9 @@ public class MailServiceImpl implements MailService {
 
             System.err.println(" timeDifferenceInSeconds: " + timeDifferenceInSeconds + ", currentTime: " + currentTime + ", startTime: " + startTime);
 
-            if (timeDifferenceInSeconds > 60) {
+            if (timeDifferenceInSeconds > 180) {
                 // 删除过期的验证码记录
-                System.err.println("timeDifferenceInSeconds > 5分钟，验证码已过期！");
+                System.err.println("timeDifferenceInSeconds > 3分钟，验证码已过期！");
                 mailDao.deleteCode(toEmail);
                 return -1;
             }
@@ -140,7 +140,7 @@ public class MailServiceImpl implements MailService {
         message.setFrom(USERNAME);
         message.setTo(toEmail);
         message.setSubject("【中山大学软件工程学院学生管理平台】用户找回密码");
-        message.setText("您本次的验证码是：" + code + "，有效期5分钟。请妥善保管，切勿泄露");
+        message.setText("您本次的验证码是：" + code + "，有效期3分钟。请妥善保管，切勿泄露");
         mailSender.send(message);
 
         // 保存到数据库
