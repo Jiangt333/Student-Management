@@ -37,7 +37,10 @@ public class MailServiceImpl implements MailService {
     private long timeDifferenceInSeconds;
 
     @Override
-    public int verifyCode(String toEmail){
+    public int verifyCodeFirst(String SID, String toEmail){
+        if(mailDao.validIdentity(SID, toEmail) == null){
+            return 2;
+        }
         List<MailCode> mailCodeList = mailDao.selectCode(toEmail);
         if(mailCodeList.size() == 1){
             MailCode mailCode = mailCodeList.get(0);
@@ -72,10 +75,7 @@ public class MailServiceImpl implements MailService {
     }
 
     @Override
-    public int verifyCode(String SID, String toEmail, String userCode){
-        if(mailDao.validIdentity(SID, toEmail) == null){
-            return 2;
-        }
+    public int verifyCode(String toEmail, String userCode){
         List<MailCode> mailCodeList = mailDao.selectCode(toEmail);
         if(mailCodeList.size() == 1){
             // 对应邮箱的验证存在
@@ -120,11 +120,15 @@ public class MailServiceImpl implements MailService {
     }
 
     @Override
-    public int sendMessageToMail(String toEmail){
+    public int sendMessageToMail(String SID, String toEmail){
 
         System.err.println("您本次的发送对象是：" + toEmail);
-        if(verifyCode(toEmail) == 0){
+        int re = verifyCodeFirst(SID, toEmail);
+        if(re == 0){
             return 0;
+        }
+        else if(re == 2){
+            return 2;
         }
 
         // 获得配置好的配置 MailSender

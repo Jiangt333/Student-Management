@@ -23,11 +23,15 @@ public class MailController {
 
     @GetMapping("/send")
     @ResponseBody
-    public Response<String> sendMessageToMail(String toEmail){
-//        int re = mailService.sendMessageToMail(toEmail);
-        if(mailService.sendMessageToMail(toEmail) == 1){
+    public Response<String> sendMessageToMail(String SID, String toEmail){
+        int re = mailService.sendMessageToMail(SID, toEmail);
+        if(re == 1){
             response.code = 200;
             response.data = "发送成功！";
+        }
+        else if(re == 2){
+            response.code = 4006;
+            response.data = "SID和邮箱不匹配！";
         }
         else{
 //            long timeDifferenceInMinutes = (300 - re) / 60;
@@ -42,15 +46,11 @@ public class MailController {
 
     @GetMapping("/valid")
     @ResponseBody
-    public Response<String> validCode(String SID, String toEmail, String userCode){
-        int re = mailService.verifyCode(SID, toEmail, userCode);
+    public Response<String> validCode(String toEmail, String userCode){
+        int re = mailService.verifyCode(toEmail, userCode);
         if(re == 1){
             response.code = 200;
             response.data = "验证成功！";
-        }
-        else if(re == 2){
-            response.code = 4006;
-            response.data = "SID和邮箱不匹配！";
         }
         else if(re == -1){
             response.code = 4007;
