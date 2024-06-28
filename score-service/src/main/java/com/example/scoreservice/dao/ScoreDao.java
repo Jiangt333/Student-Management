@@ -18,54 +18,60 @@ public interface ScoreDao {
     @DeleteProvider(type = SqlProvider.class, method = "deleteTable")
     int deleteTable(@Param("PID") String PID, @Param("SID") String SID, @Param("table") String table);
 
+    @UpdateProvider(type = SqlProvider.class, method = "updateStatusOne")
+    int updateStatusOne(@Param("PID") String PID, @Param("table") String SID, @Param("status_one") int status_one);
+
+    @UpdateProvider(type = SqlProvider.class, method = "updateStatusTwo")
+    int updateStatusTwo(@Param("PID") String PID, @Param("table") String SID, @Param("status_two") int status_two);
+
     /**
      * morality
      */
     @Insert("insert into morality(SID, idx, score, title, date, link_name, link, remarks, status_one, status_two, comment) " +
-            "values(#{SID}, #{idx}, #{score}, #{title}, #{date}, #{link_name}, #{link}, #{remarks}, #{status_one}, #{status_two}, #{comment})")
+            "values(#{SID}, #{idx}, #{score}, #{title}, #{date}, #{link_name}, #{link}, #{remarks}, 0, -1, #{comment})")
     int submitMorality(morality moral);
 
     /**
      * volunteer
      */
     @Insert("insert into volunteer(SID, idx, title, organization, type, date_start, date_end, duration, link_name, link, remarks, status_one, status_two, comment) " +
-            "values(#{SID}, #{idx}, #{title}, #{organization}, #{type}, #{date_start}, #{date_end}, #{duration}, #{link_name}, #{link}, #{remarks}, #{status_one}, #{status_two}, #{comment})")
+            "values(#{SID}, #{idx}, #{title}, #{organization}, #{type}, #{date_start}, #{date_end}, #{duration}, #{link_name}, #{link}, #{remarks}, 0, -1, #{comment})")
     int submitVolunteer(volunteer volun);
 
     /**
      * socialwork
      */
     @Insert("insert into socialwork(SID, idx, score, title, date_start, date_end, link_name, link, remarks, status_one, status_two, comment) " +
-            "values(#{SID}, #{idx}, #{score}, #{title}, #{date_start}, #{date_end}, #{link_name}, #{link}, #{remarks}, #{status_one}, #{status_two}, #{comment})")
+            "values(#{SID}, #{idx}, #{score}, #{title}, #{date_start}, #{date_end}, #{link_name}, #{link}, #{remarks}, 0, -1, #{comment})")
     int submitSocialwork(socialwork soc);
 
     /**
      * competition
      */
     @Insert("insert into competition(SID, idx, score, type, name, organization, date, title, level, my_rank, team, link_name, link, remarks, status_one, status_two, comment) " +
-            "values(#{SID}, #{idx}, #{score}, #{type}, #{name}, #{organization}, #{date}, #{title}, #{level}, #{my_rank}, #{team}, #{link_name}, #{link}, #{remarks}, #{status_one}, #{status_two}, #{comment})")
+            "values(#{SID}, #{idx}, #{score}, #{type}, #{name}, #{organization}, #{date}, #{title}, #{level}, #{my_rank}, #{team}, #{link_name}, #{link}, #{remarks}, 0, -1, #{comment})")
     int submitCompetition(competition com);
 
     /**
      * paper
      */
-    @Insert("insert into paper(SID, idx, score, title, type, author_level, authors, corresponding_author, ISSN_CN, factor, published_status," +
+    @Insert("insert into paper(SID, idx, score, title, type, publish, author_level, authors, corresponding_author, ISSN_CN, factor, published_status," +
             "submission_date, received_date, publication_date, my_range, DOI_PMID, CCF, my_partition, inclusion, publisher, language, award_flag, " +
             "collaborative_one, collaborative_two, link_name, link, remarks, status_one, status_two, comment) " +
-            "values(#{SID}, #{idx}, #{score}, #{title}, #{type}, #{author_level}, #{authors}, #{corresponding_author}, #{ISSN_CN}, #{factor}, " +
+            "values(#{SID}, #{idx}, #{score}, #{title}, #{type}, #{publish}, #{author_level}, #{authors}, #{corresponding_author}, #{ISSN_CN}, #{factor}, " +
             "#{published_status}, #{submission_date}, #{received_date}, #{publication_date}, #{my_range}, #{DOI_PMID}, #{CCF}, #{my_partition}, #{inclusion}, " +
             "#{publisher}, #{language}, #{award_flag}, #{collaborative_one}, #{collaborative_two}, " +
-            "#{link_name}, #{link}, #{remarks}, #{status_one}, #{status_two}, #{comment})")
+            "#{link_name}, #{link}, #{remarks}, 0, -1, #{comment})")
     int submitPaper(paper pap);
 
     /**
      * patent
      */
     @Insert("insert into patent(SID, idx, score, title, type, application_num, certificate_num, team, acceptance, acceptance_date, my_release, release_date," +
-            "empower, empower_date, transferred, transferred_date, link_name, link, remarks, status_one, status_two, comment)" +
+            "empower, empower_date, transferred, transferred_date, transferred_income, link_name, link, remarks, status_one, status_two, comment)" +
             "values(#{SID}, #{idx}, #{score}, #{title}, #{type}, #{application_num}, #{certificate_num}, #{team}, #{acceptance}, #{acceptance_date}, " +
-            "#{my_release}, #{release_date}, #{empower}, #{empower_date}, #{transferred}, #{transferred_date}, " +
-            "#{link_name}, #{link}, #{remarks}, #{status_one}, #{status_two}, #{comment})")
+            "#{my_release}, #{release_date}, #{empower}, #{empower_date}, #{transferred}, #{transferred_date}, #{transferred_income}," +
+            "#{link_name}, #{link}, #{remarks}, 0, -1, #{comment})")
     int submitPatent(patent pat);
 
     /**
@@ -74,7 +80,7 @@ public interface ScoreDao {
     @Insert("insert into copyright(SID, idx, score, title, author_level, team, application_status, date, " +
             "link_name, link, remarks, status_one, status_two, comment)" +
             "values(#{SID}, #{idx}, #{score}, #{title}, #{author_level}, #{team}, #{application_status}, #{date}, " +
-            "#{link_name}, #{link}, #{remarks}, #{status_one}, #{status_two}, #{comment})")
+            "#{link_name}, #{link}, #{remarks}, 0, -1, #{comment})")
     int submitCopyright(copyright cop);
 
     /**
@@ -83,7 +89,7 @@ public interface ScoreDao {
     @Insert("insert into publication(SID, idx, score, title, author_level, team, publisher, type, date, ISBN, " +
             "link_name, link, remarks, status_one, status_two, comment)" +
             "values(#{SID}, #{idx}, #{score}, #{title}, #{author_level}, #{team}, #{publisher}, #{type}, #{date}, #{ISBN}, " +
-            "#{link_name}, #{link}, #{remarks}, #{status_one}, #{status_two}, #{comment})")
+            "#{link_name}, #{link}, #{remarks}, 0, -1, #{comment})")
     int submitPublication(publication pub);
 
     /**
@@ -93,6 +99,6 @@ public interface ScoreDao {
             "flag1, flag2, flag3, flag4, link_name, link, remarks, status_one, status_two, comment)" +
             "values(#{SID}, #{title}, #{type}, #{funding_source}, #{country}, #{city}, #{institution}, #{duration}, #{date_start}, #{date_end}, " +
             "#{current_status}, #{flag1}, #{flag2}, #{flag3}, #{flag4}, " +
-            "#{link_name}, #{link}, #{remarks}, #{status_one}, #{status_two}, #{comment})")
+            "#{link_name}, #{link}, #{remarks}, 0, -1, #{comment})")
     int submitExchange(exchange exch);
 }

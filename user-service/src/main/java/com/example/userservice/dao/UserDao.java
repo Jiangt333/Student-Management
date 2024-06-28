@@ -27,4 +27,5 @@ public interface UserDao {
 
     @Update("update user_info set outlook = #{outlook}, tel = #{tel}, wechat = #{wechat}, email = #{email}, address = #{address}, emergency_name = #{emergency_name}, emergency_tel = #{emergency_tel} where SID = #{SID}")
     int updateUserById(User user);
+
 }

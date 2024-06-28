@@ -50,6 +50,8 @@ public class patent {
 
     private Date transferred_date;
 
+    private float transferred_income;
+
     private String link_name;
 
     @ApiModelProperty(value = "证明文件链接", example = "...")

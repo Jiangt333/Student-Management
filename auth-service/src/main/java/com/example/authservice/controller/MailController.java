@@ -42,14 +42,18 @@ public class MailController {
 
     @GetMapping("/valid")
     @ResponseBody
-    public Response<String> validCode(String toEmail, String userCode){
-        int re = mailService.verifyCode(toEmail, userCode);
+    public Response<String> validCode(String SID, String toEmail, String userCode){
+        int re = mailService.verifyCode(SID, toEmail, userCode);
         if(re == 1){
             response.code = 200;
             response.data = "验证成功！";
         }
+        else if(re == 2){
+            response.code = 4006;
+            response.data = "SID和邮箱不匹配！";
+        }
         else if(re == -1){
-            response.code = 4004;
+            response.code = 4007;
             response.data = "验证码已过期！";
         }
         else if(re == 0){

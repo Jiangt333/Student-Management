@@ -15,14 +15,8 @@ public class SimpleUser {
     private String SID;
 
     @ApiModelProperty(value = "姓名", example = "王凌")
-    private String SName;
+    private String name;
 
     @ApiModelProperty(value = "密码", example = "123456")
-    private String SPassword;
-
-    @ApiModelProperty(value = "学生类别", example = "境内生")
-    private Integer SCategory;
-
-    @ApiModelProperty(value = "身份证号", example = "450287200305242459")
-    private String SIDNum;
+    private String password;
 }

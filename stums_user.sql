@@ -1,14 +1,12 @@
 CREATE TABLE `stums`.`backend_user` (
   `PID` INT NOT NULL AUTO_INCREMENT,
   `SID` VARCHAR(20) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
   `name` VARCHAR(20) NULL,
   `role` INT NULL,
   `grade` VARCHAR(10) NULL,
   `user_class` VARCHAR(10) NULL,
-  `login_ip` VARCHAR(30) NULL,
-  `login_addr` VARCHAR(45) NULL,
   `create_time` DATETIME NULL,
-  `last_login_time` DATETIME NULL,
   PRIMARY KEY (`PID`));
 
   CREATE TABLE `stums`.`user_info` (
@@ -158,6 +156,7 @@ CREATE TABLE `stums`.`patent` (
   `empower_date` DATE NULL,
   `transferred` INT NULL,
   `transferred_date` DATE NULL,
+  `transferred_income` FLOAT NULL,
   `link_name` VARCHAR(45) NULL,
   `link` VARCHAR(50) NULL,
   `remarks` TEXT NULL,

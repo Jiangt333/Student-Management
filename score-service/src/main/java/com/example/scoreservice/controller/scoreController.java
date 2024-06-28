@@ -26,7 +26,7 @@ public class scoreController {
     /**
      * 各表通用的接口
      */
-    @ApiOperation(value = "各表通用：根据学生SID返回指定表的综测填报信息，其中table和type都填写对应表名")
+    @ApiOperation(value = "各表通用：根据学生SID返回指定表的综测填报信息，其中table填写对应表名")
     @GetMapping("/common")
     @ResponseBody
     public <T> Response<List<T>> selectTable(@RequestParam String SID, @RequestParam String table) {
@@ -65,6 +65,36 @@ public class scoreController {
             e.printStackTrace();
             response.data = "sql错误或其他捕获异常！";
             response.code = 4004;
+        }
+        return response;
+    }
+
+    @ApiOperation(value = "各表通用：更新status_one")
+    @PutMapping("/common/status_one")
+    @ResponseBody
+    public Response<String> updateStatusOne(@RequestParam String PID, @RequestParam String table, @RequestParam int status_one) {
+        if(scoreService.updateStatusOne(PID, table, status_one)){
+            response.data = "操作成功";
+            response.code = 200;
+        }
+        else{
+            response.data = "没有匹配的条目，请检查参数";
+            response.code = 4005;
+        }
+        return response;
+    }
+
+    @ApiOperation(value = "各表通用：更新status_two")
+    @PutMapping("/common/status_two")
+    @ResponseBody
+    public Response<String> updateStatusTwo(@RequestParam String PID, @RequestParam String table, @RequestParam int status_two) {
+        if(scoreService.updateStatusTwo(PID, table, status_two)){
+            response.data = "操作成功";
+            response.code = 200;
+        }
+        else{
+            response.data = "没有匹配的条目，请检查参数";
+            response.code = 4005;
         }
         return response;
     }

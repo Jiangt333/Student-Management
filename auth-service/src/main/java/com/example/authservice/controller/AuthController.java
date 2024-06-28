@@ -22,10 +22,10 @@ public class AuthController {
     @Autowired
     private Response response;
 
-    @GetMapping("/login")
+    @GetMapping("/login/user")
     @ResponseBody
-    public Response<String> login(String SID, String password) {
-        if(authService.login(SID, password)){
+    public Response<String> userLogin(String SID, String password) {
+        if(authService.userLogin(SID, password)){
             Map<String, String> payLoad = new HashMap<>();
             payLoad.put("id", SID);
             String token = JWTUtils.getToken(payLoad);
@@ -35,6 +35,37 @@ public class AuthController {
          else {
             response.code = 4004;
             response.data = "password or id wrong!";
+        }
+        return response;
+    }
+
+    @GetMapping("/login/backend_user")
+    @ResponseBody
+    public Response<String> backendUserLogin(String SID, String password) {
+        if(authService.backendUserLogin(SID, password)){
+            Map<String, String> payLoad = new HashMap<>();
+            payLoad.put("id", SID);
+            String token = JWTUtils.getToken(payLoad);
+            response.data = token;
+            response.code = 200;
+        }
+        else {
+            response.code = 4004;
+            response.data = "password or id wrong!";
+        }
+        return response;
+    }
+
+    @PutMapping("/password")
+    @ResponseBody
+    public Response<String> updateUserPassword(String SID, String password) {
+        if(authService.updateUserPassword(SID, password)){
+            response.data = "修改成功！";
+            response.code = 200;
+        }
+        else {
+            response.code = 4004;
+            response.data = "修改失败，请检查SID是否正确！";
         }
         return response;
     }

@@ -21,7 +21,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(jWTInterceptor)
                 .addPathPatterns("/1/**")
-                .excludePathPatterns("/**/login", "/**/mail");
+                .excludePathPatterns("/**/login", "/**/mail", "/**/password");
 
         registry.addInterceptor(corsInterceptor)
                 .addPathPatterns("/**");

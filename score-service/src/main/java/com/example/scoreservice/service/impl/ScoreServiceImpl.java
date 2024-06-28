@@ -48,6 +48,24 @@ public class ScoreServiceImpl implements ScoreService {
         }
         return result;
     }
+
+    @Override
+    public boolean updateStatusOne(String PID, String table, int status_one){
+        int result = scoreDao.updateStatusOne(PID, table, status_one);
+        if (result == 0) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean updateStatusTwo(String PID, String table, int status_two){
+        int result = scoreDao.updateStatusTwo(PID, table, status_two);
+        if (result == 0) {
+            return false;
+        }
+        return true;
+    }
 //
 //    @Override
 //    public <T> int submitForm(T form, String type) {

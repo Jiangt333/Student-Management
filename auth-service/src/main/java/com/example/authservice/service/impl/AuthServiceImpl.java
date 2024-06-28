@@ -12,11 +12,27 @@ public class AuthServiceImpl implements AuthService {
     private AuthDao authDao;
 
     @Override
-    public boolean login(String SID, String password) {
+    public boolean userLogin(String SID, String password) {
         SimpleUser myUser = authDao.findByUsernameAndPassword(SID, password);
         if(myUser != null)
             return true;
-        return  false;
+        return false;
+    }
+
+    @Override
+    public boolean backendUserLogin(String SID, String password) {
+        SimpleUser myUser = authDao.findByBackendUsernameAndPassword(SID, password);
+        if(myUser != null)
+            return true;
+        return false;
+    }
+
+    @Override
+    public boolean updateUserPassword(String SID, String password){
+        if(authDao.updateUserPassword(SID, password) == 1){
+            return true;
+        }
+        return false;
     }
 
 }

@@ -27,7 +27,7 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class MailServiceImpl implements MailService {
 
-    private String USERNAME = "1170504445@qq.com";
+    private String USERNAME = "scecs4sysusse@163.com";
 
     @Autowired
     MailDao mailDao;
@@ -72,7 +72,10 @@ public class MailServiceImpl implements MailService {
     }
 
     @Override
-    public int verifyCode(String toEmail, String userCode){
+    public int verifyCode(String SID, String toEmail, String userCode){
+        if(mailDao.validIdentity(SID, toEmail) == null){
+            return 2;
+        }
         List<MailCode> mailCodeList = mailDao.selectCode(toEmail);
         if(mailCodeList.size() == 1){
             // 对应邮箱的验证存在

@@ -15,4 +15,18 @@ public class SqlProvider {
         String PID = (String) params.get("PID");
         return "delete FROM " + table + " WHERE SID = '" + SID + "' and PID = '" + PID + "'";
     }
+
+    public String updateStatusOne(Map<String, Object> params) {
+        String table = (String) params.get("table");
+        String PID = (String) params.get("PID");
+        int status_one = (int) params.get("status_one");
+        return "update " + table + " set status_one = '" + status_one + "' WHERE PID = '" + PID + "'";
+    }
+
+    public String updateStatusTwo(Map<String, Object> params) {
+        String table = (String) params.get("table");
+        String PID = (String) params.get("PID");
+        int status_two = (int) params.get("status_two");
+        return "update " + table + " set status_two = '" + status_two + "' WHERE PID = '" + PID + "'";
+    }
 }
