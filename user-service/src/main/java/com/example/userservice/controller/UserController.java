@@ -60,4 +60,18 @@ public class UserController {
         }
         return response;
     }
+
+    @ApiOperation(value = "根据SID删除前台用户信息")
+    @DeleteMapping("/stu_userinfo")
+    @ResponseBody
+    public Response<String> deleteUser(int SID) {
+        if(userService.deleteUser(SID) == 1){
+            response.data = "删除成功！";
+            response.code = 200;
+        }else{
+            response.data = "不存在该后台用户！";
+            response.code = 4004;
+        }
+        return response;
+    }
 }

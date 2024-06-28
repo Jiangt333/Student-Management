@@ -4,4 +4,5 @@ public interface AuthService {
     boolean userLogin(String SID, String password);
     boolean backendUserLogin(String SID, String password);
     boolean updateUserPassword(String SID, String password);
+    boolean updateBackendUserPassword(String SID, String password);
 }

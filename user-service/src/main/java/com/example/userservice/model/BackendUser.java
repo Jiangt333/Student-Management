@@ -12,9 +12,11 @@ import java.util.Date;
 @Setter
 @ApiModel(description = "后台用户类")
 public class BackendUser {
+    private int PID;
+
     private String SID;
 
-    private String password;
+//    private String password;
 
     private String name;
 

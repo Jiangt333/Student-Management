@@ -1,11 +1,8 @@
 package com.example.userservice.dao;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import com.example.userservice.model.User;
-import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -27,5 +24,8 @@ public interface UserDao {
 
     @Update("update user_info set outlook = #{outlook}, tel = #{tel}, wechat = #{wechat}, email = #{email}, address = #{address}, emergency_name = #{emergency_name}, emergency_tel = #{emergency_tel} where SID = #{SID}")
     int updateUserById(User user);
+
+    @Delete("delete from user_info where SID = #{SID}")
+    int deleteUser(@Param("SID") int SID);
 
 }

@@ -39,4 +39,12 @@ public class UserServiceImpl implements UserService {
             return 0;
         }
     }
+
+    @Override
+    public int deleteUser(int SID){
+        if(userDao.deleteUser(SID) == 1){
+            return 1;
+        }
+        return 0;
+    }
 }

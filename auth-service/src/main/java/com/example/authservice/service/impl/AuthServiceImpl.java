@@ -35,4 +35,12 @@ public class AuthServiceImpl implements AuthService {
         return false;
     }
 
+    @Override
+    public boolean updateBackendUserPassword(String SID, String password){
+        if(authDao.updateBackendUserPassword(SID, password) == 1){
+            return true;
+        }
+        return false;
+    }
+
 }

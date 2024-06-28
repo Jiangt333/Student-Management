@@ -69,4 +69,18 @@ public class AuthController {
         }
         return response;
     }
+
+    @PutMapping("/backend_password")
+    @ResponseBody
+    public Response<String> updateBackendUserPassword(String SID, String password) {
+        if(authService.updateBackendUserPassword(SID, password)){
+            response.data = "修改成功！";
+            response.code = 200;
+        }
+        else {
+            response.code = 4004;
+            response.data = "修改失败，请检查SID是否正确！";
+        }
+        return response;
+    }
 }

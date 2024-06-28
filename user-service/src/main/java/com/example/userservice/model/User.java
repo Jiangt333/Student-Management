@@ -12,6 +12,8 @@ import java.util.Date;
 @Setter
 @ApiModel(description = "用户类")
 public class User {
+    private int PID;
+
     private String SID;
 
     private String name;

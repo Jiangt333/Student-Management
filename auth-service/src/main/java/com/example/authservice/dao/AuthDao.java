@@ -23,4 +23,7 @@ public interface AuthDao {
 
     @Update("update user_info set password = #{password} where SID = #{SID}")
     int updateUserPassword(String SID, String password);
+
+    @Update("update backend_user set password = #{password} where SID = #{SID}")
+    int updateBackendUserPassword(String SID, String password);
 }
