@@ -87,7 +87,7 @@ public class scoreController {
     @ApiOperation(value = "各表通用：更新status_two")
     @PutMapping("/common/status_two")
     @ResponseBody
-    public Response<String> updateStatusTwo(@RequestParam String PID, @RequestParam String table, @RequestParam int status_two) {
+    public Response<String> updateStatusTwo(@RequestParam String PID, @RequestParam String SID, @RequestParam String table, @RequestParam int status_two) {
         if(scoreService.updateStatusTwo(PID, table, status_two)){
             response.data = "操作成功";
             response.code = 200;

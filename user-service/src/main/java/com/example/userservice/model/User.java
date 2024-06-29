@@ -20,6 +20,8 @@ public class User {
 
     private String password;
 
+    private Integer gender;
+
     private Integer type;
 
     private Integer nation;
