@@ -38,7 +38,7 @@ public class MailServiceImpl implements MailService {
 
     @Override
     public int verifyCodeFirst(String SID, String toEmail){
-        if(mailDao.validIdentity(SID, toEmail) == null){
+        if(mailDao.validIdentity(SID, toEmail) == 0){
             return 2;
         }
         List<MailCode> mailCodeList = mailDao.selectCode(toEmail);

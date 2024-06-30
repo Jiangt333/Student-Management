@@ -69,6 +69,21 @@ public class scoreController {
         return response;
     }
 
+    @ApiOperation(value = "各表通用：根据PID更新idx和score")
+    @PutMapping("/common/idx_score")
+    @ResponseBody
+    public Response<String> updateIdxAndScore(@RequestParam String PID, @RequestParam String SID, @RequestParam int idx, @RequestParam float score) {
+        if(scoreService.updateIdxAndScore(PID, SID, idx, score)){
+            response.data = "操作成功";
+            response.code = 200;
+        }
+        else{
+            response.data = "没有匹配的条目，请检查参数";
+            response.code = 4005;
+        }
+        return response;
+    }
+
     @ApiOperation(value = "各表通用：更新status_one")
     @PutMapping("/common/status_one")
     @ResponseBody

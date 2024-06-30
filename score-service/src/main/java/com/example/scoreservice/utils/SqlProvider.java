@@ -16,6 +16,14 @@ public class SqlProvider {
         return "delete FROM " + table + " WHERE SID = '" + SID + "' and PID = '" + PID + "'";
     }
 
+    public String updateIdxAndScore(Map<String, Object> params) {
+        String table = (String) params.get("table");
+        String PID = (String) params.get("PID");
+        int idx = (int) params.get("idx");
+        float score = (float) params.get("score");
+        return "update " + table + " set idx = '" + idx + "' and score = '" + score + "' WHERE PID = '" + PID + "'";
+    }
+
     public String updateStatusOne(Map<String, Object> params) {
         String table = (String) params.get("table");
         String PID = (String) params.get("PID");

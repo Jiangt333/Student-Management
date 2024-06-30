@@ -19,4 +19,6 @@ public class SimpleUser {
 
     @ApiModelProperty(value = "密码", example = "123456")
     private String password;
+
+//    private String email;
 }

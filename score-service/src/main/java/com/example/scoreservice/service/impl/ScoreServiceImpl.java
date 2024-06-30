@@ -50,6 +50,15 @@ public class ScoreServiceImpl implements ScoreService {
     }
 
     @Override
+    public boolean updateIdxAndScore(String PID, String SID, int idx, float score){
+        int result = scoreDao.updateIdxAndScore(PID, SID, idx, score);
+        if (result == 0) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
     public boolean updateStatusOne(String PID, String table, int status_one){
         int result = scoreDao.updateStatusOne(PID, table, status_one);
         if (result == 0) {

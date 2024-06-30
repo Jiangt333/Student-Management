@@ -18,6 +18,9 @@ public interface ScoreDao {
     @DeleteProvider(type = SqlProvider.class, method = "deleteTable")
     int deleteTable(@Param("PID") String PID, @Param("SID") String SID, @Param("table") String table);
 
+    @UpdateProvider(type = SqlProvider.class, method = "updateIdxAndScore")
+    int updateIdxAndScore(@Param("PID") String PID, @Param("table") String SID, @Param("idx") int idx, @Param("score") float score);
+
     @UpdateProvider(type = SqlProvider.class, method = "updateStatusOne")
     int updateStatusOne(@Param("PID") String PID, @Param("table") String SID, @Param("status_one") int status_one);
 
