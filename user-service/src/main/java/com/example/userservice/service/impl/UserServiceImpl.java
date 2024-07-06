@@ -47,7 +47,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int deleteUser(List<String> SIDList){
-        if(userDao.deleteUser(SIDList) != 0){
+        if(userDao.deleteUser(SIDList) == 0){
+            return 0;
+        }
+        return 1;
+    }
+
+    @Override
+    public int addUser(List<User> userList){
+        if(userDao.addUser(userList) == 0){
             return 0;
         }
         return 1;

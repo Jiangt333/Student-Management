@@ -27,7 +27,7 @@ public class SqlProvider {
         int PID = (int) params.get("PID");
         int idx = (int) params.get("idx");
         float score = (float) params.get("score");
-        return "update " + table + " set idx = '" + idx + "' and score = '" + score + "' WHERE PID = '" + PID + "'";
+        return "update " + table + " set idx = '" + idx + "', score = '" + score + "' WHERE PID = '" + PID + "'";
     }
 
     public String updateStatusOne(Map<String, Object> params) {

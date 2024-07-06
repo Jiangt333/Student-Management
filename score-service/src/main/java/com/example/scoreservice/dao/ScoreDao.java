@@ -53,8 +53,8 @@ public interface ScoreDao {
     /**
      * volunteer
      */
-    @Insert("insert into volunteer(SID, idx, title, organization, type, date_start, date_end, duration, link_name, link, remarks, status_one, status_two, comment) " +
-            "values(#{SID}, #{idx}, #{title}, #{organization}, #{type}, #{date_start}, #{date_end}, #{duration}, #{link_name}, #{link}, #{remarks}, 0, -1, #{comment})")
+    @Insert("insert into volunteer(SID, idx, score, title, organization, type, date_start, date_end, duration, link_name, link, remarks, status_one, status_two, comment) " +
+            "values(#{SID}, #{idx}, #{score}, #{title}, #{organization}, #{type}, #{date_start}, #{date_end}, #{duration}, #{link_name}, #{link}, #{remarks}, 0, -1, #{comment})")
     int submitVolunteer(volunteer volun);
 
     /**

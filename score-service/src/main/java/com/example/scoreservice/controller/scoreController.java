@@ -73,8 +73,8 @@ public class scoreController {
     @ApiOperation(value = "各表通用：根据PID更新idx和score")
     @PutMapping("/common/idx_score")
     @ResponseBody
-    public Response<String> updateIdxAndScore(@RequestParam int PID, @RequestParam String SID, @RequestParam int idx, @RequestParam float score) {
-        if(scoreService.updateIdxAndScore(PID, SID, idx, score)){
+    public Response<String> updateIdxAndScore(@RequestParam int PID, @RequestParam String table, @RequestParam int idx, @RequestParam float score) {
+        if(scoreService.updateIdxAndScore(PID, table, idx, score)){
             response.data = "操作成功";
             response.code = 200;
         }

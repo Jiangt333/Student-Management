@@ -65,4 +65,7 @@ public class User {
     private Integer copyright_count;
     private Integer publication_count;
     private Integer exchange_count;
+
+    private Integer personal;
+    private Integer overall;
 }

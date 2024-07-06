@@ -36,4 +36,15 @@ public interface UserDao {
             "</script>")
     int deleteUser(@Param("SIDList") List<String> SIDList);
 
+    @Insert("<script>" +
+            "insert into user_info (SID, name, type, gender, nation, identity, birthday, grade, user_class, level, outlook, dorm, " +
+            "user_native, tel, address, emergency_name, emergency_tel, wechat, email) values" +
+            "<foreach item='user' collection='userList' separator=','>" +
+            "(#{user.SID}, #{user.name}, #{user.type}, #{user.gender}, #{user.nation}, #{user.identity}, #{user.birthday}, #{user.grade}, " +
+            "#{user.user_class}, #{user.level}, #{user.outlook}, #{user.dorm}," +
+            "#{user.user_native}, #{user.tel}, #{user.address}, #{user.emergency_name}, #{user.emergency_tel}, #{user.wechat}, #{user.email})" +
+            "</foreach>" +
+            "</script>")
+    int addUser(@Param("userList") List<User> userList);
+
 }

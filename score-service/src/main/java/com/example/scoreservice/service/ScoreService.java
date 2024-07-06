@@ -16,7 +16,7 @@ public interface ScoreService {
 
     int deleteTable(int PID, String SID, String table) throws myException.SqlOperationException, myException.NoMatchingRecordException;
 
-    boolean updateIdxAndScore(int PID, String SID, int idx, float score);
+    boolean updateIdxAndScore(int PID, String table, int idx, float score);
 
     boolean updateStatusOne(int PID, String table, int status_one);
 

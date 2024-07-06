@@ -84,4 +84,18 @@ public class UserController {
         }
         return response;
     }
+
+    @ApiOperation(value = "批量添加学生用户")
+    @PostMapping("/stu_userinfo")
+    @ResponseBody
+    public Response<String> addUser(@RequestBody List<User> userList) {
+        if(userService.addUser(userList) == 1){
+            response.data = "添加成功！";
+            response.code = 200;
+        }else{
+            response.data = "添加失败！";
+            response.code = 4004;
+        }
+        return response;
+    }
 }

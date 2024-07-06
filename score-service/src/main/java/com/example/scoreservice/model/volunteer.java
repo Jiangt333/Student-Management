@@ -21,6 +21,8 @@ public class volunteer {
     @ApiModelProperty(value = "大序号", example = "1")
     private int idx;
 
+    private float score;
+
     private String title;
 
     private String organization;
