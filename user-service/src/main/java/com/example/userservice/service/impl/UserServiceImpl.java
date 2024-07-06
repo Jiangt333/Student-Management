@@ -14,8 +14,9 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public List<User> getAllUsers() {
-        List<User> UserList = userDao.findAllUsers();
+    public List<User> getAllUsers(String SID, String name, String grade, String user_class,
+                                  Integer type, Integer level, Integer outlook, Integer personal, Integer overall) {
+        List<User> UserList = userDao.findAllUsers(SID, name, grade, user_class, type, level, outlook, personal, overall);
         return UserList;
     }
 

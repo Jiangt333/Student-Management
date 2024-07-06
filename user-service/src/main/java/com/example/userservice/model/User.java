@@ -12,13 +12,13 @@ import java.util.Date;
 @Setter
 @ApiModel(description = "用户类")
 public class User {
-    private int PID;
+    private Integer PID;
 
     private String SID;
 
     private String name;
 
-    private String password;
+//    private String password;
 
     private Integer gender;
 
@@ -65,7 +65,6 @@ public class User {
     private Integer copyright_count;
     private Integer publication_count;
     private Integer exchange_count;
-
     private Integer personal;
     private Integer overall;
 }

@@ -105,7 +105,7 @@ public class scoreController {
     @ResponseBody
     public Response<String> updateStatusTwo(@RequestParam int PID, @RequestParam String SID, @RequestParam String table, @RequestParam int status_two) {
         if(scoreService.updateStatusTwo(PID, table, status_two)){
-            List<Map<String, Object>> info = scoreService.selectScoreAndDate(PID, table);
+//            List<Map<String, Object>> info = scoreService.selectScoreAndDate(PID, table);
 
             response.data = "操作成功";
             response.code = 200;

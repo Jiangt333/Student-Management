@@ -24,10 +24,22 @@ public class gpa {
     @ApiModelProperty(value = "绩点排名", example = "1")
     private int gpa_rk;
 
-    @ApiModelProperty(value = "综测加分", example = "2.1")
-    private float com_bonus;
+    @ApiModelProperty(value = "政治思想道德类（3分）", example = "2.1")
+    private float com_bonus1;
 
-    @ApiModelProperty(value = "综测分数", example = "3.5")
+    @ApiModelProperty(value = "社会工作类（3分）", example = "2.1")
+    private float com_bonus2;
+
+    @ApiModelProperty(value = "文体、实践类（4分）", example = "2.1")
+    private float com_bonus3;
+
+    @ApiModelProperty(value = "学习、竞赛及科研成果（6分）", example = "2.1")
+    private float com_bonus4;
+
+    @ApiModelProperty(value = "综测总加分（不超过gpa值的20%）", example = "2.1")
+    private float com_bonus_total;
+
+    @ApiModelProperty(value = "综测分数 = gpa + 10% * 综测总加分", example = "3.5")
     private float com_score;
 
     @ApiModelProperty(value = "综测排名", example = "1")

@@ -239,3 +239,11 @@ CREATE TABLE `stums`.`gpa` (
    `com_score` float NULL,
    `com_rk` int NULL,
    PRIMARY KEY (`PID`));
+
+
+show global status like 'Max_used_connections';
+show variables like '%max_connections%';
+
+select * from information_schema.processlist;
+
+set global max_connections=10000;

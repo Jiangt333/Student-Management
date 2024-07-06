@@ -22,11 +22,12 @@ public class UserController {
     @Autowired
     private Response response;
 
-    @ApiOperation(value = "获取全部用户的全部信息")
+    @ApiOperation(value = "根据筛选项获取学生用户的信息")
     @GetMapping("/all-users")
     @ResponseBody
-    public Response<List<User>> getAllUsers() {
-        List<User> UserList = userService.getAllUsers();
+    public Response<List<User>> getAllUsers(String SID, String name, String grade, String user_class,
+                                            Integer type, Integer level, Integer outlook, Integer personal, Integer overall) {
+        List<User> UserList = userService.getAllUsers(SID, name, grade, user_class, type, level, outlook, personal, overall);
         response.data = UserList;
         response.code = 200;
         return response;

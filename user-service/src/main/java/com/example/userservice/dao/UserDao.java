@@ -8,20 +8,39 @@ import java.util.List;
 
 @Mapper
 public interface UserDao {
-    /**
-     * 获取所有用户全部信息
-     * @return
-     */
-    @Select("select * from user_info")
-    List<User> findAllUsers();
+
+    @Select("<script>" +
+            "select * from user_info" +
+            "<where>" +
+            "<trim suffixOverrides=\"and\">" +   // 移除最后一个多出来的 and(<trim> 标签可以用于移除生成 SQL 语句中的不必要的字符)
+            "<if test='SID != null'>SID = #{SID} and </if>" +
+            "<if test='name != null'>name = #{name} and </if>" +
+            "<if test='grade != grade'>grade = #{grade} and </if>" +
+            "<if test='user_class != null'>user_class = #{user_class} and </if>" +
+            "<if test='type != null'>type = #{type} and</if>" +
+            "<if test='level != null'>level = #{level} and</if>" +
+            "<if test='outlook != null'>outlook = #{outlook} and</if>" +
+            "<if test='personal != null'>" +
+            "   <choose>" +
+            "       <when test='personal == 0'>personal = 0</when>" +
+            "       <otherwise>personal != 0</otherwise>" +
+            "   </choose> and" +
+            "</if>" +
+            "<if test='overall != null'>" +
+            "   <choose>" +
+            "       <when test='overall == 0'>overall = 0</when>" +
+            "       <otherwise>overall != 0</otherwise>" +
+            "   </choose>" +
+            "</if>" +
+            "</trim>" +
+            "</where>" +
+            "</script>")
+    List<User> findAllUsers(String SID, String name, String grade, String user_class,
+                            Integer type, Integer level, Integer outlook, Integer personal, Integer overall);
 
     @Select("select count(*) from user_info")
     int getUserNum();
 
-    /**
-     * 获取某个用户全部信息
-     * @return
-     */
     @Select("select * from user_info where SID = #{SID}")
     User findUserById(@Param("SID") String SID);
 
