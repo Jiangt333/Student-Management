@@ -1,14 +1,10 @@
 package com.example.userservice.controller;
 
 import com.example.userservice.model.BackendUser;
-import com.example.userservice.model.SimpleBackendUser;
-import com.example.userservice.model.User;
 import com.example.userservice.service.BackendUserService;
-import com.example.userservice.service.UserService;
 import com.example.userservice.utils.Response;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;

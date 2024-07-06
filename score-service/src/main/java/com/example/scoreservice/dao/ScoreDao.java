@@ -16,7 +16,7 @@ public interface ScoreDao {
     @SelectProvider(type = SqlProvider.class, method = "selectTable")
     List<Map<String, Object>> selectTable(@Param("SID") String SID, @Param("table") String table);
 
-    @SelectProvider(type = SqlProvider.class, method = "selectScore")
+    @SelectProvider(type = SqlProvider.class, method = "selectScoreAndDate")
     List<Map<String, Object>> selectScoreAndDate(@Param("PID") int PID, @Param("table") String table);
 
     @DeleteProvider(type = SqlProvider.class, method = "deleteTable")
@@ -31,17 +31,17 @@ public interface ScoreDao {
     @UpdateProvider(type = SqlProvider.class, method = "updateStatusTwo")
     int updateStatusTwo(@Param("PID") int PID, @Param("table") String table, @Param("status_two") int status_two);
 
-    @Update("UPDATE gpa " +
-            "SET com_bonus = (CASE " +
-            "  WHEN com_bonus + #{score} > 5 THEN 5 " +
-            "  ELSE com_bonus + #{score} " +
-            "END) " +
-            "WHERE SID = #{SID} " +
-            "AND sch_year = (CASE " +
-            "  WHEN MONTH(date) >= 9 THEN YEAR(date) + 1 " +
-            "  ELSE YEAR(date) " +
-            "END)")
-    int updateGpa(@Param("SID") String SID, @Param("score") float score, @Param("Date") Date date);
+//    @Update("UPDATE gpa " +
+//            "SET com_bonus = (CASE " +
+//            "  WHEN com_bonus + #{score} > 5 THEN 5 " +
+//            "  ELSE com_bonus + #{score} " +
+//            "END) " +
+//            "WHERE SID = #{SID} " +
+//            "AND sch_year = (CASE " +
+//            "  WHEN MONTH(date) >= 9 THEN YEAR(date) + 1 " +
+//            "  ELSE YEAR(date) " +
+//            "END)")
+//    int updateGpa(@Param("SID") String SID, @Param("score") float score, @Param("Date") Date date);
 
     /**
      * morality

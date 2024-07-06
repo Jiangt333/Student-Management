@@ -1,8 +1,6 @@
 package com.example.userservice.dao;
 
 import com.example.userservice.model.BackendUser;
-import com.example.userservice.model.SimpleBackendUser;
-import com.example.userservice.model.User;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
