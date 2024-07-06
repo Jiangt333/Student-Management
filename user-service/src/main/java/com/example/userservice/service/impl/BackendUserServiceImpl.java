@@ -3,6 +3,7 @@ package com.example.userservice.service.impl;
 import com.example.userservice.dao.BackendUserDao;
 import com.example.userservice.dao.UserDao;
 import com.example.userservice.model.BackendUser;
+import com.example.userservice.model.SimpleBackendUser;
 import com.example.userservice.model.User;
 import com.example.userservice.service.BackendUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +22,37 @@ public class BackendUserServiceImpl implements BackendUserService {
     }
 
     @Override
-    public BackendUser findBackendUser(int SID){
+    public int getBackendUserNum(){
+        return backendUserDao.getBackendUserNum();
+    }
+
+    @Override
+    public BackendUser findBackendUser(String SID){
         return backendUserDao.findBackendUser(SID);
     }
 
     @Override
-    public int deleteBackendUser(int SID){
-        if(backendUserDao.deleteBackendUser(SID) == 1){
-            return 1;
+    public int deleteBackendUser(List<String> SIDList){
+        if(backendUserDao.deleteBackendUser(SIDList) == 0){
+            return 0;
         }
+        return 1;
+    }
+
+    @Override
+    public int addBackendUser(BackendUser backendUser){
+        if(backendUserDao.findBackendUser(backendUser.getSID()) != null)
+            return -1;
+
+        if(backendUserDao.addBackendUser(backendUser) == 1)
+            return 1;
+        return 0;
+    }
+
+    @Override
+    public int updateBackendUser(BackendUser backendUser){
+        if(backendUserDao.updateBackendUser(backendUser) == 1)
+            return 1;
         return 0;
     }
 }

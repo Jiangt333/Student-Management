@@ -5,6 +5,7 @@ import com.example.scoreservice.utils.SqlProvider;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.exceptions.PersistenceException;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -15,17 +16,32 @@ public interface ScoreDao {
     @SelectProvider(type = SqlProvider.class, method = "selectTable")
     List<Map<String, Object>> selectTable(@Param("SID") String SID, @Param("table") String table);
 
+    @SelectProvider(type = SqlProvider.class, method = "selectScore")
+    List<Map<String, Object>> selectScoreAndDate(@Param("PID") int PID, @Param("table") String table);
+
     @DeleteProvider(type = SqlProvider.class, method = "deleteTable")
-    int deleteTable(@Param("PID") String PID, @Param("SID") String SID, @Param("table") String table);
+    int deleteTable(@Param("PID") int PID, @Param("SID") String SID, @Param("table") String table);
 
     @UpdateProvider(type = SqlProvider.class, method = "updateIdxAndScore")
-    int updateIdxAndScore(@Param("PID") String PID, @Param("table") String SID, @Param("idx") int idx, @Param("score") float score);
+    int updateIdxAndScore(@Param("PID") int PID, @Param("table") String table, @Param("idx") int idx, @Param("score") float score);
 
     @UpdateProvider(type = SqlProvider.class, method = "updateStatusOne")
-    int updateStatusOne(@Param("PID") String PID, @Param("table") String SID, @Param("status_one") int status_one);
+    int updateStatusOne(@Param("PID") int PID, @Param("table") String table, @Param("status_one") int status_one);
 
     @UpdateProvider(type = SqlProvider.class, method = "updateStatusTwo")
-    int updateStatusTwo(@Param("PID") String PID, @Param("table") String SID, @Param("status_two") int status_two);
+    int updateStatusTwo(@Param("PID") int PID, @Param("table") String table, @Param("status_two") int status_two);
+
+    @Update("UPDATE gpa " +
+            "SET com_bonus = (CASE " +
+            "  WHEN com_bonus + #{score} > 5 THEN 5 " +
+            "  ELSE com_bonus + #{score} " +
+            "END) " +
+            "WHERE SID = #{SID} " +
+            "AND sch_year = (CASE " +
+            "  WHEN MONTH(date) >= 9 THEN YEAR(date) + 1 " +
+            "  ELSE YEAR(date) " +
+            "END)")
+    int updateGpa(@Param("SID") String SID, @Param("score") float score, @Param("Date") Date date);
 
     /**
      * morality

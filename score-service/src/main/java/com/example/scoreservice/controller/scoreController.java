@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.List;
+import java.util.Map;
 
 @Api(tags = {"综测信息的接口文档"})
 @RestController
@@ -51,7 +52,7 @@ public class scoreController {
     @ApiOperation(value = "各表通用：根据主键PID, 学生SID删除指定表的综测填报信息")
     @DeleteMapping("/common")
     @ResponseBody
-    public Response<String> deleteTable(@RequestParam String PID, @RequestParam String SID, @RequestParam String table) {
+    public Response<String> deleteTable(@RequestParam int PID, @RequestParam String SID, @RequestParam String table) {
         try{
             scoreService.deleteTable(PID, SID, table);
             response.data = "操作成功";
@@ -72,7 +73,7 @@ public class scoreController {
     @ApiOperation(value = "各表通用：根据PID更新idx和score")
     @PutMapping("/common/idx_score")
     @ResponseBody
-    public Response<String> updateIdxAndScore(@RequestParam String PID, @RequestParam String SID, @RequestParam int idx, @RequestParam float score) {
+    public Response<String> updateIdxAndScore(@RequestParam int PID, @RequestParam String SID, @RequestParam int idx, @RequestParam float score) {
         if(scoreService.updateIdxAndScore(PID, SID, idx, score)){
             response.data = "操作成功";
             response.code = 200;
@@ -87,7 +88,7 @@ public class scoreController {
     @ApiOperation(value = "各表通用：更新status_one")
     @PutMapping("/common/status_one")
     @ResponseBody
-    public Response<String> updateStatusOne(@RequestParam String PID, @RequestParam String table, @RequestParam int status_one) {
+    public Response<String> updateStatusOne(@RequestParam int PID, @RequestParam String table, @RequestParam int status_one) {
         if(scoreService.updateStatusOne(PID, table, status_one)){
             response.data = "操作成功";
             response.code = 200;
@@ -102,8 +103,10 @@ public class scoreController {
     @ApiOperation(value = "各表通用：更新status_two")
     @PutMapping("/common/status_two")
     @ResponseBody
-    public Response<String> updateStatusTwo(@RequestParam String PID, @RequestParam String SID, @RequestParam String table, @RequestParam int status_two) {
+    public Response<String> updateStatusTwo(@RequestParam int PID, @RequestParam String SID, @RequestParam String table, @RequestParam int status_two) {
         if(scoreService.updateStatusTwo(PID, table, status_two)){
+            List<Map<String, Object>> info = scoreService.selectScoreAndDate(PID, table);
+
             response.data = "操作成功";
             response.code = 200;
         }

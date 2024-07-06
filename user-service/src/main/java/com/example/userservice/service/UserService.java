@@ -7,10 +7,8 @@ import java.util.List;
 public interface UserService {
 
     List<User> getAllUsers();
-
+    int getUserNum();
     User getUserById(String SID);
-
     int updateUserById(User user);
-
-    int deleteUser(int SID);
+    int deleteUser(List<String> SIDList);
 }

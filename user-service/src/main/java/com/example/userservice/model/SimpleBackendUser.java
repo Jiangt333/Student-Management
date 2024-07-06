@@ -10,10 +10,8 @@ import java.util.Date;
 @Data
 @Getter
 @Setter
-@ApiModel(description = "后台用户类")
-public class BackendUser {
-    private int PID;
-
+@ApiModel(description = "后台用户简单类")
+public class SimpleBackendUser {
     private String SID;
 
     private String password;

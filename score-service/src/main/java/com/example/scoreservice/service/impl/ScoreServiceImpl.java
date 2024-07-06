@@ -4,6 +4,7 @@ import com.example.scoreservice.dao.ScoreDao;
 import com.example.scoreservice.model.*;
 import com.example.scoreservice.service.ScoreService;
 import com.example.scoreservice.utils.myException;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import org.apache.commons.beanutils.BeanUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -41,7 +43,12 @@ public class ScoreServiceImpl implements ScoreService {
     }
 
     @Override
-    public int deleteTable(String PID, String SID, String table) throws myException.SqlOperationException, myException.NoMatchingRecordException {
+    public List<Map<String, Object>> selectScoreAndDate(int PID, String table) {
+        return scoreDao.selectScoreAndDate(PID, table);
+    }
+
+    @Override
+    public int deleteTable(int PID, String SID, String table) throws myException.SqlOperationException, myException.NoMatchingRecordException {
         int result = scoreDao.deleteTable(PID, SID, table);
         if (result == 0) {
             throw new myException.NoMatchingRecordException("No matching record found for operation");
@@ -50,7 +57,7 @@ public class ScoreServiceImpl implements ScoreService {
     }
 
     @Override
-    public boolean updateIdxAndScore(String PID, String SID, int idx, float score){
+    public boolean updateIdxAndScore(int PID, String SID, int idx, float score){
         int result = scoreDao.updateIdxAndScore(PID, SID, idx, score);
         if (result == 0) {
             return false;
@@ -59,7 +66,7 @@ public class ScoreServiceImpl implements ScoreService {
     }
 
     @Override
-    public boolean updateStatusOne(String PID, String table, int status_one){
+    public boolean updateStatusOne(int PID, String table, int status_one){
         int result = scoreDao.updateStatusOne(PID, table, status_one);
         if (result == 0) {
             return false;
@@ -68,13 +75,19 @@ public class ScoreServiceImpl implements ScoreService {
     }
 
     @Override
-    public boolean updateStatusTwo(String PID, String table, int status_two){
+    public boolean updateStatusTwo(int PID, String table, int status_two){
         int result = scoreDao.updateStatusTwo(PID, table, status_two);
         if (result == 0) {
             return false;
         }
         return true;
     }
+
+//    @Override
+//     public int updateGpa(String SID, float score, Date date){
+//        int re = scoreDao.updateGpa(SID, score, date);
+//    }
+
 //
 //    @Override
 //    public <T> int submitForm(T form, String type) {

@@ -20,6 +20,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public int getUserNum(){
+        return userDao.getUserNum();
+    }
+
+    @Override
     public User getUserById(String SID) {
         User User = userDao.findUserById(SID);
         return User;
@@ -41,10 +46,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int deleteUser(int SID){
-        if(userDao.deleteUser(SID) == 1){
-            return 1;
+    public int deleteUser(List<String> SIDList){
+        if(userDao.deleteUser(SIDList) != 0){
+            return 0;
         }
-        return 0;
+        return 1;
     }
 }

@@ -4,19 +4,26 @@ import com.example.scoreservice.model.*;
 import com.example.scoreservice.utils.myException;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public interface ScoreService {
 
     <T> List<T> selectTable(String SID, String table, Class<T> type) throws myException.SqlOperationException, myException.NoMatchingRecordException;
 
-    int deleteTable(String PID, String SID, String table) throws myException.SqlOperationException, myException.NoMatchingRecordException;
+    List<Map<String, Object>> selectScoreAndDate(int PID, String table);
 
-    boolean updateIdxAndScore(String PID, String SID, int idx, float score);
+    int deleteTable(int PID, String SID, String table) throws myException.SqlOperationException, myException.NoMatchingRecordException;
 
-    boolean updateStatusOne(String PID, String table, int status_one);
+    boolean updateIdxAndScore(int PID, String SID, int idx, float score);
 
-    boolean updateStatusTwo(String PID, String table, int status_two);
+    boolean updateStatusOne(int PID, String table, int status_one);
+
+    boolean updateStatusTwo(int PID, String table, int status_two);
+
+//    int updateGpa(String SID, float score, Date date);
+
 
 //    public <T> int submitForm(T form, String type);
 

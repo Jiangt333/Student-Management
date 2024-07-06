@@ -32,6 +32,16 @@ public class UserController {
         return response;
     }
 
+
+    @ApiOperation(value = "获取前台用户（即学生）的总人数")
+    @GetMapping("/user-num")
+    @ResponseBody
+    public Response<Integer> getUserNum() {
+        response.data = userService.getUserNum();
+        response.code = 200;
+        return response;
+    }
+
     @ApiOperation(value = "根据学生学号SID获取某个用户全部信息")
     @GetMapping("/one-user")
     @ResponseBody
@@ -61,15 +71,15 @@ public class UserController {
         return response;
     }
 
-    @ApiOperation(value = "根据SID删除前台用户信息")
+    @ApiOperation(value = "根据SID列表删除前台用户信息")
     @DeleteMapping("/stu_userinfo")
     @ResponseBody
-    public Response<String> deleteUser(int SID) {
-        if(userService.deleteUser(SID) == 1){
+    public Response<String> deleteUser(@RequestParam List<String> SIDList) {
+        if(userService.deleteUser(SIDList) == 1){
             response.data = "删除成功！";
             response.code = 200;
         }else{
-            response.data = "不存在该后台用户！";
+            response.data = "不存在该前台用户！";
             response.code = 4004;
         }
         return response;
