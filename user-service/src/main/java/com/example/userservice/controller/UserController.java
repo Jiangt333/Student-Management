@@ -1,5 +1,6 @@
 package com.example.userservice.controller;
 
+import com.example.userservice.model.SimpleUser;
 import com.example.userservice.utils.Response;
 import com.example.userservice.model.User;
 import com.example.userservice.service.UserService;
@@ -89,7 +90,7 @@ public class UserController {
     @ApiOperation(value = "批量添加学生用户")
     @PostMapping("/stu_userinfo")
     @ResponseBody
-    public Response<String> addUser(@RequestBody List<User> userList) {
+    public Response<String> addUser(@RequestBody List<SimpleUser> userList) {
         if(userService.addUser(userList) == 1){
             response.data = "添加成功！";
             response.code = 200;

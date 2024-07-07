@@ -27,3 +27,4 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 .addPathPatterns("/**");
     }
 }
+

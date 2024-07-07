@@ -1,5 +1,7 @@
 package com.example.scoreservice.utils;
 
+import io.swagger.models.auth.In;
+
 import java.util.Map;
 
 public class SqlProvider {
@@ -7,6 +9,12 @@ public class SqlProvider {
         String table = (String) params.get("table");
         String SID = (String) params.get("SID");
         return "SELECT * FROM " + table + " WHERE SID = '" + SID + "'";
+    }
+
+    public String selectItem(Map<String, Object> params) {
+        String table = (String) params.get("table");
+        Integer PID = (Integer) params.get("PID");
+        return "SELECT * FROM " + table + " WHERE PID = '" + PID + "'";
     }
 
     public String selectScoreAndDate(Map<String, Object> params) {

@@ -12,10 +12,10 @@ public interface BackendUserDao {
             "select * from user_info" +
             "<where>" +
             "<trim suffixOverrides=\"and\">" +   // 移除最后一个多出来的 and(<trim> 标签可以用于移除生成 SQL 语句中的不必要的字符)
-            "<if test='SID != null'>SID = #{SID} and </if>" +
-            "<if test='name != null'>name = #{name} and </if>" +
-            "<if test='role != null'>role = #{role} and</if>" +
-            "<if test='grade != grade'>grade = #{grade} and </if>" +
+            "<if test='SID != null'>SID LIKE CONCAT('%', #{SID}, '%') and </if>" +
+            "<if test='name != null'>name LIKE CONCAT('%', #{name}, '%') and </if>" +
+            "<if test='role != null'>role = #{role} and </if>" +
+            "<if test='grade != null'>grade = #{grade} and </if>" +
             "<if test='user_class != null'>user_class = #{user_class} and </if>" +
             "</trim>" +
             "</where>" +

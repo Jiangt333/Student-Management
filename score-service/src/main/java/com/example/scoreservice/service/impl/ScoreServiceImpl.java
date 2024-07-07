@@ -12,10 +12,9 @@ import org.apache.commons.beanutils.BeanUtils;
 
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 public class ScoreServiceImpl implements ScoreService {
@@ -91,11 +90,6 @@ public class ScoreServiceImpl implements ScoreService {
         return true;
     }
 
-//    @Override
-//     public int updateGpa(String SID, float score, Date date){
-//        int re = scoreDao.updateGpa(SID, score, date);
-//    }
-
 //
 //    @Override
 //    public <T> int submitForm(T form, String type) {
@@ -124,23 +118,102 @@ public class ScoreServiceImpl implements ScoreService {
 //    }
 
     @Override
-    public boolean verifyByAdmin(Integer num, Integer PID, String table, Integer status_one, String comment){
+    public boolean verifyByAdmin(Integer num, Integer PID, String table, Integer status, String comment){
         boolean flag = false;
         if(num == 1){
             // 一审的逻辑：直接更新status_one 和 comment
-            if(scoreDao.updateStatusOneByAdmin(PID, table, status_one, comment) == 1)
+            if(scoreDao.updateStatusOneByAdmin(PID, table, status, comment) == 1)
                 flag = true;
-            flag = false;
+            else
+                flag = false;
         }
-        else{
+        else {
             // 二审的逻辑
             // 1. 更新status_two 和 comment
-            if(scoreDao.updateStatusOneByAdmin(PID, table, status_one, comment) == 1){
+            if(scoreDao.updateStatusTwoByAdmin(PID, table, status, comment) == 1){
                 // 2. 如果status_two=1，累计score到gpa的对应类里
+                if(status == 1 && table != "exchange"){
+                    Map<String, Object> mp = scoreDao.selectItem(PID, table);
+                    System.err.println(mp);
+                    float score = ((Number) mp.get("score")).floatValue();
+                    String SID = (String) mp.get("SID");
+                    Date date;
+                    if (table.equals("competition")) {
+                        int type = ((Number) mp.get("type")).intValue();
+                        if (type == 1)
+                            table = "study_competition";
+                        else
+                            table = "art_competition";
+                        date = parseDate(mp.get("date"));
+                    } else if (table.equals("paper")) {
+                        date = parseDate(mp.get("publication_date"));
+                    } else if (table.equals("patent")) {
+                        date = parseDate(mp.get("acceptance_date"));
+                    } else if (table.equals("socialwork")) {
+                        date = parseDate(mp.get("date_start"));
+                    } else if (table.equals("volunteer")) {
+                        date = parseDate(mp.get("date_start"));
+                    }else {
+                        date = parseDate(mp.get("date"));
+                    }
+//                    if(table == "competition"){
+//                        int type = ((Number) mp.get("type")).intValue();
+//                        if(type == 1)
+//                            table = "study_competition";
+//                        else
+//                            table = "art_competition";
+//                        date = (Date) mp.get("date");
+//                    } else if(table == "paper"){
+//                        date = (Date) mp.get("publication_date");
+//                    } else if(table == "patent"){
+//                        date = (Date) mp.get("acceptance_date");
+//                    } else if(table == "socialwork"){
+//                        date = (Date) mp.get("date_start");
+//                    } else{
+//                        date = (Date) mp.get("date");
+//                    }
+                    System.err.println(date);
+                    System.err.println(SID);
+                    System.err.println(score);
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTime(date);
+                    int year = calendar.get(Calendar.YEAR);
+                    int month = calendar.get(Calendar.MONTH);
+                    if (month >= Calendar.SEPTEMBER) {
+                        year += 1;
+                    }
 
+                    if(scoreDao.selectGpa(SID, year) == 0){
+                        scoreDao.insertNewGpa(SID, year);
+                        System.err.println("insert!");
+                    }
+                    int re = scoreDao.updateGpa(table, SID, score, year);
+                    System.err.println("update!");
+                    if(re == 1)
+                        flag = true;
+                    else
+                        flag = false;
+                }
+                else{
+                    flag = true;
+                }
             }
         }
         return flag;
+    }
+    private Date parseDate(Object dateObj) {
+        if (dateObj == null) {
+            return null;
+        } else if (dateObj instanceof Date) {
+            return (Date) dateObj;
+        } else if (dateObj instanceof String) {
+            try {
+                return new SimpleDateFormat("yyyy-MM-dd").parse((String) dateObj);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
     /**

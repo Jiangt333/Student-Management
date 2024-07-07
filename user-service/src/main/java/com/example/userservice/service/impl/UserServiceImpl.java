@@ -1,6 +1,7 @@
 package com.example.userservice.service.impl;
 
 import com.example.userservice.dao.UserDao;
+import com.example.userservice.model.SimpleUser;
 import com.example.userservice.model.User;
 import com.example.userservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +56,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int addUser(List<User> userList){
+    public int addUser(List<SimpleUser> userList){
         if(userDao.addUser(userList) == 0){
             return 0;
         }

@@ -1,5 +1,6 @@
 package com.example.userservice.service;
 
+import com.example.userservice.model.SimpleUser;
 import com.example.userservice.model.User;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,5 +15,5 @@ public interface UserService {
     User getUserById(String SID);
     int updateUserById(User user);
     int deleteUser(List<String> SIDList);
-    int addUser(List<User> userList);
+    int addUser(List<SimpleUser> userList);
 }

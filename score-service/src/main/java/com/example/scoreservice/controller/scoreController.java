@@ -135,6 +135,37 @@ public class scoreController {
         return response;
     }
 
+    @ApiOperation(value = "管理员一审接口")
+    @PutMapping("/admin/status_one")
+    @ResponseBody
+    public Response<String> adminOne(@RequestParam Integer PID, @RequestParam String table, @RequestParam Integer status_one, @RequestParam String comment) {
+        if(scoreService.verifyByAdmin(1, PID, table, status_one, comment)){
+            response.data = "操作成功";
+            response.code = 200;
+        }
+        else{
+            response.data = "没有匹配的条目，请检查参数";
+            response.code = 4005;
+        }
+        return response;
+    }
+
+    @ApiOperation(value = "管理员二审接口")
+    @PutMapping("/admin/status_two")
+    @ResponseBody
+    public Response<String> adminTwo(@RequestParam Integer PID, @RequestParam String table, @RequestParam Integer status_two, @RequestParam String comment) {
+        if(scoreService.verifyByAdmin(2, PID, table, status_two, comment)){
+            response.data = "操作成功";
+            response.code = 200;
+        }
+        else{
+            response.data = "操作失败";
+            response.code = 4005;
+        }
+        return response;
+    }
+
+
 //    @ApiOperation(value = "各表通用：提交填报某表的表单")
 //    @PostMapping("/common")
 //    @ResponseBody

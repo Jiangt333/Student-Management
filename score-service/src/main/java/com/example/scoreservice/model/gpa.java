@@ -24,6 +24,9 @@ public class gpa {
     @ApiModelProperty(value = "绩点排名", example = "1")
     private int gpa_rk;
 
+    @ApiModelProperty(value = "志愿服务（0.75分）", example = "2.1")
+    private float com_bonus_vol;
+
     @ApiModelProperty(value = "政治思想道德类（3分）", example = "2.1")
     private float com_bonus1;
 

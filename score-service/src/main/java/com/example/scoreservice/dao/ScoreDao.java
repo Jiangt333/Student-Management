@@ -2,6 +2,7 @@ package com.example.scoreservice.dao;
 
 import com.example.scoreservice.model.*;
 import com.example.scoreservice.utils.SqlProvider;
+import io.swagger.models.auth.In;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.exceptions.PersistenceException;
 
@@ -15,6 +16,10 @@ public interface ScoreDao {
     //    List<Map<String, Object>> selectTable(@Param("SID") String SID, @Param("table") String table) throws PersistenceException;
     @SelectProvider(type = SqlProvider.class, method = "selectTable")
     List<Map<String, Object>> selectTable(@Param("SID") String SID, @Param("table") String table);
+
+    @SelectProvider(type = SqlProvider.class, method = "selectItem")
+    Map<String, Object> selectItem(@Param("PID") Integer PID, @Param("table") String table);
+
 
     @SelectProvider(type = SqlProvider.class, method = "selectScoreAndDate")
     List<Map<String, Object>> selectScoreAndDate(@Param("PID") int PID, @Param("table") String table);
@@ -31,17 +36,71 @@ public interface ScoreDao {
     @UpdateProvider(type = SqlProvider.class, method = "updateStatusTwo")
     int updateStatusTwo(@Param("PID") int PID, @Param("table") String table, @Param("status_two") int status_two);
 
-//    @Update("UPDATE gpa " +
-//            "SET com_bonus = (CASE " +
-//            "  WHEN com_bonus + #{score} > 5 THEN 5 " +
-//            "  ELSE com_bonus + #{score} " +
-//            "END) " +
-//            "WHERE SID = #{SID} " +
-//            "AND sch_year = (CASE " +
-//            "  WHEN MONTH(date) >= 9 THEN YEAR(date) + 1 " +
-//            "  ELSE YEAR(date) " +
-//            "END)")
-//    int updateGpa(@Param("SID") String SID, @Param("score") float score, @Param("Date") Date date);
+//    @Select("<script>" +
+//            "select score" +
+//            "from ${table}" +
+//            "where PID = #{PID}" +
+//            "</script>")
+//    float getScore(String table, Integer PID);
+
+//    @Select("<script>" +
+//            "select score, type" +
+//            "from competition" +
+//            "where PID = #{PID}" +
+//            "</script>")
+//    Map<String, Object> getScoreAndType(Integer PID);
+
+
+    @Update("<script>" +
+            "UPDATE gpa SET " +
+            "<if test='table == \"morality\"'>" +
+                " com_bonus1 = (CASE " +
+                    " WHEN com_bonus1 + #{score} > 3 THEN 3" +
+                    " ELSE com_bonus1 + #{score} " +
+                " END)" +
+            "</if>" +
+            "<if test='table == \"volunteer\"'>" +
+                " com_bonus1 = (CASE " +
+                    " WHEN com_bonus1 + #{score} > 3 THEN 3" +
+                    " ELSE com_bonus1 + #{score} " +
+                " END), " +
+                " com_bonus_vol = (CASE " +
+                    " WHEN com_bonus_vol + #{score} > 0.75 THEN 0.75" +
+                    " ELSE com_bonus_vol + #{score} " +
+                " END)" +
+            "</if>" +
+            "<if test='table == \"socialwork\"'>" +
+                " com_bonus2 = (CASE " +
+                    " WHEN com_bonus2 + #{score} > 3 THEN 3" +
+                    " ELSE com_bonus2 + #{score} " +
+                " END)" +
+            "</if>" +
+            "<if test='table == \"art_competition\"'>" +
+                " com_bonus3 = (CASE " +
+                " WHEN com_bonus3 + #{score} > 4 THEN 4" +
+                " ELSE com_bonus3 + #{score} " +
+                " END)" +
+            "</if>" +
+            "<if test='table == \"study_competition\" || table == \"paper\" || table == \"patent\" || table == \"copyright\" || table == \"publication\"'>" +
+                " com_bonus4 = (CASE " +
+                    " WHEN com_bonus4 + #{score} > 6 THEN 6" +
+                    " ELSE com_bonus4 + #{score} " +
+                " END)" +
+            "</if>" +
+            " WHERE SID = #{SID} " +
+            " AND sch_year = #{year} " +
+            "</script>")
+    int updateGpa(@Param("table") String table, @Param("SID") String SID, @Param("score") float score, @Param("year") int year);
+
+    @Insert("insert into gpa(SID, sch_year, com_bonus_vol, com_bonus1, com_bonus2, com_bonus3, com_bonus4, com_bonus_total, com_score) values(#{SID}, #{year}, 0, 0, 0, 0, 0, 0, 0)")
+    int insertNewGpa(@Param("SID") String SID, @Param("year") int year);
+
+    @Select("<script>" +
+            "select count(*) from gpa where " +
+            " SID = #{SID} and " +
+            " sch_year = #{year} " +
+            "</script>")
+    int selectGpa(@Param("SID") String SID, @Param("year") int year);
 
     @Select("select * from competition where type != 1")
     List<competition> getArtisticCompeition();
@@ -50,16 +109,16 @@ public interface ScoreDao {
     List<competition> getStudyCompeition();
 
     @Update("<script>" +
-            "update ${table}" +
+            "update ${table} " +
             "set status_one = #{status_one}, comment = #{comment}" +
-            "where PID = #{PID}" +
+            " where PID = #{PID}" +
             "</script>")
     int updateStatusOneByAdmin(Integer PID, String table, Integer status_one, String comment);
 
     @Update("<script>" +
-            "update ${table}" +
+            "update ${table} " +
             "set status_two = #{status_two}, comment = #{comment}" +
-            "where PID = #{PID}" +
+            " where PID = #{PID}" +
             "</script>")
     int updateStatusTwoByAdmin(Integer PID, String table, Integer status_two, String comment);
 
