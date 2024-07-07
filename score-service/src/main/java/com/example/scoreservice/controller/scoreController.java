@@ -49,6 +49,24 @@ public class scoreController {
         return response;
     }
 
+    @ApiOperation(value = "获取文体比赛列表")
+    @GetMapping("/artistic-competition")
+    @ResponseBody
+    public Response<List<competition>> getArtistCompetition() {
+        response.data = scoreService.getCompetition(0);
+        response.code = 200;
+        return response;
+    }
+
+    @ApiOperation(value = "获取学科比赛列表")
+    @GetMapping("/study-competition")
+    @ResponseBody
+    public Response<List<competition>> getStudyCompetition() {
+        response.data = scoreService.getCompetition(1);
+        response.code = 200;
+        return response;
+    }
+
     @ApiOperation(value = "各表通用：根据主键PID, 学生SID删除指定表的综测填报信息")
     @DeleteMapping("/common")
     @ResponseBody

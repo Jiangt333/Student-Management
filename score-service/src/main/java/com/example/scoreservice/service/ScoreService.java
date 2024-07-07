@@ -2,6 +2,7 @@ package com.example.scoreservice.service;
 
 import com.example.scoreservice.model.*;
 import com.example.scoreservice.utils.myException;
+import io.swagger.models.auth.In;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
@@ -22,10 +23,13 @@ public interface ScoreService {
 
     boolean updateStatusTwo(int PID, String table, int status_two);
 
+    List<competition> getCompetition(int type);
+
 //    int updateGpa(String SID, float score, Date date);
 
-
 //    public <T> int submitForm(T form, String type);
+
+    boolean verifyByAdmin(Integer num, Integer PID, String table, Integer status_one, String comment);
 
     /**
      * morality

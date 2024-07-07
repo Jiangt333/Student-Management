@@ -43,6 +43,14 @@ public class ScoreServiceImpl implements ScoreService {
     }
 
     @Override
+    public List<competition> getCompetition(int type){
+        if(type != 1){
+            return scoreDao.getArtisticCompeition();
+        }
+        return scoreDao.getStudyCompeition();
+    }
+
+    @Override
     public List<Map<String, Object>> selectScoreAndDate(int PID, String table) {
         return scoreDao.selectScoreAndDate(PID, table);
     }
@@ -114,6 +122,26 @@ public class ScoreServiceImpl implements ScoreService {
 //                throw new IllegalArgumentException("Unknown form type: " + type);
 //        }
 //    }
+
+    @Override
+    public boolean verifyByAdmin(Integer num, Integer PID, String table, Integer status_one, String comment){
+        boolean flag = false;
+        if(num == 1){
+            // 一审的逻辑：直接更新status_one 和 comment
+            if(scoreDao.updateStatusOneByAdmin(PID, table, status_one, comment) == 1)
+                flag = true;
+            flag = false;
+        }
+        else{
+            // 二审的逻辑
+            // 1. 更新status_two 和 comment
+            if(scoreDao.updateStatusOneByAdmin(PID, table, status_one, comment) == 1){
+                // 2. 如果status_two=1，累计score到gpa的对应类里
+
+            }
+        }
+        return flag;
+    }
 
     /**
      * morality

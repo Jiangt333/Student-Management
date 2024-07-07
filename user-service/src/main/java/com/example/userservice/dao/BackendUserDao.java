@@ -22,7 +22,6 @@ public interface BackendUserDao {
             "</script>")
     List<BackendUser> findAllBackendUsers(String SID, String name, Integer role, String grade, String user_class);
 
-
     @Select("select count(*) from backend_user")
     int getBackendUserNum();
 
@@ -53,4 +52,5 @@ public interface BackendUserDao {
             "where SID = #{SID}" +
             "</script>")
     int updateBackendUser(BackendUser BackendUser);
+
 }

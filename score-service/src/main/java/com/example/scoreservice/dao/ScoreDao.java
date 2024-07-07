@@ -43,6 +43,26 @@ public interface ScoreDao {
 //            "END)")
 //    int updateGpa(@Param("SID") String SID, @Param("score") float score, @Param("Date") Date date);
 
+    @Select("select * from competition where type != 1")
+    List<competition> getArtisticCompeition();
+
+    @Select("select * from competition where type = 1")
+    List<competition> getStudyCompeition();
+
+    @Update("<script>" +
+            "update ${table}" +
+            "set status_one = #{status_one}, comment = #{comment}" +
+            "where PID = #{PID}" +
+            "</script>")
+    int updateStatusOneByAdmin(Integer PID, String table, Integer status_one, String comment);
+
+    @Update("<script>" +
+            "update ${table}" +
+            "set status_two = #{status_two}, comment = #{comment}" +
+            "where PID = #{PID}" +
+            "</script>")
+    int updateStatusTwoByAdmin(Integer PID, String table, Integer status_two, String comment);
+
     /**
      * morality
      */
@@ -120,4 +140,5 @@ public interface ScoreDao {
             "#{current_status}, #{flag1}, #{flag2}, #{flag3}, #{flag4}, " +
             "#{link_name}, #{link}, #{remarks}, 0, -1, #{comment})")
     int submitExchange(exchange exch);
+
 }

@@ -56,15 +56,17 @@ public class User {
 
     private Integer status;
 
-    private Integer morality_count;
-    private Integer volunteer_count;
-    private Integer socialwork_count;
-    private Integer competition_count;
-    private Integer paper_count;
-    private Integer patent_count;
-    private Integer copyright_count;
-    private Integer publication_count;
-    private Integer exchange_count;
+//    private Integer morality_count;
+//    private Integer volunteer_count;
+//    private Integer socialwork_count;
+//    private Integer competition_count;
+//    private Integer paper_count;
+//    private Integer patent_count;
+//    private Integer copyright_count;
+//    private Integer publication_count;
+//    private Integer exchange_count;
+
     private Integer personal;
+
     private Integer overall;
 }

@@ -40,8 +40,6 @@ public class BackendUserController {
         return response;
     }
 
-
-
     @ApiOperation(value = "根据SID获取后台用户信息")
     @GetMapping("/user")
     @ResponseBody
