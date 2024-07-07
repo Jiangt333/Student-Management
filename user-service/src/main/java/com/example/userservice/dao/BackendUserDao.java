@@ -1,18 +1,27 @@
 package com.example.userservice.dao;
 
 import com.example.userservice.model.BackendUser;
+import com.example.userservice.model.User;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
 @Mapper
 public interface BackendUserDao {
-    /**
-     * 获取所有用户全部信息
-     * @return
-     */
-    @Select("select PID, SID, name, role, grade, user_class from backend_user")
-    List<BackendUser> findAllBackendUsers();
+    @Select("<script>" +
+            "select * from user_info" +
+            "<where>" +
+            "<trim suffixOverrides=\"and\">" +   // 移除最后一个多出来的 and(<trim> 标签可以用于移除生成 SQL 语句中的不必要的字符)
+            "<if test='SID != null'>SID = #{SID} and </if>" +
+            "<if test='name != null'>name = #{name} and </if>" +
+            "<if test='role != null'>role = #{role} and</if>" +
+            "<if test='grade != grade'>grade = #{grade} and </if>" +
+            "<if test='user_class != null'>user_class = #{user_class} and </if>" +
+            "</trim>" +
+            "</where>" +
+            "</script>")
+    List<BackendUser> findAllBackendUsers(String SID, String name, Integer role, String grade, String user_class);
+
 
     @Select("select count(*) from backend_user")
     int getBackendUserNum();

@@ -14,8 +14,8 @@ public class BackendUserServiceImpl implements BackendUserService {
     private BackendUserDao backendUserDao;
 
     @Override
-    public List<BackendUser> getAllBackendUsers() {
-        return backendUserDao.findAllBackendUsers();
+    public List<BackendUser> getAllBackendUsers(String SID, String name, Integer role, String grade, String user_class) {
+        return backendUserDao.findAllBackendUsers(SID, name, role, grade, user_class);
     }
 
     @Override

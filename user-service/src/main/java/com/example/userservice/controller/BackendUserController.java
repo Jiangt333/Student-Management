@@ -21,11 +21,11 @@ public class BackendUserController {
     @Autowired
     private Response response;
 
-    @ApiOperation(value = "获取全部后台用户的全部信息")
+    @ApiOperation(value = "根据筛选项获取后台用户的信息")
     @GetMapping("/all-users")
     @ResponseBody
-    public Response<List<BackendUser>> getAllBackendUsers() {
-        List<BackendUser> backendUserList = backendUserService.getAllBackendUsers();
+    public Response<List<BackendUser>> getAllBackendUsers(String SID, String name, Integer role, String grade, String user_class) {
+        List<BackendUser> backendUserList = backendUserService.getAllBackendUsers(SID, name, role, grade, user_class);
         response.data = backendUserList;
         response.code = 200;
         return response;
