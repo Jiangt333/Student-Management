@@ -122,9 +122,7 @@ public class scoreController {
     @PutMapping("/common/status_two")
     @ResponseBody
     public Response<String> updateStatusTwo(@RequestParam int PID, @RequestParam String SID, @RequestParam String table, @RequestParam int status_two) {
-        if(scoreService.updateStatusTwo(PID, table, status_two)){
-//            List<Map<String, Object>> info = scoreService.selectScoreAndDate(PID, table);
-
+        if(scoreService.updateStatusTwo(PID, SID, table, status_two)){
             response.data = "操作成功";
             response.code = 200;
         }
@@ -138,8 +136,8 @@ public class scoreController {
     @ApiOperation(value = "管理员一审接口")
     @PutMapping("/admin/status_one")
     @ResponseBody
-    public Response<String> adminOne(@RequestParam Integer PID, @RequestParam String table, @RequestParam Integer status_one, @RequestParam String comment) {
-        if(scoreService.verifyByAdmin(1, PID, table, status_one, comment)){
+    public Response<String> adminOne(@RequestParam Integer PID, @RequestParam String SID, @RequestParam String table, @RequestParam Integer status_one, @RequestParam String comment) {
+        if(scoreService.verifyByAdmin(1, PID, SID, table, status_one, comment)){
             response.data = "操作成功";
             response.code = 200;
         }
@@ -153,8 +151,8 @@ public class scoreController {
     @ApiOperation(value = "管理员二审接口")
     @PutMapping("/admin/status_two")
     @ResponseBody
-    public Response<String> adminTwo(@RequestParam Integer PID, @RequestParam String table, @RequestParam Integer status_two, @RequestParam String comment) {
-        if(scoreService.verifyByAdmin(2, PID, table, status_two, comment)){
+    public Response<String> adminTwo(@RequestParam Integer PID, @RequestParam String SID, @RequestParam String table, @RequestParam Integer status_two, @RequestParam String comment) {
+        if(scoreService.verifyByAdmin(2, PID, SID, table, status_two, comment)){
             response.data = "操作成功";
             response.code = 200;
         }

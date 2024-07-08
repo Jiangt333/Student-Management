@@ -23,14 +23,12 @@ public interface UserDao {
             "<if test='outlook != null'>outlook = #{outlook} and </if>" +
             "<if test='personal != null'>" +
             "   <choose>" +
-            "       <when test='personal != 0'>personal = 0</when>" +
-            "       <otherwise>personal = 0</otherwise>" +
+            "       <when test='personal = 1'>personal != 0</when>" +
             "   </choose> and " +
             "</if>" +
             "<if test='overall != null'>" +
             "   <choose>" +
-            "       <when test='overall != 0'> overall = 0</when>" +
-            "       <otherwise> overall = 0</otherwise>" +
+            "       <when test='overall = 1'> overall != 0</when>" +
             "   </choose>" +
             "</if>" +
             "</trim>" +
@@ -66,5 +64,6 @@ public interface UserDao {
             "</foreach>" +
             "</script>")
     int addUser(@Param("userList") List<SimpleUser> userList);
+
 
 }

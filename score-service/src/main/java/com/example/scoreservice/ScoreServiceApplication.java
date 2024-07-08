@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@SpringBootApplication(scanBasePackages={"com.example.scoreservice"})
+@SpringBootApplication
 @EnableEurekaClient
 @EnableSwagger2
 public class ScoreServiceApplication {

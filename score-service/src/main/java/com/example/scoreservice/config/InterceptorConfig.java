@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-@Configuration
+@Configuration("scoreServiceInter")
 public class InterceptorConfig implements WebMvcConfigurer {
     @Autowired
     private JWTInterceptor jWTInterceptor;
@@ -14,6 +14,6 @@ public class InterceptorConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(jWTInterceptor)
-                .addPathPatterns("/score1/**");
+                .addPathPatterns("/score/**");
     }
 }

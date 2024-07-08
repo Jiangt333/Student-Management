@@ -9,6 +9,7 @@ import org.apache.ibatis.exceptions.PersistenceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.apache.commons.beanutils.BeanUtils;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.lang.reflect.InvocationTargetException;
@@ -82,9 +83,11 @@ public class ScoreServiceImpl implements ScoreService {
     }
 
     @Override
-    public boolean updateStatusTwo(int PID, String table, int status_two){
-        int result = scoreDao.updateStatusTwo(PID, table, status_two);
-        if (result == 0) {
+    @Transactional
+    public boolean updateStatusTwo(int PID, String SID, String table, int status_two){
+        int result = scoreDao.updateStatusTwo(PID, SID, table, status_two);
+        int re = scoreDao.addOverall(SID);
+        if (result == 0 || re == 0) {
             return false;
         }
         return true;
@@ -118,10 +121,12 @@ public class ScoreServiceImpl implements ScoreService {
 //    }
 
     @Override
-    public boolean verifyByAdmin(Integer num, Integer PID, String table, Integer status, String comment){
+    @Transactional
+    public boolean verifyByAdmin(Integer num, Integer PID, String SID, String table, Integer status, String comment){
         boolean flag = false;
         if(num == 1){
             // 一审的逻辑：直接更新status_one 和 comment
+            scoreDao.subPersonal(SID);
             if(scoreDao.updateStatusOneByAdmin(PID, table, status, comment) == 1)
                 flag = true;
             else
@@ -130,13 +135,13 @@ public class ScoreServiceImpl implements ScoreService {
         else {
             // 二审的逻辑
             // 1. 更新status_two 和 comment
+            scoreDao.subOverall(SID);
             if(scoreDao.updateStatusTwoByAdmin(PID, table, status, comment) == 1){
                 // 2. 如果status_two=1，累计score到gpa的对应类里
                 if(status == 1 && table != "exchange"){
                     Map<String, Object> mp = scoreDao.selectItem(PID, table);
                     System.err.println(mp);
                     float score = ((Number) mp.get("score")).floatValue();
-                    String SID = (String) mp.get("SID");
                     Date date;
                     if (table.equals("competition")) {
                         int type = ((Number) mp.get("type")).intValue();
@@ -172,9 +177,6 @@ public class ScoreServiceImpl implements ScoreService {
 //                    } else{
 //                        date = (Date) mp.get("date");
 //                    }
-                    System.err.println(date);
-                    System.err.println(SID);
-                    System.err.println(score);
                     Calendar calendar = Calendar.getInstance();
                     calendar.setTime(date);
                     int year = calendar.get(Calendar.YEAR);
@@ -188,6 +190,9 @@ public class ScoreServiceImpl implements ScoreService {
                         System.err.println("insert!");
                     }
                     int re = scoreDao.updateGpa(table, SID, score, year);
+                    System.err.println(year);
+                    System.err.println(SID);
+                    System.err.println(score);
                     System.err.println("update!");
                     if(re == 1)
                         flag = true;
@@ -201,6 +206,7 @@ public class ScoreServiceImpl implements ScoreService {
         }
         return flag;
     }
+
     private Date parseDate(Object dateObj) {
         if (dateObj == null) {
             return null;
@@ -220,9 +226,11 @@ public class ScoreServiceImpl implements ScoreService {
      * morality
      */
     @Override
+    @Transactional
     public int submitMorality(morality moral){
         try{
             scoreDao.submitMorality(moral);
+            scoreDao.addPersonal(moral.getSID());
             return 1;
         }
         catch (Exception e){
@@ -236,9 +244,11 @@ public class ScoreServiceImpl implements ScoreService {
      * volunteer
      */
     @Override
+    @Transactional
     public int submitVolunteer(volunteer volun){
         try{
             scoreDao.submitVolunteer(volun);
+            scoreDao.addPersonal(volun.getSID());
             return 1;
         }
         catch (Exception e){
@@ -251,9 +261,11 @@ public class ScoreServiceImpl implements ScoreService {
      * socialwork
      */
     @Override
+    @Transactional
     public int submitSocialwork(socialwork soc){
         try{
             scoreDao.submitSocialwork(soc);
+            scoreDao.addPersonal(soc.getSID());
             return 1;
         }
         catch (Exception e){
@@ -266,9 +278,11 @@ public class ScoreServiceImpl implements ScoreService {
      * competition
      */
     @Override
+    @Transactional
     public int submitCompetition(competition com){
         try{
             scoreDao.submitCompetition(com);
+            scoreDao.addPersonal(com.getSID());
             return 1;
         }
         catch (Exception e){
@@ -281,9 +295,11 @@ public class ScoreServiceImpl implements ScoreService {
      * paper
      */
     @Override
+    @Transactional
     public int submitPaper(paper pap){
         try{
             scoreDao.submitPaper(pap);
+            scoreDao.addPersonal(pap.getSID());
             return 1;
         }
         catch (Exception e){
@@ -296,9 +312,11 @@ public class ScoreServiceImpl implements ScoreService {
      * patent
      */
     @Override
+    @Transactional
     public int submitPatent(patent pat){
         try{
             scoreDao.submitPatent(pat);
+            scoreDao.addPersonal(pat.getSID());
             return 1;
         }
         catch (Exception e){
@@ -311,9 +329,11 @@ public class ScoreServiceImpl implements ScoreService {
      * copyright
      */
     @Override
+    @Transactional
     public int submitCopyright(copyright cop){
         try{
             scoreDao.submitCopyright(cop);
+            scoreDao.addPersonal(cop.getSID());
             return 1;
         }
         catch (Exception e){
@@ -326,9 +346,11 @@ public class ScoreServiceImpl implements ScoreService {
      * publication
      */
     @Override
+    @Transactional
     public int submitPublication(publication pub){
         try{
             scoreDao.submitPublication(pub);
+            scoreDao.addPersonal(pub.getSID());
             return 1;
         }
         catch (Exception e){
@@ -341,9 +363,11 @@ public class ScoreServiceImpl implements ScoreService {
      * exchange
      */
     @Override
+    @Transactional
     public int submitExchange(exchange exch){
         try{
             scoreDao.submitExchange(exch);
+            scoreDao.addPersonal(exch.getSID());
             return 1;
         }
         catch (Exception e){

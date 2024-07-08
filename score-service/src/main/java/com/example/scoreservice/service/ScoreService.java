@@ -21,7 +21,7 @@ public interface ScoreService {
 
     boolean updateStatusOne(int PID, String table, int status_one);
 
-    boolean updateStatusTwo(int PID, String table, int status_two);
+    boolean updateStatusTwo(int PID, String SID, String table, int status_two);
 
     List<competition> getCompetition(int type);
 
@@ -29,7 +29,7 @@ public interface ScoreService {
 
 //    public <T> int submitForm(T form, String type);
 
-    boolean verifyByAdmin(Integer num, Integer PID, String table, Integer status_one, String comment);
+    boolean verifyByAdmin(Integer num, Integer PID, String SID, String table, Integer status_one, String comment);
 
     /**
      * morality

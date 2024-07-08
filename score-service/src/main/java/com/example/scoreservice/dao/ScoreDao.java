@@ -34,7 +34,7 @@ public interface ScoreDao {
     int updateStatusOne(@Param("PID") int PID, @Param("table") String table, @Param("status_one") int status_one);
 
     @UpdateProvider(type = SqlProvider.class, method = "updateStatusTwo")
-    int updateStatusTwo(@Param("PID") int PID, @Param("table") String table, @Param("status_two") int status_two);
+    int updateStatusTwo(@Param("PID") int PID, @Param("SID") String SID, @Param("table") String table, @Param("status_two") int status_two);
 
 //    @Select("<script>" +
 //            "select score" +
@@ -54,41 +54,41 @@ public interface ScoreDao {
     @Update("<script>" +
             "UPDATE gpa SET " +
             "com_bonus_total = (CASE" +
-            "   WHEN com_bonus_total + #{score} > gpa * 0.2 THEN gpa * 0.2" +
-            "   ELSE com_bonus_total + #{score}" +
+            "   WHEN com_bonus_total + #{score} > gpa * 0.2 THEN gpa * 0.2 " +
+            "   ELSE com_bonus_total + #{score} " +
             "END), " +
             "com_score = gpa + com_bonus_total * 0.1, " +
             "<if test='table == \"morality\"'>" +
                 " com_bonus1 = (CASE " +
-                    " WHEN com_bonus1 + #{score} > 3 THEN 3" +
+                    " WHEN com_bonus1 + #{score} > 3 THEN 3 " +
                     " ELSE com_bonus1 + #{score} " +
                 " END)" +
             "</if>" +
             "<if test='table == \"volunteer\"'>" +
                 " com_bonus1 = (CASE " +
-                    " WHEN com_bonus1 + #{score} > 3 THEN 3" +
+                    " WHEN com_bonus1 + #{score} > 3 THEN 3 " +
                     " ELSE com_bonus1 + #{score} " +
                 " END), " +
                 " com_bonus_vol = (CASE " +
-                    " WHEN com_bonus_vol + #{score} > 0.75 THEN 0.75" +
+                    " WHEN com_bonus_vol + #{score} > 0.75 THEN 0.75 " +
                     " ELSE com_bonus_vol + #{score} " +
                 " END)" +
             "</if>" +
             "<if test='table == \"socialwork\"'>" +
                 " com_bonus2 = (CASE " +
-                    " WHEN com_bonus2 + #{score} > 3 THEN 3" +
+                    " WHEN com_bonus2 + #{score} > 3 THEN 3 " +
                     " ELSE com_bonus2 + #{score} " +
                 " END)" +
             "</if>" +
             "<if test='table == \"art_competition\"'>" +
                 " com_bonus3 = (CASE " +
-                " WHEN com_bonus3 + #{score} > 4 THEN 4" +
+                " WHEN com_bonus3 + #{score} > 4 THEN 4 " +
                 " ELSE com_bonus3 + #{score} " +
                 " END)" +
             "</if>" +
             "<if test='table == \"study_competition\" || table == \"paper\" || table == \"patent\" || table == \"copyright\" || table == \"publication\"'>" +
                 " com_bonus4 = (CASE " +
-                    " WHEN com_bonus4 + #{score} > 6 THEN 6" +
+                    " WHEN com_bonus4 + #{score} > 6 THEN 6 " +
                     " ELSE com_bonus4 + #{score} " +
                 " END)" +
             "</if>" +
@@ -204,5 +204,19 @@ public interface ScoreDao {
             "#{current_status}, #{flag1}, #{flag2}, #{flag3}, #{flag4}, " +
             "#{link_name}, #{link}, #{remarks}, 0, -1, #{comment})")
     int submitExchange(exchange exch);
+
+
+
+    @Update("update user_info set personal = personal + 1 where SID = #{SID}")
+    int addPersonal(String SID);
+
+    @Update("update user_info set personal = personal - 1 where SID = #{SID}")
+    int subPersonal(String SID);
+
+    @Update("update user_info set overall = overall + 1 where SID = #{SID}")
+    int addOverall(String SID);
+
+    @Update("update user_info set overall = overall - 1 where SID = #{SID}")
+    int subOverall(String SID);
 
 }
