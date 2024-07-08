@@ -9,7 +9,7 @@ import java.util.List;
 @Mapper
 public interface BackendUserDao {
     @Select("<script>" +
-            "select * from user_info" +
+            "select * from backend_user" +
             "<where>" +
             "<trim suffixOverrides=\"and\">" +   // 移除最后一个多出来的 and(<trim> 标签可以用于移除生成 SQL 语句中的不必要的字符)
             "<if test='SID != null'>SID LIKE CONCAT('%', #{SID}, '%') and </if>" +

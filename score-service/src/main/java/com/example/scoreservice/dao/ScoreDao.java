@@ -53,6 +53,11 @@ public interface ScoreDao {
 
     @Update("<script>" +
             "UPDATE gpa SET " +
+            "com_bonus_total = (CASE" +
+            "   WHEN com_bonus_total + #{score} > gpa * 0.2 THEN gpa * 0.2" +
+            "   ELSE com_bonus_total + #{score}" +
+            "END), " +
+            "com_score = gpa + com_bonus_total * 0.1, " +
             "<if test='table == \"morality\"'>" +
                 " com_bonus1 = (CASE " +
                     " WHEN com_bonus1 + #{score} > 3 THEN 3" +

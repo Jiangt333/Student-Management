@@ -24,13 +24,13 @@ public interface UserDao {
             "<if test='personal != null'>" +
             "   <choose>" +
             "       <when test='personal != 0'>personal = 0</when>" +
-            "       <otherwise>personal == 0</otherwise>" +
-            "   </choose> and" +
+            "       <otherwise>personal = 0</otherwise>" +
+            "   </choose> and " +
             "</if>" +
             "<if test='overall != null'>" +
             "   <choose>" +
-            "       <when test='overall != 0'>overall = 0</when>" +
-            "       <otherwise>overall == 0</otherwise>" +
+            "       <when test='overall != 0'> overall = 0</when>" +
+            "       <otherwise> overall = 0</otherwise>" +
             "   </choose>" +
             "</if>" +
             "</trim>" +
